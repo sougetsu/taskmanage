@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>任务单管理-库存管理</title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+    <script src="js/respond.js"></script>
+    <script src="js/admin.js"></script>
+</head>
+
+<body>
+<div class="lefter">
+    <div ><a href="http://www.pintuer.com" target="_blank"><img src="images/logo.png" alt="库存管理系统" /></a></div>
+</div>
+<div class="righter nav-navicon" id="admin-nav">
+    <div class="mainer">
+        <div class="admin-navbar">
+            <ul class="nav nav-inline admin-nav">
+            	<li><a href="pga.html" class="icon-home">PGA</a></li>
+                <li><a href="store.html">LCC</a></li>
+                <li class="active"><a href="bga.html">BGA</a></li>
+                <li><a href="store.html">无检验批次</a></li>
+                <li><a href="fp.html" > FP</a></li>
+                <li><a href="#" > CQFP</a></li>
+                <li><a href="#" > CSOP</a></li>
+                <li><a href="#" > MCP</a></li>
+                <li><a href="#" > CCGA</a></li>
+                <li><a href="#" > JLCC</a></li>
+                <li><a href="#"> MCM</a></li>
+                <li><a href="#" > TO管座</a></li>
+                <li><a href="#" > CQFJ</a></li>          
+            </ul>
+        </div>
+        <div class="admin-bread">
+            <span>您好，admin，欢迎您的光临。</span>
+            <ul class="bread">
+                <li><a href="index.html" class="icon-home"> 库存详细</a></li>
+                <li>BGA</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="admin">
+	<div class="line-big">
+        <div class="xm12">
+        	<div class="alert alert-yellow"><span class="close"></span><strong>注意：</strong>您有5条库存数量已到临界值。</div>
+            <div class="panel">
+            	<div class="panel-head"><strong>详细信息</strong></div>
+                <table class="table">
+                	<tr>
+                		<th>物料编号</th>
+                		<th>物料名称</th>
+                		<th>规格型号</th>
+                		<th>主计量单位</th>
+                		<th>批次号</th>
+                		<th>数量</th>
+                	</tr>
+                    <tr>
+                    	<td>01010006</td>
+                    	<td>DIP24管壳</td>
+                    	<td>KD-82831-D-01</td>
+                    	<td>只</td>
+                    	<td>160104-02</td>
+                    	<td><span class="badge bg-main">302</span></td>
+                    </tr>
+                    <tr>
+                    	<td>01010006</td>
+                    	<td>DIP24管壳</td>
+                    	<td>KD-82831-D-01</td>
+                    	<td>只</td>
+                    	<td>160104-02</td>
+                    	<td><span class="badge bg-main">828</span></td>
+                    </tr>
+                    <tr>
+                    	<td>01010006</td>
+                    	<td>DIP24管壳</td>
+                    	<td>KD-82831-D-01</td>
+                    	<td>只</td>
+                    	<td>160104-02</td>
+                    	<td><span class="float-center badge bg-red">15</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>	
+</div>
+</body>
+</html>
