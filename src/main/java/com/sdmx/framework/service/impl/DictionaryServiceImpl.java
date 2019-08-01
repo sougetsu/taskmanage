@@ -62,7 +62,9 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	@Override
 	@Transactional
 	public void remove(String dicId) {
-		
+		Dictionary dic = baseDao.get(Dictionary.class, Long.valueOf(dicId));
+		dic.setState("0");
+		baseDao.update(dic);	
 	}
 
 	@Override
@@ -84,7 +86,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 
 	@Override
 	public List<DictionaryInfo> list() {
-		String hql = "from Dictionary t order by t.seq";
+		String hql = "from Dictionary t where t.state = '1' order by t.seq";
 		List<Dictionary> l = baseDao.find(hql);
 		List<DictionaryInfo> nl = new ArrayList<DictionaryInfo>();
 		
@@ -109,7 +111,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	@Override
 	public List<DictionaryInfo> allTreeNode() {
 		List<DictionaryInfo> nl = new ArrayList<DictionaryInfo>();
-		String hql = "from Dictionary t order by t.seq";
+		String hql = "from Dictionary t where t.state = '1' order by t.seq";
 		List<Dictionary> l = baseDao.find(hql);
 		if (l != null && l.size() > 0) {
 			for (Dictionary t : l) {
@@ -132,7 +134,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	@Override
 	public List<DictionaryInfo> queslist() {
 		List<DictionaryInfo> nl = new ArrayList<DictionaryInfo>();
-		String hql = "from Dictionary t where t.categoryNO = '0004'order by t.seq";
+		String hql = "from Dictionary t where  t.state = '1' and t.categoryNO = '0004'order by t.seq";
 		List<Dictionary> l = baseDao.find(hql);
 		if (l != null && l.size() > 0) {
 			for (Dictionary t : l) {
@@ -160,7 +162,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	}
 	
 	public List<DictionaryInfo> getOrganizationObjectByRoleAndMember(RoleType roleType , String memberId,int seleT){
-		String hql = "from Dictionary t where 1=1 ";
+		String hql = "from Dictionary t where 1=1 and t.state = '1' ";
 		if(seleT==0){
 			seleT=2;
 		}
@@ -210,7 +212,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	@Override
 	public List<DictionaryInfo> typeList() {
 		List<DictionaryInfo> nl = new ArrayList<DictionaryInfo>();
-		String hql = "from Dictionary t where t.categoryNO = '0009'order by t.seq";
+		String hql = "from Dictionary t where t.state = '1' and t.categoryNO = '0009'order by t.seq";
 		List<Dictionary> l = baseDao.find(hql);
 		if (l != null && l.size() > 0) {
 			for (Dictionary t : l) {
@@ -284,7 +286,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 //	}
 	public Dictionary getLimitedDays(int limitedType){
 		Dictionary limitedDay = null;
-		String hql = "from Dictionary t where t.categoryNO = '0010' and t.codeNO="+limitedType;
+		String hql = "from Dictionary t where t.state = '1' and t.categoryNO = '0010' and t.codeNO="+limitedType;
 		Object[] obj = null;
 		limitedDay = baseDao.get(hql,obj);
 		return limitedDay;
@@ -295,7 +297,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
         SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
         Long departId = Long.valueOf(sessionInfo.getOrgnizationId());
-		String hql = "from Dictionary t where 1=1 ";
+		String hql = "from Dictionary t where 1=1 and t.state = '1' ";
 		hql += " and (t.categoryNO = '0004' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0004' )) ";
 		hql += " and (t.departDicId.dictionaryId ="+departId+ ") ";
 		return getDictionarylistByHql(hql);
@@ -303,7 +305,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 
 	@Override
 	public List<DictionaryInfo> getTopicList() {
-		String hql = "from Dictionary t where 1=1 ";
+		String hql = "from Dictionary t where 1=1 and t.state = '1' ";
 		hql += " and (t.categoryNO = '0006' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0006' )) ";
 		
 		return getDictionarylistByHql(hql);

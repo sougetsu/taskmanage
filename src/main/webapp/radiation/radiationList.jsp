@@ -3,40 +3,9 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript">
-	$(function() {
+		$(function() {
 		parent.$.messager.progress('close');
-		$('#radiation_list_datagrid').datagrid({
-			url : '${pageContext.request.contextPath}/radiation/list',
-			fit : true,
-			fitColumns : true,
-			border : false,
-			pagination : true,
-			idField : 'orderId',
-			pageSize : 10,
-			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'createtime',
-			sortOrder : 'desc',
-			checkOnSelect : false,
-			selectOnCheck : false,
-			singleSelect:true,
-			columns : [ [ 
-			    {field : 'orderId',title : '序号',hidden:true,width : 80}, 
-			    {field : 'taskNo',title : 'NO',width : 180}, 
-			    {field : 'dlxh',title : '电路型号',formatter : linkUrl;width : 100,sortable : true},
-			    {field : 'yfbm',title : '研发部门',width : 120},
-			    {field : 'xmfzr',title : '项目负责人',width : 100,sortable : true}, 
-			    {field : 'dlzfzr',title : '单粒子负责人',width : 80,sortable : true},
-			    {field : 'zjlfzr',title : '总剂量负责人',width : 100,sortable : true}, 
-			    {field : 'ktlb',title : '课题类别',width : 100}, 
-			    {field : 'gycc',title : '工艺尺寸',width : 150,sortable : true}, 
-			    {field : 'sccj',title : '生产厂家',width : 120,sortable : true},
-			    {field : 'zcgy',title : '制造工艺',width : 100,sortable : true},
-			    {field : 'action',title : '操作',width : 150,formatter : formatZxcxOperation} 
-			    ] ],
-		    onLoadSuccess : function() {
-				parent.$.messager.progress('close');
-			}
-		});
+		
 	});
 	function linkUrl(value, row, index){
 		var str = '';

@@ -60,6 +60,8 @@
 					var str = '';
 					if ($.canEdit) {
 						str += formatString('<img onclick="admin_zdgl_editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += '&nbsp;';
+						str += formatString('<img onclick="admin_zdgl_removeFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
 					}
 					return str;
 				}
@@ -117,7 +119,25 @@
 			}
 		});
 	});
-
+	function admin_zdgl_removeFun(id) {
+		$.messager.confirm('确认', '您是否要删除该字典？', function(r) {
+			if (r) {
+				$.ajax({
+					url : '${pageContext.request.contextPath}/dictionary/remove?dicId='+id,
+					dataType : 'json',
+					success : function(result) {
+						if (result.success) {
+							$('#admin_zdgl_treegrid').treegrid('reload');
+						}
+						$.messager.show({
+							title : '提示',
+							msg : result.msg
+						});
+					}
+				});
+			}
+		});
+	}
 	function admin_zdgl_appendFun() {
 		$('<div/>').dialog({
 			href : '${pageContext.request.contextPath}/admin/zdglAdd.jsp',

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.sdmx.framework.dao.impl.BaseDaoImpl;
 import com.sdmx.taskmanage.dao.ILshDao;
 import com.sdmx.taskmanage.entity.OrderLsh;
+import com.sdmx.taskmanage.entity.RadiationOrderLsh;
 @Repository("lshDao")
 public class LshDaoImpl extends BaseDaoImpl<OrderLsh> implements ILshDao{
 	
@@ -37,4 +38,5 @@ public class LshDaoImpl extends BaseDaoImpl<OrderLsh> implements ILshDao{
 		update(orderLsh);
 		return lsh;
 	}
+	
 }

@@ -27,7 +27,9 @@ import com.sdmx.framework.vo.DataGrid;
 import com.sdmx.framework.vo.JsonResult;
 import com.sdmx.framework.vo.MemberVO;
 import com.sdmx.framework.vo.SessionInfo;
+import com.sdmx.taskmanage.service.IRadiationTaskOrderService;
 import com.sdmx.taskmanage.service.ITaskOrderService;
+import com.sdmx.taskmanage.service.ITaskOrderTestService;
 import com.sdmx.yansTask.service.IYansTaskOrderService;
 
 @Controller
@@ -38,10 +40,14 @@ public class MemberController {
 	@Autowired
 	private ITaskOrderService taskOrderService;
 	@Autowired
+	private ITaskOrderTestService taskOrderTestService;
+	@Autowired
 	private IErsaiTaskOrderService ersaiTaskOrderService;
 	@Autowired
 	private IYansTaskOrderService yansTaskOrderService;
-
+	@Autowired
+	private IRadiationTaskOrderService radiationTaskOrderService;
+	
 	private IMemberService memberService;
 	public IMemberService getMemberService() {
 		return memberService;
@@ -304,9 +310,13 @@ public class MemberController {
 		int taskNum = taskOrderService.getTaskNum();
 		int erSaiTaskNum = ersaiTaskOrderService.getTaskNum();
 		int yansTaskNum = yansTaskOrderService.getTaskNum();
+		int fcwxTaskNum = taskOrderTestService.getTaskNum();
+		int fsrwTaskNum = radiationTaskOrderService.getTaskNum();
 		request.setAttribute("taskInfo", taskNum);
 		request.setAttribute("ersaiTaskInfo", erSaiTaskNum);
 		request.setAttribute("yansTaskInfo", yansTaskNum);
+		request.setAttribute("fcwxTaskInfo", fcwxTaskNum);
+		request.setAttribute("fsTaskInfo", fsrwTaskNum);
 		return new ModelAndView("/admin/currentUserInfo");
 	}
 }

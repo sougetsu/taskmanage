@@ -309,6 +309,7 @@ public class ErsaiTaskOrderServiceImpl implements IErsaiTaskOrderService{
 				}
 				ersaiTaskOrderVO.setEditState(1);
 				ersaiTaskOrderVO.setDeleteState(1);
+				ersaiTaskOrderVO.setUrgencyState(1);
 				break;
 			}
 			case TestCenterManage:{
@@ -428,6 +429,8 @@ public class ErsaiTaskOrderServiceImpl implements IErsaiTaskOrderService{
 		taskOrder.setWantedEndDate(ersaiTaskOrderVO.getWantedEndDate());
 		//是否有附件
 		taskOrder.setAttachmentFlag(ersaiTaskOrderVO.getAttachmentFlag());
+		//紧急程度
+		taskOrder.setUrgency(ersaiTaskOrderVO.getUrgency());
 		//申请原因及说明
 		taskOrder.setApplyReason(ersaiTaskOrderVO.getApplyReason());
 		//具体要求（二筛条件）

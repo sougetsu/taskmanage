@@ -70,8 +70,12 @@ public class TaskOrderVO implements java.io.Serializable {
 	private int fixState;//确认状态
 	private int editState;//修改状态
 	private int deleteState;//删除权限
+	private int urgency;
+	private int urgencyState;//修改状态
+	private String urgencyName;//修改状态
 	private Double sumPrice;
 	private String lsh;
+
 	private String clType;//处理类型（1：待处理查询，2：全部查询）
 	
 	private int reductionFlag;// 1 有减薄。0无减薄
@@ -684,6 +688,31 @@ public class TaskOrderVO implements java.io.Serializable {
 
 	public void setWaferFlag(int waferFlag) {
 		this.waferFlag = waferFlag;
+	}
+
+
+	public int getUrgency() {
+		return urgency;
+	}
+
+	public void setUrgency(int urgency) {
+		this.urgency = urgency;
+	}
+
+	public int getUrgencyState() {
+		return urgencyState;
+	}
+
+	public void setUrgencyState(int urgencyState) {
+		this.urgencyState = urgencyState;
+	}
+
+	public String getUrgencyName() {
+		return urgencyName;
+	}
+
+	public void setUrgencyName(String urgencyName) {
+		this.urgencyName = urgencyName;
 	}
 	
 }

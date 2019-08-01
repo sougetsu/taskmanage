@@ -114,7 +114,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
         SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
         Member currentMember = memberDao.get(Member.class, Long.parseLong(sessionInfo.getUserId()));
-		hql += " where 1=1 and t.status !=0 ";
+		hql += " where 1=1 and t.status !=0 and (t.taskOrderType=0 or t.taskOrderType is null) ";
 		//项目名称
 		if (UtilValidate.isNotEmpty(taskOrdervo.getProjectName())) {
 			hql += " and t.project.annotation like :projectName";
@@ -205,6 +205,8 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		if (taskOrdervo.getSort() != null) {
 			if("statusName".equals(taskOrdervo.getSort())){
 				hql += " order by t.status "  + taskOrdervo.getOrder();
+			}else if("urgencyName".equals(taskOrdervo.getSort())){
+				hql += " order by t.urgency "  + taskOrdervo.getOrder();
 			}else if("projectName".equals(taskOrdervo.getSort())){
 				hql += " order by t.project.value "  + taskOrdervo.getOrder();
 			}else if("topicNo".equals(taskOrdervo.getSort())){
@@ -226,13 +228,14 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
         Member currentMember = memberDao.get(Member.class, Long.parseLong(sessionInfo.getUserId()));
 		TaskOrder taskOrder = new TaskOrder();
 		BeanUtilsEx.copyProperties(taskOrder, taskOrdervo);
+		taskOrder.setTaskOrderType(0);
 		//项目名称、课题号
 		Dictionary project = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getProjectId()));
 		taskOrder.setProject(project);
 		taskOrder.setTopic(project);
 		//成本归集课题号
-		Dictionary costTopicNo = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getCostTopicNoId()));
-		taskOrder.setCostTopicNo(costTopicNo);
+		//Dictionary costTopicNo = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getCostTopicNoId()));
+		//taskOrder.setCostTopicNo(costTopicNo);
 		//协助部门
 		Dictionary helpDept = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getHelpDeptId()));
 		taskOrder.setHelpDept(helpDept);
@@ -365,8 +368,8 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		taskOrderVO.setProjectName(taskOrder.getProject().getAnnotation());
 		taskOrderVO.setTopicNoId(String.valueOf(taskOrder.getProject().getDictionaryId()));
 		taskOrderVO.setTopicNo(taskOrder.getProject().getValue());
-		taskOrderVO.setCostTopicNoId(String.valueOf(taskOrder.getCostTopicNo().getDictionaryId()));
-		taskOrderVO.setCostTopicNoName(taskOrder.getCostTopicNo().getAnnotation());
+		//taskOrderVO.setCostTopicNoId(String.valueOf(taskOrder.getCostTopicNo().getDictionaryId()));
+		//taskOrderVO.setCostTopicNoName(taskOrder.getCostTopicNo().getAnnotation());
 		//业务申请内容
 		List<Dictionary> applyContent = taskOrder.getApplyContent();
 		String applyContentIds = "";
@@ -486,6 +489,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 					taskOrderVO.setConfirmState(1);
 				}
 				taskOrderVO.setEditState(1);
+				taskOrderVO.setUrgencyState(1);
 				taskOrderVO.setDeleteState(1);
 				break;
 			}
@@ -522,6 +526,20 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
     			taskOrderVO.setAttachment(attachvo);// 设置附件信息
     		}
         }
+        //紧急程度
+        if(taskOrder.getUrgency()!=null)
+		{
+			if(taskOrder.getUrgency()==1){
+				taskOrderVO.setUrgencyName("紧急");
+			}else if(taskOrder.getUrgency()==2){
+				taskOrderVO.setUrgencyName("超紧急");
+			}else{
+				taskOrderVO.setUrgencyName("一般");
+			}
+		}else{
+			taskOrderVO.setUrgencyName("一般");
+		}
+        
 		return taskOrderVO;
 	}
 
@@ -547,8 +565,8 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		taskOrder.setProject(project);
 		taskOrder.setTopic(project);
 		//成本归集课题号
-		Dictionary costTopicNo = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getCostTopicNoId()));
-		taskOrder.setCostTopicNo(costTopicNo);
+		//Dictionary costTopicNo = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getCostTopicNoId()));
+		//taskOrder.setCostTopicNo(costTopicNo);
 		//所内型号
 		taskOrder.setInternalModel(taskOrdervo.getInternalModel());
 		//协助部门
@@ -632,6 +650,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		}
 		taskOrder.setCheckType(checkType);
 		taskOrder.setApplyReason(taskOrdervo.getApplyReason());
+		taskOrder.setUrgency(taskOrdervo.getUrgency());
 		taskOrder.setDetailRequire(taskOrdervo.getDetailRequire());
 		taskOrder.setRemarks(taskOrdervo.getRemarks());
 		taskOrder.setProductManagesuggest(taskOrdervo.getProductManagesuggest());
@@ -769,6 +788,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		columnTitle.add("业务申请内容");
 		columnTitle.add("申请原因");
 		columnTitle.add("价格");
+		columnTitle.add("紧急程度");
 
 		return columnTitle;
 	}
@@ -821,6 +841,19 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			columns.add(task.getApplyReason());
 			//价格
 			columns.add(task.getSumPrice().toString());
+			//紧急程度
+			if(task.getUrgency()!=null)
+			{
+				if(task.getUrgency()==1){
+					columns.add("紧急");
+				}else if(task.getUrgency()==2){
+					columns.add("超紧急");
+				}else{
+					columns.add("一般");
+				}
+			}else{
+				columns.add("一般");
+			}
 			rows.add(columns);
 		}
 		
@@ -992,7 +1025,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
         RoleType memType = RoleType.getType(sessionInfo.getRoleNames());
         Member currentMember = memberDao.get(Member.class, Long.parseLong(sessionInfo.getUserId()));
         Map<String, Object> params = new HashMap<String, Object>();
-        String hql = "from TaskOrder t where 1=1 and t.status !=0  ";
+        String hql = "from TaskOrder t where 1=1 and t.status !=0 and (t.taskOrderType=0 or t.taskOrderType is null) ";
         switch(memType){
 	        case DepartMember :{
 	        	hql += " and t.status in (11,12,13)";

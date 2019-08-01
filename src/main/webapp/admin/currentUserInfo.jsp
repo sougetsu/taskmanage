@@ -31,6 +31,20 @@
 			href : '${pageContext.request.contextPath}/yans/yansTaskSusList.jsp'
 		});
 	}
+	function fcwx_rwdcl_link(){
+		layout_center_addTabFun({
+			title : '外协待处理查询',
+			closable : true,
+			href : '${pageContext.request.contextPath}/taskmanagetest/taskTestSusList.jsp'
+		});
+	}
+	function fsrw_rwdcl_link(){
+		layout_center_addTabFun({
+			title : '辐射待处理查询',
+			closable : true,
+			href : '${pageContext.request.contextPath}/taskmanageradiation/taskRadiationSusList.jsp'
+		});
+	}
 </script>
 <div style="width:80%;margin-left: auto;margin-right: auto;">
 	<div style="margin-top: 20px;">
@@ -146,6 +160,34 @@
 		            	<c:if test="${yansTaskInfo != 0}">
 		            		尚有<a style="color:red;font-weight:bold" href="javascript:ys_rwdcl_link()">${yansTaskInfo}</a>条待处理任务单。
 		            		<a style="color:blue;font-weight:bold" href="javascript:ys_rwdcl_link()">【立即处理】</a>
+		            	</c:if>
+		            </td>
+		       	</tr>
+		       	<tr>
+		            <th width="15%" class="textinfo_title" align="right" >
+						外协任务待处理
+		            </th>
+		            <td width="85%"  align="left">
+		            	<c:if test="${fcwxTaskInfo == 0}">
+		            		无
+		            	</c:if>
+		            	<c:if test="${fcwxTaskInfo != 0}">
+		            		尚有<a style="color:red;font-weight:bold" href="javascript:fcwx_rwdcl_link()">${fcwxTaskInfo}</a>条待处理任务单。
+		            		<a style="color:blue;font-weight:bold" href="javascript:fcwx_rwdcl_link()">【立即处理】</a>
+		            	</c:if>
+		            </td>
+		       	</tr>
+		       	<tr>
+		            <th width="15%" class="textinfo_title" align="right" >
+						辐射任务待处理
+		            </th>
+		            <td width="85%"  align="left">
+		            	<c:if test="${fsTaskInfo == 0}">
+		            		无
+		            	</c:if>
+		            	<c:if test="${fsTaskInfo != 0}">
+		            		尚有<a style="color:red;font-weight:bold" href="javascript:fsrw_rwdcl_link()">${fsTaskInfo}</a>条待处理任务单。
+		            		<a style="color:blue;font-weight:bold" href="javascript:fsrw_rwdcl_link()">【立即处理】</a>
 		            	</c:if>
 		            </td>
 		       	</tr>

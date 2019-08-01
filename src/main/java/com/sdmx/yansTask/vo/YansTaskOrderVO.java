@@ -51,7 +51,8 @@ public class YansTaskOrderVO {
 	private int yansNum;
 	private int ersaiFlag;
 	private String ersaiLsh;
-	
+	private int urgency;
+	private int urgencyState;//修改状态
 	
 	public String getOrderId() {
 		return orderId;
@@ -310,6 +311,18 @@ public class YansTaskOrderVO {
 	}
 	public void setErsaiLsh(String ersaiLsh) {
 		this.ersaiLsh = ersaiLsh;
+	}
+	public int getUrgency() {
+		return urgency;
+	}
+	public void setUrgency(int urgency) {
+		this.urgency = urgency;
+	}
+	public int getUrgencyState() {
+		return urgencyState;
+	}
+	public void setUrgencyState(int urgencyState) {
+		this.urgencyState = urgencyState;
 	}
 	
 }

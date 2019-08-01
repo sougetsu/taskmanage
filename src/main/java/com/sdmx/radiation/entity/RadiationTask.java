@@ -71,6 +71,7 @@ public class RadiationTask {
 	private String wyss;//位移损伤
 	private String stjll;//瞬态剂量率
 	
+	private Integer urgency;
 	/**
 	 * 试验进度
 	 */
@@ -474,6 +475,14 @@ public class RadiationTask {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public Integer getUrgency() {
+		return urgency;
+	}
+
+	public void setUrgency(Integer urgency) {
+		this.urgency = urgency;
 	}
 	
 }

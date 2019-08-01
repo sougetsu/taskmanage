@@ -16,7 +16,7 @@
 			queueID:"attachs",//上传队列说存储的位置
 			auto:false,//是否选中之后就上传,false表示选中之后不上传
 			multi:true,//时候支持多文件上传
-			buttonImg:contextPath+"/style/images/liulan.jpg",
+			buttonImg:'..//style/images/liulan.jpg',
 			height: 32,
 		    width: 55,
 			fileDesc:"请选择"+allowDescType,
@@ -156,7 +156,7 @@
 </script>
 <div class="easyui-layout" data-options="fit : true,border : false">
 <div data-options="region:'center',border:false">
-	<div align="center">
+	<div align="center" style="margin-top:20px;">
 		<form id="taskOrder_createForm"method="post" enctype="multipart/form-data">
 		<input type="hidden" id="status" name="status">
 			<table class="tasktableForm" width="95%" border="1"  bordercolor="#B5C0C4" rules="none" style="border-collapse:collapse;">
@@ -165,13 +165,18 @@
 					<td width=174 colspan=2>
 						<input id="Add_projectId" name="projectId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/projectList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false" />
+						
 					</td>
-					<th width=121 colspan=2>成本归集课题号</th>
+					<th width=121 colspan=2></th>
+					<td width=264 colspan=3>
+					</td>
+					<%--
+					<th width=121 colspan=2></th>
 					<td width=264 colspan=3>
 						<input name="costTopicNoId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/topicList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false" />
 					</td>
-				</tr>
+				--%></tr>
 				<tr>
 					<th width="150px">所内型号</th>
 					<td width=174 colspan=2><input name="internalModel"
@@ -539,6 +544,17 @@
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check3" name="checkTypeId" value="25"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="check3">第三方直检</label>
 					</td>
 				</tr>
+				<tr>
+					<th width="150px" >紧急程度：</th>
+					<td style="text-align:left" colspan=7>
+						<span style="white-space:nowrap;">
+						<input type="radio" style="width:30px" name="urgency" value="0" checked="checked" disabled="disabled"/>一般
+						<input type="radio" style="width:30px" name="urgency" value="1" disabled="disabled" />紧急
+						<input type="radio" style="width:30px" name="urgency" value="2" disabled="disabled"/>超紧急
+						</span>
+					</td>
+				</tr>
+				
 				<tr>
 					<th width="150px" >申请原因及说明：</th>
 					<td colspan=7>

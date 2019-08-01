@@ -310,6 +310,7 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
 				}
 				yansTaskOrderVO.setEditState(1);
 				yansTaskOrderVO.setDeleteState(1);
+				yansTaskOrderVO.setUrgencyState(1);
 				break;
 			}
 			case TestCenterManage:{
@@ -429,6 +430,8 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
 		taskOrder.setWantedEndDate(yansTaskOrderVO.getWantedEndDate());
 		//是否有附件
 		taskOrder.setAttachmentFlag(yansTaskOrderVO.getAttachmentFlag());
+		//紧急程度
+		taskOrder.setUrgency(yansTaskOrderVO.getUrgency());
 		//申请原因及说明
 		taskOrder.setApplyReason(yansTaskOrderVO.getApplyReason());
 		//具体要求（验收条件）

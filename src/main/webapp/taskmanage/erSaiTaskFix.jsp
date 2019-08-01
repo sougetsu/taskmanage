@@ -120,6 +120,22 @@
 				   	</c:when>
 				</c:choose>
 				<tr>
+					<th width=88 >紧急程度：</th>
+					<td width=558 colspan=7>
+						<c:choose>
+						   	<c:when test="${taskOrder.urgency==1}">
+						   		紧急
+						   	</c:when>
+						   	<c:when test="${taskOrder.urgency==2}">
+						   		超紧急
+						   	</c:when>
+						   	<c:otherwise>
+						   		一般
+						   	</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+				<tr>
 					<th width=88 >申请原因及说明：</th>
 					<td width=558 colspan=7>
 						${taskOrder.applyReason}

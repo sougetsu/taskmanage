@@ -46,6 +46,8 @@ public class ErsaiTaskOrderVO {
 	private int fixState;//确认状态
 	private int editState;//修改状态
 	private int deleteState;//删除权限
+	private int urgency;
+	private int urgencyState;//修改状态
 	private Double sumPrice;
 	private int yansFlag;
 	private int yansNum;
@@ -296,4 +298,17 @@ public class ErsaiTaskOrderVO {
 	public void setYansNum(int yansNum) {
 		this.yansNum = yansNum;
 	}
+	public int getUrgency() {
+		return urgency;
+	}
+	public void setUrgency(int urgency) {
+		this.urgency = urgency;
+	}
+	public int getUrgencyState() {
+		return urgencyState;
+	}
+	public void setUrgencyState(int urgencyState) {
+		this.urgencyState = urgencyState;
+	}
+	
 }

@@ -32,6 +32,7 @@
 			    {field : 'wantedEndDate',title : '希望完成时间',width : 120,sortable : true},
 			    {field : 'statusName',title : '任务单状态',width : 100,sortable : true},
 			    {field : 'sumPrice',title : '价格',width : 100,sortable : true},
+			    {field : 'urgencyName',title : '紧急程度',width : 100,sortable : true},
 			    {field : 'action',title : '操作',width : 180,formatter : formatZxcxOperation} 
 			    ] ],
 		    onLoadSuccess : function() {

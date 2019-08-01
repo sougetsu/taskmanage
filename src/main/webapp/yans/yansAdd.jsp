@@ -146,7 +146,7 @@
 						style="width:98%" /></td>
 				</tr>
 				<tr>
-					<th width="150px">成本归集课题号</th>
+					<th width="150px">课题号</th>
 					<td width=174 colspan=2>
 						<input name="topicId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/topicList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false"/>
@@ -166,9 +166,10 @@
 					<th width="150px">请求协助部门</th>
 					<td width=174 colspan=2><input name="helpDeptId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false"/></td>
-					<th width=121 colspan=2>希望完成时间</th>
+					<th width="121" colspan=2>希望完成时间</th>
 					<td width=264 colspan=3><input id="wantedEndDate" name="wantedEndDate" class="easyui-validatebox" data-options="required:true"
 									onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" style="width:330px"/></td>
+			
 				</tr>
 				<tr>
 					<th width="150px" >是否有附件</th>
@@ -216,6 +217,16 @@
 						class="easyui-validatebox"
 						data-options="validType:'length[1,100]'"
 						style="width:330px" value="0"/>
+					</td>
+				</tr>
+				<tr>
+					<th width="150px" >紧急程度：</th>
+					<td style="text-align:left" colspan=7>
+						<span style="white-space:nowrap;">
+						<input type="radio" style="width:30px" name="urgency" value="0" checked="checked" disabled="disabled"/>一般
+						<input type="radio" style="width:30px" name="urgency" value="1" disabled="disabled" />紧急
+						<input type="radio" style="width:30px" name="urgency" value="2" disabled="disabled"/>超紧急
+						</span>
 					</td>
 				</tr>
 				<tr>

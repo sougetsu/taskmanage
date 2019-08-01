@@ -9,7 +9,8 @@ public enum RoleType {
 	Default("默认",6),
 	MarketManger("市场人员",7),
 	TestOutMember("封测外协",8),
-	TestOutManage("封测调度",9);
+	TestOutManage("封测调度",9),
+	KangjiaManage("抗加调度",10);
 	
 	private String label;
 	private int id;

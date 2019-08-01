@@ -53,6 +53,7 @@ public class ErsaiTaskOrder implements Serializable {
 	private Double sumPrice;
 	private String lsh;
 	private Integer attachmentFlag;// 是否有附件
+	private Integer urgency;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_ErsaiOrder_ID")
@@ -291,4 +292,13 @@ public class ErsaiTaskOrder implements Serializable {
     	taskPrice.setErsaiTaskOrder(null);  
         this.taskPriceList.remove(taskPrice);
     }
+
+	public Integer getUrgency() {
+		return urgency;
+	}
+
+	public void setUrgency(Integer urgency) {
+		this.urgency = urgency;
+	}
+    
 }

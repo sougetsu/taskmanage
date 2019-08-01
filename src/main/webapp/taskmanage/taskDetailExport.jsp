@@ -18,9 +18,8 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 					<td whidth=194 colspan=2>
 						${taskOrder.projectName}
 					</td>
-					<th width=101 colspan=2>成本归集课题号</th>
+					<th width=101 colspan=2></th>
 					<td width=264 colspan=3>
-						${taskOrder.costTopicNoName}
 					</td>
 				</tr>
 				<tr>
@@ -41,7 +40,7 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 				</tr>
 				<tr>
 					<th width=88>课题号</th>
-					<td width=194 colspan=2></td>
+					<td width=194 colspan=2>${taskOrder.topicNo}</td>
 					<th width=101 colspan=2>项目负责人</th>
 					<td width=106>${taskOrder.projectManager}</td>
 					<th width=42>电话</th>
@@ -310,6 +309,22 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 					<th width=88 >鉴定方式：</th>
 					<td width=558 colspan=7>
 						${taskOrder.checkTypeName}
+					</td>
+				</tr>
+				<tr>
+					<th width=88 >紧急程度：</th>
+					<td width=558 colspan=7>
+						<c:choose>
+						   	<c:when test="${taskOrder.urgency==1}">
+						   		紧急
+						   	</c:when>
+						   	<c:when test="${taskOrder.urgency==2}">
+						   		超紧急
+						   	</c:when>
+						   	<c:otherwise>
+						   		一般
+						   	</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 				<tr>

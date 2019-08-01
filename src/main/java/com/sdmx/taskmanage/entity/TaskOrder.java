@@ -33,7 +33,7 @@ public class TaskOrder implements Serializable {
 	
 	private Long orderId;
 	private Dictionary project;//项目id
-	private Dictionary costTopicNo;//成本归集课题号
+	//private Dictionary costTopicNo;//成本归集课题号
 	private String internalModel;//所内型号
 	private Dictionary helpDept;//请求协作部门
 	private String applyDept;//申请部门
@@ -66,6 +66,8 @@ public class TaskOrder implements Serializable {
 	private TaskSchedule taskSchedule;//工单日程
 	private Double sumPrice;
 	private String lsh;
+	private Integer taskOrderType;
+	private Integer urgency;
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_Order_ID")
 	@SequenceGenerator(name = "S_Order_ID", sequenceName = "S_Order_ID",allocationSize=1)
@@ -85,15 +87,15 @@ public class TaskOrder implements Serializable {
 	public void setProject(Dictionary project) {
 		this.project = project;
 	}
-	@JsonIgnore
-	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
-	@JoinColumn(name="costTopicNoId")
-	public Dictionary getCostTopicNo() {
-		return costTopicNo;
-	}
-	public void setCostTopicNo(Dictionary costTopicNo) {
-		this.costTopicNo = costTopicNo;
-	}
+//	@JsonIgnore
+//	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+//	@JoinColumn(name="costTopicNoId")
+//	public Dictionary getCostTopicNo() {
+//		return costTopicNo;
+//	}
+//	public void setCostTopicNo(Dictionary costTopicNo) {
+//		this.costTopicNo = costTopicNo;
+//	}
 	@Column(length = 100)
 	public String getInternalModel() {
 		return internalModel;
@@ -371,5 +373,17 @@ public class TaskOrder implements Serializable {
 	public void setLsh(String lsh) {
 		this.lsh = lsh;
 	}
-    
+	public Integer getTaskOrderType() {
+		return taskOrderType;
+	}
+	public void setTaskOrderType(Integer taskOrderType) {
+		this.taskOrderType = taskOrderType;
+	}
+	public Integer getUrgency() {
+		return urgency;
+	}
+	public void setUrgency(Integer urgency) {
+		this.urgency = urgency;
+	}
+	
 }

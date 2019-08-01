@@ -80,7 +80,8 @@ public class RadiationTaskVO implements java.io.Serializable{
 	private String zjl;//总剂量
 	private String wyss;//位移损伤
 	private String stjll;//瞬态剂量率
-	
+	private int urgency;
+	private int urgencyState;//修改状态
 
 	/**
 	 * 试验文档
@@ -456,6 +457,22 @@ public class RadiationTaskVO implements java.io.Serializable{
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public int getUrgency() {
+		return urgency;
+	}
+
+	public void setUrgency(int urgency) {
+		this.urgency = urgency;
+	}
+
+	public int getUrgencyState() {
+		return urgencyState;
+	}
+
+	public void setUrgencyState(int urgencyState) {
+		this.urgencyState = urgencyState;
 	}
 	
 	

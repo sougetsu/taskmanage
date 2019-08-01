@@ -49,6 +49,13 @@ public class DictionaryController {
         return JsonResult.success("修改成功！", dic);
     }
 	
+	@RequestMapping(value = "/remove")
+    @ResponseBody
+    public JsonResult remove(String dicId) {
+		dictionaryService.remove(dicId);
+        return JsonResult.success("删除成功！", dicId);
+    }
+	
 	/**
 	 * 获得分转单位对象
 	 * @param request

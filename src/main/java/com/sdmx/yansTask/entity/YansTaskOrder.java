@@ -56,6 +56,7 @@ public class YansTaskOrder implements Serializable {
 	private int yansNum;// 验收数量
 	private int ersaiFlag;//是否使用二筛
 	private String ersaiLsh;//二筛流水号
+	private Integer urgency;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_YansOrder_ID")
@@ -318,6 +319,14 @@ public class YansTaskOrder implements Serializable {
 
 	public void setErsaiLsh(String ersaiLsh) {
 		this.ersaiLsh = ersaiLsh;
+	}
+
+	public Integer getUrgency() {
+		return urgency;
+	}
+
+	public void setUrgency(Integer urgency) {
+		this.urgency = urgency;
 	}
     
 }

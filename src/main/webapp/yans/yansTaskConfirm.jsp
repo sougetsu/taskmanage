@@ -197,7 +197,7 @@
 						style="width:98%" value="${taskOrder.applyMemberPhone}"/></td>
 				</tr>
 				<tr>
-					<th width="150px">成本归集课题号</th>
+					<th width="150px">课题号</th>
 					<td width=174 colspan=2>
 						<input name="topicId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/topicList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false" value="${taskOrder.topicId}"/>
@@ -320,6 +320,16 @@
 						</tr>
 					</c:otherwise>
 				</c:choose>
+				<tr>
+					<th width="150px" >紧急程度：</th>
+					<td style="text-align:left" colspan=7>
+						<span style="white-space:nowrap;">
+						<input type="radio" style="width:30px" name="urgency" value="0" ${taskOrder.urgency == 0 ? 'checked' : ''}  ${taskOrder.urgencyState == 0 ? 'disabled' : ''}/>一般
+						<input type="radio" style="width:30px" name="urgency" value="1" ${taskOrder.urgency == 1 ? 'checked' : ''}   ${taskOrder.urgencyState == 0 ? 'disabled' : ''}/>紧急
+						<input type="radio" style="width:30px" name="urgency" value="2" ${taskOrder.urgency == 2 ? 'checked' : ''}   ${taskOrder.urgencyState == 0 ? 'disabled' : ''}/>超紧急
+						</span>
+					</td>
+				</tr>
 				<tr>
 					<th width="150px" >申请原因及说明：</th>
 					<td colspan=7>

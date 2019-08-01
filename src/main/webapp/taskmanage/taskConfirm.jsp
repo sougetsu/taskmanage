@@ -213,11 +213,15 @@
 						<input id="Confirm_projectId" name="projectId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/projectList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false" value="${taskOrder.projectId}"/>
 					</td>
-					<th width=121 colspan=2>成本归集课题号</th>
+					<th width=121 colspan=2></th>
+					<td width=264 colspan=3>
+					</td>
+					<%--<th width=121 colspan=2></th>
 					<td width=264 colspan=3>
 						<input name="costTopicNoId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/topicList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false" value="${taskOrder.costTopicNoId}"/>
 					</td>
+				--%>
 				</tr>
 				<tr>
 					<th width="150px">所内型号</th>
@@ -858,6 +862,16 @@
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check1" name="checkTypeId" value="23" ${taskOrder.checkTypeId == 23 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check1">自鉴</label>
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check2" name="checkTypeId" value="24" ${taskOrder.checkTypeId == 24 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check2">第三方监督</label>
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check3" name="checkTypeId" value="25" ${taskOrder.checkTypeId == 25 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check3">第三方直检</label>
+					</td>
+				</tr>
+				<tr>
+					<th width="150px" >紧急程度：</th>
+					<td style="text-align:left" colspan=7>
+						<span style="white-space:nowrap;">
+						<input type="radio" style="width:30px" name="urgency" value="0" ${taskOrder.urgency == 0 ? 'checked' : ''}  ${taskOrder.urgencyState == 0 ? 'disabled' : ''}/>一般
+						<input type="radio" style="width:30px" name="urgency" value="1" ${taskOrder.urgency == 1 ? 'checked' : ''}   ${taskOrder.urgencyState == 0 ? 'disabled' : ''}/>紧急
+						<input type="radio" style="width:30px" name="urgency" value="2" ${taskOrder.urgency == 2 ? 'checked' : ''}   ${taskOrder.urgencyState == 0 ? 'disabled' : ''}/>超紧急
+						</span>
 					</td>
 				</tr>
 				<tr>

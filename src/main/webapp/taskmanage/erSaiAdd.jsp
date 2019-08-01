@@ -144,11 +144,12 @@
 						style="width:98%" /></td>
 				</tr>
 				<tr>
-					<th width="150px">成本归集课题号</th>
+					<th width="150px">课题号</th>
 					<td width=174 colspan=2>
 						<input name="topicId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/topicList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false"/>
 					</td>
+					
 					<th width=121 colspan=2>项目负责人</th>
 					<td width=106><input name="projectManager"
 						class="easyui-validatebox"
@@ -191,6 +192,16 @@
 					<th width="150px" >已上传附件：</th>
 					<td style="text-align:left" colspan=7>
 						<div id="erSaiAdd_xxwhAdd_alreadyAttachs"></div>
+					</td>
+				</tr>
+				<tr>
+					<th width="150px" >紧急程度：</th>
+					<td style="text-align:left" colspan=7>
+						<span style="white-space:nowrap;">
+						<input type="radio" style="width:30px" name="urgency" value="0" checked="checked" disabled="disabled"/>一般
+						<input type="radio" style="width:30px" name="urgency" value="1" disabled="disabled" />紧急
+						<input type="radio" style="width:30px" name="urgency" value="2" disabled="disabled"/>超紧急
+						</span>
 					</td>
 				</tr>
 				<tr>

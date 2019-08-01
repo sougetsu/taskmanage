@@ -34,7 +34,7 @@
 					<td width=115>${taskOrder.applyMemberPhone}</td>
 				</tr>
 				<tr>
-					<th width=88>成本归集课题号</th>
+					<th width=88>课题号</th>
 					<td width=194 colspan=2>${taskOrder.topicName}</td>
 					<th width=101 colspan=2>项目负责人</th>
 					<td width=106>${taskOrder.projectManager}</td>
@@ -46,6 +46,8 @@
 					<td width=194 colspan=2>${taskOrder.helpDeptName}</td>
 					<th width=101 colspan=2>希望完成时间</th>
 					<td width=264 colspan=3><fmt:formatDate value="${taskOrder.wantedEndDate}" pattern="yyyy-MM-dd" /></td>
+					<th></th>
+					<td colspan=4></td>
 				</tr>
 				<tr>
 					<th width=88 >是否有附件：</th>
@@ -100,6 +102,22 @@
 						</tr>
 					</c:when>
 				</c:choose>
+				<tr>
+					<th width=88 >紧急程度：</th>
+					<td width=558 colspan=7>
+						<c:choose>
+						   	<c:when test="${taskOrder.urgency==1}">
+						   		紧急
+						   	</c:when>
+						   	<c:when test="${taskOrder.urgency==2}">
+						   		超紧急
+						   	</c:when>
+						   	<c:otherwise>
+						   		一般
+						   	</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
 				<tr>
 					<th width=88 >申请原因及说明：</th>
 					<td width=558 colspan=7>
