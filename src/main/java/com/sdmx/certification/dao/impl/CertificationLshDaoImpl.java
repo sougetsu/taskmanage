@@ -15,7 +15,7 @@ public class CertificationLshDaoImpl extends BaseDaoImpl<CertificationLsh>
 		implements ICertificationLshDao {
 	public String getCertificationId() {
 		SessionFactory sessionFactory = getSessionFactory();
-		String sql = "select 'SDMX'||to_char(sysdate,'yyyyMMdd')||lpad(t.lsh,4,'0') as xh, t.yearid"
+		String sql = "select to_char(sysdate,'yyyyMM')||lpad(t.lsh,4,'0') as xh, t.yearid"
 				+ " from CertificationLsh t"
 				+ " where t.yearId= to_char(sysdate,'yyyy')";
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql)

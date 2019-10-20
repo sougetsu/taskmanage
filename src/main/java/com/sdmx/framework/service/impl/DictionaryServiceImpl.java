@@ -297,9 +297,21 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
         SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
         Long departId = Long.valueOf(sessionInfo.getOrgnizationId());
+        RoleType memType = RoleType.getType(sessionInfo.getRoleNames());
 		String hql = "from Dictionary t where 1=1 and t.state = '1' ";
 		hql += " and (t.categoryNO = '0004' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0004' )) ";
-		hql += " and (t.departDicId.dictionaryId ="+departId+ ") ";
+		switch(memType){
+			case MarketManger:
+			case DepartMember :	
+			case DepartManage :{
+				hql += " and (t.departDicId.dictionaryId ="+departId+ ") ";
+				break;
+			}
+			default:{
+				break;
+			}
+		}
+		
 		return getDictionarylistByHql(hql);
 	}
 

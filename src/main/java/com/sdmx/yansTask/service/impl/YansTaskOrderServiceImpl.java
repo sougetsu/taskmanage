@@ -162,10 +162,10 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
         SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
 		hql += " where 1=1 and t.status !=0 ";
 		
-		//任务类型
-		if (UtilValidate.isNotEmpty(yansTaskOrderVO.getTaskType())) {
-			hql += " and t.taskType like :taskType";
-			params.put("taskType", "%%" +yansTaskOrderVO.getTaskType().trim() + "%%");
+		//所内型号
+		if (UtilValidate.isNotEmpty(yansTaskOrderVO.getInternalModel())) {
+			hql += " and t.internalModel like :internalModel";
+			params.put("internalModel", "%%" +yansTaskOrderVO.getInternalModel().trim() + "%%");
 		}
 		//申请人
 		if (UtilValidate.isNotEmpty(yansTaskOrderVO.getApplyMember())) {

@@ -44,7 +44,7 @@
 						<td>${certification.testReportId}</td>
 					</tr>
 					<tr>
-						<td>质 量 状 态：</td>
+						<td>质量保证等级：</td>
 						<td>${certification.qualityStatus}</td>
 						<td>用 户 单 位：</td>
 						<td>${certification.userUnits}</td>

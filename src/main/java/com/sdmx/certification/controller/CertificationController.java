@@ -5,8 +5,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -86,7 +88,41 @@ public class CertificationController {
 				try {
 					response.setContentType(this.getContentType(filePath));
 					response.setHeader("Content-disposition",
-							"attachment;filename="+"sdaf"+".doc");
+							"attachment;filename="+"合格证导出"+".doc");
+					OutputStream out = response.getOutputStream();
+					FileInputStream in = new FileInputStream(uploadedFile);
+					try {
+						byte[] buf = new byte[512];
+						int len = 0;
+						while ((len = in.read(buf)) != -1) {
+							out.write(buf, 0, len);
+						}
+					} finally {
+						in.close();
+						out.close();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+    }
+	
+	/**
+	 * 列表数据word导出
+	 * @param consult
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/downloadList")
+    public void downloadList(HttpServletRequest request,
+			HttpServletResponse response, HttpSession session,CertificationVO certificationvo) throws Exception{
+			String filePath = createWordListByVO(certificationvo);
+			File uploadedFile = new File(filePath);
+			if (uploadedFile.exists()) {
+				try {
+					response.setContentType(this.getContentType(filePath));
+					response.setHeader("Content-disposition",
+							"attachment;filename="+"certificate"+".doc");
 					OutputStream out = response.getOutputStream();
 					FileInputStream in = new FileInputStream(uploadedFile);
 					try {
@@ -126,6 +162,38 @@ public class CertificationController {
 		mdoc.createDoc(dataMap, fileName,"hgz.ftl");
 		return fileName;
 	}
+	
+	private String createWordListByVO(CertificationVO cfaVO) throws Exception{
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Map<String, Object>> datalist = new ArrayList<Map<String, Object>>();
+		List<CertificationVO> cvo = certificationService.listCertification(cfaVO).getRows();
+		for (CertificationVO certificationVO : cvo) {
+			Map<String, Object> dataMap = new HashMap<String, Object>();
+			dataMap.put("certificationId", UtilValidate.isEmpty(certificationVO.getCertificationId())?"":certificationVO.getCertificationId());
+			dataMap.put("productName", UtilValidate.isEmpty(certificationVO.getProductName())?"":certificationVO.getProductName());
+			dataMap.put("productType", UtilValidate.isEmpty(certificationVO.getProductType())?"":certificationVO.getProductType());
+			dataMap.put("productBatch", UtilValidate.isEmpty(certificationVO.getProductBatch())?"":certificationVO.getProductBatch());
+			dataMap.put("productNum", UtilValidate.isEmpty(certificationVO.getProductNum())?"":certificationVO.getProductNum());
+			dataMap.put("testStandard", UtilValidate.isEmpty(certificationVO.getTestStandard())?"":certificationVO.getTestStandard());
+			dataMap.put("testReportId", UtilValidate.isEmpty(certificationVO.getTestReportId())?"":certificationVO.getTestReportId());
+			dataMap.put("qualityStatus", UtilValidate.isEmpty(certificationVO.getQualityStatus())?"":certificationVO.getQualityStatus());
+			dataMap.put("userUnits", UtilValidate.isEmpty(certificationVO.getUserUnits())?"":certificationVO.getUserUnits());
+			dataMap.put("inspector", UtilValidate.isEmpty(certificationVO.getInspector())?"":certificationVO.getInspector());
+			dataMap.put("certificationDate", DateUtil.formatYMD(certificationVO.certificationDate));
+			dataMap.put("remark", UtilValidate.isEmpty(certificationVO.getRemark())?"":certificationVO.getRemark());
+			datalist.add(dataMap);
+		}
+		resultMap.put("dataList", datalist);
+		MDoc mdoc = new MDoc();
+		String newFileName = UUID.randomUUID().toString()
+				.replaceAll("-", "")+".doc";
+		String fileName="C:/download/"+newFileName;
+		mdoc.createDoc(resultMap, fileName,"hgzlist.ftl");
+		return fileName;
+	}
+	
+	
+	
 	
 	/**
 	 * 设置文件类型

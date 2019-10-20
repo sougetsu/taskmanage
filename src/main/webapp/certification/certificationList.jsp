@@ -90,6 +90,19 @@
 			}
 		});
 	}
+	function certificationList_downloadFun() {
+		var startTime = $('#certificationList_registTimeStart').val();
+		var endTime = $('#certificationList_registTimeEnd').val();
+		if(comparetime(startTime,endTime)){
+			$('#certificationList_searchForm').attr('action','${pageContext.request.contextPath}/certification/downloadList');
+			$('#certificationList_searchForm').submit();
+		}else{
+			$.messager.show({
+				title : '提示',
+				msg : "开始时间大于结束时间"
+			});
+		}
+	}
 </script>
 <div class="easyui-layout" data-options="fit : true,border : false">
 	<div data-options="region:'north',border:false" style="height: 150px;overflow: hidden;" align="center">
@@ -115,6 +128,7 @@
 					<td colspan="6" style="text-align: center;">
 						<div>
 							<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="certificationList_searchFun();return false;">查询</a>&nbsp;
+							<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-print',plain:true" onclick="certificationList_downloadFun();return false;">导出数据</a>&nbsp;
 						</div>
 					</td>
 				</tr>

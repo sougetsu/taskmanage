@@ -25,6 +25,7 @@
 			    {field : 'applyDept',title : '申请部门',width : 100,sortable : true}, 
 			    {field : 'applyMember',title : '申请人',width : 80,sortable : true},
 			    {field : 'topicName',title : '课题号',width : 100,sortable : true}, 
+			    {field : 'internalModel',title : '所内型号',width : 100,sortable : true}, 
 			    {field : 'projectManager',title : '项目负责人',width : 100}, 
 			    {field : 'createtime',title : '登记日期',width : 150,sortable : true}, 
 			    {field : 'wantedEndDate',title : '希望完成时间',width : 120,sortable : true},
@@ -162,8 +163,8 @@
 		<form id="yans_taskList_searchForm" method="post" >
 			<table align="center" class="tableFormcx" cellSpacing=0 cellPadding=5 style="margin-top: 10px;">
 				<tr>
-					<td style="width: 60px;">任务类型</td>
-					<td><input name="taskType" /></td>
+					<td style="width: 60px;">所内型号</td>
+					<td><input name="internalModel" /></td>
 					<td style="width: 60px;">申&nbsp;&nbsp;请&nbsp;&nbsp;人</td>
 					<td><input name="applyMember" /></td>
 					<td>通知单号</td>

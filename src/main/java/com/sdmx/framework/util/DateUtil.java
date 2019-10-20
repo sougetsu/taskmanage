@@ -34,6 +34,7 @@ public class DateUtil {
 		return format(date, "yyyy-MM-dd");
 	}
 	
+	
 	/**
 	 * 将Date类型转换为字符串
 	 * 

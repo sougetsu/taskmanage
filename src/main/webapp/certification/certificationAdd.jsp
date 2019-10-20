@@ -79,7 +79,7 @@
 							data-options="required:true,validType:'length[1,100]'" /></td>
 					</tr>
 					<tr>
-						<td>质 量 状 态：</td>
+						<td>质量保证等级：</td>
 						<td><input name="qualityStatus" class="easyui-validatebox"
 							data-options="required:true,validType:'length[1,100]'" /></td>
 						<td>用 户 单 位：</td>

@@ -40,7 +40,7 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 				</tr>
 				<tr>
 					<th width=88>课题号</th>
-					<td width=194 colspan=2></td>
+					<td width=194 colspan=2>${taskOrder.topicNo}</td>
 					<th width=101 colspan=2>项目负责人</th>
 					<td width=106>${taskOrder.projectManager}</td>
 					<th width=42>电话</th>
