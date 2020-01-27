@@ -287,6 +287,15 @@
 					</c:otherwise>
 				</c:choose>
 				<tr>
+					<th width="150px" >电路是否借库</th>
+					<td width=174px style="text-align:left" colspan=2 >
+						<span style="white-space:nowrap;">
+							<input type="radio" style="width:30px" name="borrow"  value="1" ${taskOrder.borrow == 1 ? 'checked' : ''}/>是
+							<input type="radio" style="width:30px" name="borrow"  value="0" ${taskOrder.borrow == 0 ? 'checked' : ''}/>否
+						</span>
+					</td>
+				</tr>
+				<tr>
 					<th width="150px" >紧急程度：</th>
 					<td style="text-align:left" colspan=7>
 						<span style="white-space:nowrap;">

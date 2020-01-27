@@ -338,4 +338,12 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		
 		return getDictionarylistByHql(hql);
 	}
+	
+	@Override
+	public List<DictionaryInfo> getOrderTypeList() {
+		String hql = "from Dictionary t where 1=1 and t.state = '1' ";
+		hql += " and (t.categoryNO = '0009' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0009' )) ";
+		
+		return getDictionarylistByHql(hql);
+	}
 }

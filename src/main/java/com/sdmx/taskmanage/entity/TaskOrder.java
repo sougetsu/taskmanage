@@ -68,6 +68,8 @@ public class TaskOrder implements Serializable {
 	private String lsh;
 	private Integer taskOrderType;
 	private Integer urgency;
+	private Dictionary orderType;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_Order_ID")
 	@SequenceGenerator(name = "S_Order_ID", sequenceName = "S_Order_ID",allocationSize=1)
@@ -385,5 +387,17 @@ public class TaskOrder implements Serializable {
 	public void setUrgency(Integer urgency) {
 		this.urgency = urgency;
 	}
+	
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+	@JoinColumn(name="orderTypeId")
+	public Dictionary getOrderType() {
+		return orderType;
+	}
+	public void setOrderType(Dictionary orderType) {
+		this.orderType = orderType;
+	}
+
+	
 	
 }

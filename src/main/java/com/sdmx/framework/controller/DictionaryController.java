@@ -111,4 +111,15 @@ public class DictionaryController {
 	public List<DictionaryInfo> getYansTopicList(HttpServletRequest request) {
 		return dictionaryService.getYansTopicList();
 	}
+	
+	/**
+	 * 获得任务单类型列表
+	 * @param request
+	 * @return List<DictionaryInfo> 对象列表
+	 */
+	@RequestMapping("/orderTypeList")
+	@ResponseBody
+	public List<DictionaryInfo> getOrderTypeList(HttpServletRequest request) {
+		return dictionaryService.getOrderTypeList();
+	}
 }

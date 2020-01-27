@@ -194,14 +194,14 @@ public class TaskOrderController {
 	@RequestMapping("/detailPage")
 	public ModelAndView detailPage(String id, HttpServletRequest request) {
 		TaskOrderVO tInfo = taskOrderService.getTaskOrderById(id);
-		if(tInfo.getStatus() == TaskOrderStatus.COMPLETED.getValue() ||
-			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
-			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
-			List<TaskPriceVO> taskPriceList = taskOrderService.getTaskPriceListById(id);
-			TaskScheduleVO taskSchedule = taskOrderService.getTaskScheduleById(id);
-			request.setAttribute("taskPrice", taskPriceList);
-			request.setAttribute("taskSchedule", taskSchedule);
-		}
+//		if(tInfo.getStatus() == TaskOrderStatus.COMPLETED.getValue() ||
+//			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
+//			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
+//			List<TaskPriceVO> taskPriceList = taskOrderService.getTaskPriceListById(id);
+//			TaskScheduleVO taskSchedule = taskOrderService.getTaskScheduleById(id);
+//			request.setAttribute("taskPrice", taskPriceList);
+//			request.setAttribute("taskSchedule", taskSchedule);
+//		}
 		request.setAttribute("taskOrder", tInfo);
 		return new ModelAndView("/taskmanage/taskDetail");
 	}
@@ -261,14 +261,14 @@ public class TaskOrderController {
 	@RequestMapping("/fixPage")
 	public ModelAndView fixPage(String id, HttpServletRequest request) {
 		TaskOrderVO tInfo = taskOrderService.getTaskOrderById(id);
-		if(tInfo.getStatus() == TaskOrderStatus.COMPLETED.getValue() ||
-			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
-			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
-			List<TaskPriceVO> taskPriceList = taskOrderService.getTaskPriceListById(id);
-			TaskScheduleVO taskSchedule = taskOrderService.getTaskScheduleById(id);
-			request.setAttribute("taskPrice", taskPriceList);
-			request.setAttribute("taskSchedule", taskSchedule);
-		}
+//		if(tInfo.getStatus() == TaskOrderStatus.COMPLETED.getValue() ||
+//			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
+//			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
+//			List<TaskPriceVO> taskPriceList = taskOrderService.getTaskPriceListById(id);
+//			TaskScheduleVO taskSchedule = taskOrderService.getTaskScheduleById(id);
+//			request.setAttribute("taskPrice", taskPriceList);
+//			request.setAttribute("taskSchedule", taskSchedule);
+//		}
 		request.setAttribute("taskOrder", tInfo);
 		return new ModelAndView("/taskmanage/taskFix");
 	}

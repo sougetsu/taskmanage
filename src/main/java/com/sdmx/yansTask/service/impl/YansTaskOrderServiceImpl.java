@@ -346,6 +346,12 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
     			yansTaskOrderVO.setAttachment(attachvo);// 设置附件信息
     		}
         }
+        //是否借库
+        if(UtilValidate.isNotEmpty(yansTaskOrder.getBorrow()) && yansTaskOrder.getBorrow()==1) {
+        	yansTaskOrderVO.setBorrowState("是");
+        }else {
+        	yansTaskOrderVO.setBorrowState("否");
+        }
 		return yansTaskOrderVO;
 	}
 	@Override
@@ -442,6 +448,8 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
 		taskOrder.setErsaiFlag(yansTaskOrderVO.getErsaiFlag());
 		taskOrder.setErsaiLsh(yansTaskOrderVO.getErsaiLsh());
 		taskOrder.setYansNum(yansTaskOrderVO.getYansNum());
+		//是否借库
+		taskOrder.setBorrow(yansTaskOrderVO.getBorrow());
 		switch(memType){
 			case DepartManage:
 			case DepartMember:{
@@ -456,7 +464,9 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
 				break;
 			}
 			case TestCenterManage:{
-				taskOrder.setStatus(YansTaskOrderStatus.WAITTOCHARGE_TESTCENTERMANAGE.getValue());
+				//2020.01.27 取消封测核价
+				//taskOrder.setStatus(YansTaskOrderStatus.WAITTOCHARGE_TESTCENTERMANAGE.getValue());
+				taskOrder.setStatus(YansTaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue());
 				break;
 			}
 			default:{
@@ -590,7 +600,7 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
 		columnTitle.add("申请原因");
 		columnTitle.add("验收条件");
 		columnTitle.add("验收数量");
-		columnTitle.add("价格");
+		columnTitle.add("是否借库");
 		columnTitle.add("任务单状态");
 
 		return columnTitle;
@@ -622,7 +632,12 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
 			columns.add(task.getApplyReason());//申请原因
 			columns.add(task.getDetailRequire());//验收条件
 			columns.add(String.valueOf(task.getYansNum()));//验收数量
-			columns.add(String.valueOf(task.getSumPrice()));//价格
+			if(UtilValidate.isNotEmpty(task.getBorrow()) && task.getBorrow()==1) {
+				columns.add("是");//是否借库
+			}else {
+				columns.add("否");//是否借库
+			}
+			
 			//状态名称
 			String statusName="";
 			for (ErsaiTaskOrderStatus type : ErsaiTaskOrderStatus.values()) {

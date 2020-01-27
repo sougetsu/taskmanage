@@ -174,7 +174,7 @@
 			</table>
 		</form>
 	</div>
-	<c:choose>
+	<%-- <c:choose>
 		<c:when test="${taskOrder.status==43 || taskOrder.status==24 || taskOrder.status==51 || taskOrder.status==52}">
 			<div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
 			<div id="priceItem" title="价格信息" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
@@ -240,6 +240,6 @@
 			</div>
 			</div>
 		</c:when>
-	</c:choose>
+	</c:choose> --%>
 </div>
 </div>

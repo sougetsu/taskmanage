@@ -30,7 +30,7 @@
 						    {field : 'createtime',title : '登记日期',width : 150,sortable : true}, 
 						    {field : 'wantedEndDate',title : '希望完成时间',width : 120,sortable : true},
 						    {field : 'statusName',title : '任务单状态',width : 100,sortable : true},
-						    {field : 'sumPrice',title : '价格',width : 100,sortable : true},
+						    {field : 'borrowState',title : '是否借库',width : 100,sortable : true},
 						    {field : 'action',title : '操作',width : 200,formatter : formatZxcxOperation} 
 					] ],
 		    onLoadSuccess : function() {
@@ -55,7 +55,7 @@
 			}
 			if(row.priceEditState==1){
 				str += '&nbsp;';
-				str += formatString('<span onclick="yans_taskorder_list_priceEdit(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>修改</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+				str += formatString('<span onclick="yans_taskorder_list_edit(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>修改</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 			}
 			if(row.fixState==1){
 				str += '&nbsp;';

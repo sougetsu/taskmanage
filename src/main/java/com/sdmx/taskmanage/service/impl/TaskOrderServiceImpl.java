@@ -130,6 +130,11 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			hql += " and t.internalModel like :internalModel";
 			params.put("internalModel", "%%" +taskOrdervo.getInternalModel().trim() + "%%");
 		}
+		//任务类型
+		if (UtilValidate.isNotEmpty(taskOrdervo.getOrderTypeId())) {
+			hql += " and t.orderType.dictionaryId = :orderTypeId";
+			params.put("orderTypeId", Long.valueOf(taskOrdervo.getOrderTypeId()));
+		}
 		//课题号
 		if (UtilValidate.isNotEmpty(taskOrdervo.getTopicNo())) {
 			hql += " and t.topic.value like :topicNo";
@@ -211,6 +216,8 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				hql += " order by t.project.value "  + taskOrdervo.getOrder();
 			}else if("topicNo".equals(taskOrdervo.getSort())){
 				hql += " order by t.topic.value "  + taskOrdervo.getOrder();
+			}else if("orderTypeName".equals(taskOrdervo.getSort())){
+				hql += " order by t.orderType.value "  + taskOrdervo.getOrder();
 			}else{
 				hql += " order by " + taskOrdervo.getSort() + " " + taskOrdervo.getOrder();
 			}
@@ -432,6 +439,15 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskOrderVO.setWaferFlag(taskPackage.getWaferFlag());
 			}
 		}
+		//任务类型
+		Dictionary orderType = taskOrder.getOrderType();
+		if(UtilValidate.isNotEmpty(orderType)) {
+			taskOrderVO.setOrderTypeId(String.valueOf(orderType.getDictionaryId()));
+			taskOrderVO.setOrderTypeName(orderType.getAnnotation());
+		}else {
+			taskOrderVO.setOrderTypeName("");
+		}
+		
 		//鉴定方式
 		List<Dictionary> checkType = taskOrder.getCheckType();
 		String checkTypeIds = "";
@@ -585,6 +601,13 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		taskOrder.setControlledPlanFlag(taskOrdervo.getControlledPlanFlag());
 		taskOrder.setCountersignFlag(taskOrdervo.getCountersignFlag());
 		taskOrder.setDetailPlanNo(taskOrdervo.getDetailPlanNo());
+
+		//任务类型
+		if(UtilValidate.isNotEmpty(taskOrdervo.getOrderTypeId())) {
+			Dictionary orderType = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getOrderTypeId()));
+			taskOrder.setOrderType(orderType);
+		}
+	
 		
 		//业务申请内容
 		List<Dictionary> applyContent = new  ArrayList<Dictionary>();
@@ -672,7 +695,9 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				break;
 			}
 			case TestCenterManage:{
-				taskOrder.setStatus(TaskOrderStatus.WAITTOCHARGE_TESTCENTERMANAGE.getValue());
+				//2020.01.27取消封测核价操作
+				//taskOrder.setStatus(TaskOrderStatus.WAITTOCHARGE_TESTCENTERMANAGE.getValue());
+				taskOrder.setStatus(TaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue());
 				break;
 			}
 			default:{
@@ -787,7 +812,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		columnTitle.add("交付物 ");
 		columnTitle.add("业务申请内容");
 		columnTitle.add("申请原因");
-		columnTitle.add("价格");
+		columnTitle.add("任务类型");
 		columnTitle.add("紧急程度");
 
 		return columnTitle;
@@ -839,8 +864,15 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			columns.add(applyContentNames);
 			//申请原因
 			columns.add(task.getApplyReason());
-			//价格
-			columns.add(task.getSumPrice().toString());
+			//任务类型
+			Dictionary orderType = task.getOrderType();
+			
+			if(UtilValidate.isNotEmpty(orderType)) {
+				columns.add(task.getOrderType().getAnnotation());
+			}else {
+				columns.add("");
+			}
+			
 			//紧急程度
 			if(task.getUrgency()!=null)
 			{

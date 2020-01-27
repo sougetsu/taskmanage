@@ -102,6 +102,8 @@ public class TaskOrderVO implements java.io.Serializable {
 	private String markDemand;// 打标要求
 	private String discNum; //使用圆片号
 	private int waferFlag; //是否中测
+	private String orderTypeId;
+	private String orderTypeName;
 	
 	public int getPage() {
 		return page;
@@ -714,5 +716,23 @@ public class TaskOrderVO implements java.io.Serializable {
 	public void setUrgencyName(String urgencyName) {
 		this.urgencyName = urgencyName;
 	}
+
+	public String getOrderTypeId() {
+		return orderTypeId;
+	}
+
+	public void setOrderTypeId(String orderTypeId) {
+		this.orderTypeId = orderTypeId;
+	}
+
+	public String getOrderTypeName() {
+		return orderTypeName;
+	}
+
+	public void setOrderTypeName(String orderTypeName) {
+		this.orderTypeName = orderTypeName;
+	}
+	
+	
 	
 }

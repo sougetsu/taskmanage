@@ -115,14 +115,14 @@ public class YansTaskOrderController {
 	@RequestMapping("/detailPage")
 	public ModelAndView detailPage(String id, HttpServletRequest request) {
 		YansTaskOrderVO tInfo = yansTaskOrderService.getTaskOrderById(id);
-		if(tInfo.getStatus() == YansTaskOrderStatus.COMPLETED.getValue() ||
-			tInfo.getStatus() == YansTaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
-			tInfo.getStatus() == YansTaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
-			List<TaskPriceVO> taskPriceList = yansTaskOrderService.getTaskPriceListById(id);
-			TaskScheduleVO taskSchedule = yansTaskOrderService.getTaskScheduleById(id);
-			request.setAttribute("taskPrice", taskPriceList);
-			request.setAttribute("taskSchedule", taskSchedule);
-		}
+//		if(tInfo.getStatus() == YansTaskOrderStatus.COMPLETED.getValue() ||
+//			tInfo.getStatus() == YansTaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
+//			tInfo.getStatus() == YansTaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
+//			List<TaskPriceVO> taskPriceList = yansTaskOrderService.getTaskPriceListById(id);
+//			TaskScheduleVO taskSchedule = yansTaskOrderService.getTaskScheduleById(id);
+//			request.setAttribute("taskPrice", taskPriceList);
+//			request.setAttribute("taskSchedule", taskSchedule);
+//		}
 		request.setAttribute("taskOrder", tInfo);
 		return new ModelAndView("/yans/yansTaskDetail");
 	}
@@ -245,14 +245,14 @@ public class YansTaskOrderController {
 	@RequestMapping("/fixPage")
 	public ModelAndView fixPage(String id, HttpServletRequest request) {
 		YansTaskOrderVO tInfo = yansTaskOrderService.getTaskOrderById(id);
-		if(tInfo.getStatus() == YansTaskOrderStatus.COMPLETED.getValue() ||
-			tInfo.getStatus() == YansTaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
-			tInfo.getStatus() == YansTaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
-			List<TaskPriceVO> taskPriceList = yansTaskOrderService.getTaskPriceListById(id);
-			TaskScheduleVO taskSchedule = yansTaskOrderService.getTaskScheduleById(id);
-			request.setAttribute("taskPrice", taskPriceList);
-			request.setAttribute("taskSchedule", taskSchedule);
-		}
+//		if(tInfo.getStatus() == YansTaskOrderStatus.COMPLETED.getValue() ||
+//			tInfo.getStatus() == YansTaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
+//			tInfo.getStatus() == YansTaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
+//			List<TaskPriceVO> taskPriceList = yansTaskOrderService.getTaskPriceListById(id);
+//			TaskScheduleVO taskSchedule = yansTaskOrderService.getTaskScheduleById(id);
+//			request.setAttribute("taskPrice", taskPriceList);
+//			request.setAttribute("taskSchedule", taskSchedule);
+//		}
 		request.setAttribute("taskOrder", tInfo);
 		return new ModelAndView("/yans/yansTaskFix");
 	}

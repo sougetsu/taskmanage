@@ -411,7 +411,8 @@
 			</table>
 		</form>
 	</div>
-	<c:choose>
+	
+	<%-- <c:choose>
 		<c:when test="${taskOrder.status==43 || taskOrder.status==13 || taskOrder.status==51}">
 			<div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
 			<div id="priceItem" title="价格信息" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
@@ -562,7 +563,7 @@
 			</div>
 			</div>
 		</c:when>
-	</c:choose>
+	</c:choose> --%>
 	<div id="print_area" align="center" style="display:none;">
 			<table class="tasktableForm" border="1" bordercolor="#CCC" style="border-collapse:collapse;">
 				<tr>

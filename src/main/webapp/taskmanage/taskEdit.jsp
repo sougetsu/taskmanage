@@ -823,6 +823,13 @@
 					</c:otherwise>
 				</c:choose>
 				<tr>
+					<th width="150px" >任务类型：</th>
+					<td style="text-align:left" colspan=7>
+						<input name="orderTypeId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/orderTypeList',parentField : 'pid',required:'true'"
+						lines="true" cascadeCheck="false" value="${taskOrder.orderTypeId}"/>	
+					</td>
+				</tr>
+				<tr>
 					<th width="150px" >鉴定方式：</th>
 					<td style="text-align:left" colspan=7>
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check1" name="checkTypeId" value="23" ${taskOrder.checkTypeId == 23 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check1">自鉴</label>
@@ -830,6 +837,7 @@
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check3" name="checkTypeId" value="25" ${taskOrder.checkTypeId == 25 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check3">第三方直检</label>
 					</td>
 				</tr>
+				
 				<c:choose>
 				   	<c:when test="${taskOrder.urgencyState==0}">
 						<tr>

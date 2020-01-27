@@ -451,7 +451,9 @@ public class ErsaiTaskOrderServiceImpl implements IErsaiTaskOrderService{
 				break;
 			}
 			case TestCenterManage:{
-				taskOrder.setStatus(ErsaiTaskOrderStatus.WAITTOCHARGE_TESTCENTERMANAGE.getValue());
+				//2020.01.27 取消封测核价
+				//taskOrder.setStatus(ErsaiTaskOrderStatus.WAITTOCHARGE_TESTCENTERMANAGE.getValue());
+				taskOrder.setStatus(ErsaiTaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue());
 				break;
 			}
 			default:{

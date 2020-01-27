@@ -31,7 +31,7 @@
 			    {field : 'createtime',title : '登记日期',width : 150,sortable : true}, 
 			    {field : 'wantedEndDate',title : '希望完成时间',width : 120,sortable : true},
 			    {field : 'statusName',title : '任务单状态',width : 100,sortable : true},
-			    {field : 'sumPrice',title : '价格',width : 100,sortable : true},
+			    {field : 'orderTypeName',title : '任务类型',width : 100,sortable : true},
 			    {field : 'urgencyName',title : '紧急程度',width : 100,sortable : true},
 			    {field : 'action',title : '操作',width : 180,formatter : formatZxcxOperation} 
 			    ] ],
@@ -184,7 +184,7 @@
 	}
 </script>
 <div class="easyui-layout" data-options="fit : true,border : false">
-	<div data-options="region:'north',border:false" style="height: 150px;overflow: hidden;" align="center">
+	<div data-options="region:'north',border:false" style="overflow: hidden;" align="center">
 		<form id="taskList_searchForm" method="post" >
 			<table align="center" class="tableFormcx" cellSpacing=0 cellPadding=5 style="margin-top: 10px;">
 				<tr>
@@ -193,7 +193,12 @@
 					<td style="width: 60px;">申&nbsp;&nbsp;请&nbsp;&nbsp;人</td>
 					<td><input name="applyMember" /></td>
 					<td>所内型号</td>
-					<td><input name="internalModel" /></td>
+					<td>
+						<input name="internalModel" />
+					</td>
+					<td>任务类型</td>
+					<td><input name="orderTypeId" class="easyui-combotree" data-options="url:'${pageContext.request.contextPath}/dictionary/orderTypeList',parentField : 'pid',required:'true'"
+						lines="true" cascadeCheck="false"/></td>
 				</tr>
 				<tr>
 					<td style="width: 60px;">任务单号</td>

@@ -103,6 +103,12 @@
 					</c:when>
 				</c:choose>
 				<tr>
+					<th width="150px" >电路是否借库</th>
+					<td width=174px style="text-align:left" colspan=2 >
+						${taskOrder.borrowState}
+					</td>
+				</tr>
+				<tr>
 					<th width=88 >紧急程度：</th>
 					<td width=558 colspan=7>
 						<c:choose>
@@ -159,7 +165,8 @@
 			</table>
 		</form>
 	</div>
-	<c:choose>
+	
+	<%-- <c:choose>
 		<c:when test="${taskOrder.status==43 || taskOrder.status==24 || taskOrder.status==51}">
 			<div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
 			<div id="priceItem" title="价格信息" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
@@ -225,6 +232,6 @@
 			</div>
 			</div>
 		</c:when>
-	</c:choose>
+	</c:choose> --%>
 </div>
 </div>

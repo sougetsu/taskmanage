@@ -228,8 +228,10 @@
 						data-options="validType:'length[1,30]'"
 						style="width:330px" /></td>
 					<th width=121 colspan=2>希望完成时间</th>
-					<td width=264 colspan=3><input id="wantedEndDate" name="wantedEndDate" class="easyui-validatebox" data-options="required:true"
-									onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" style="width:330px"/></td>
+					<td width=264 colspan=3>
+						<input id="wantedEndDate" name="wantedEndDate" class="easyui-validatebox" data-options="required:true"
+									onFocus="WdatePicker({readOnly:false,dateFmt:'yyyy-MM-dd'})" style="width:330px"/>
+					</td>
 				</tr>
 				<tr>
 					<th width="150px" >是否有附件：</th>

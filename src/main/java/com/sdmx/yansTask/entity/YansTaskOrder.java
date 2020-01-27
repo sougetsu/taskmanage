@@ -57,6 +57,7 @@ public class YansTaskOrder implements Serializable {
 	private int ersaiFlag;//是否使用二筛
 	private String ersaiLsh;//二筛流水号
 	private Integer urgency;
+	private Integer borrow;//电路是否借库
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_YansOrder_ID")
@@ -285,7 +286,8 @@ public class YansTaskOrder implements Serializable {
 				+ "状态：" + this.getStatus() + "是否附件：" + this.getAttachmentFlag()
 				+ "总价：" + this.getSumPrice() + "协助部门："
 				+ this.getHelpDept().getAnnotation() + "希望完成时间："
-				+ this.getWantedEndDate();
+				+ this.getWantedEndDate() + "是否借库："
+				+ this.getBorrow();
 		return info;
 	}
 	 /* 
@@ -327,6 +329,14 @@ public class YansTaskOrder implements Serializable {
 
 	public void setUrgency(Integer urgency) {
 		this.urgency = urgency;
+	}
+
+	public Integer getBorrow() {
+		return borrow;
+	}
+
+	public void setBorrow(Integer borrow) {
+		this.borrow = borrow;
 	}
     
 }

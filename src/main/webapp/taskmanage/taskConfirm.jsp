@@ -857,6 +857,13 @@
 					</c:otherwise>
 				</c:choose>
 				<tr>
+					<th width="150px" >任务类型：</th>
+					<td style="text-align:left" colspan=7>
+						<input  name="orderType" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/orderTypeList',parentField : 'pid'"
+						lines="true" cascadeCheck="false" value="${taskOrder.orderType}"/>	
+					</td>
+				</tr>
+				<tr>
 					<th width="150px" >鉴定方式：</th>
 					<td style="text-align:left" colspan=7>
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check1" name="checkTypeId" value="23" ${taskOrder.checkTypeId == 23 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check1">自鉴</label>

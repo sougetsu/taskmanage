@@ -163,7 +163,7 @@
 	</div>
 	<c:choose>
 		<c:when test="${taskOrder.status==43 || taskOrder.status==24 || taskOrder.status==51}">
-			<div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
+			<%-- <div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
 			<div id="priceItem" title="价格信息" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
 				<table width=100%>
 					<thead>
@@ -225,34 +225,34 @@
 				    </tr>
 			    </table>
 			</div>
-			</div>
-			<c:choose>
-			<c:when test="${taskOrder.status==24}">
-			<div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
-			<div id="yans_panding" title="是否需要验收" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
-				<table cellSpacing=0 cellPadding=5>
-					<tr>
-				    	<th width="150px" >是否需要验收：</th>
-						<td width=174px style="text-align:left" colspan=2 >
-							<span style="white-space:nowrap;">
-								<input type="radio" style="width:30px" name="yansFlag" onclick="setAttachRow(this.value)" value="1" />是
-								<input type="radio" style="width:30px" name="yansFlag" onclick="setAttachRow(this.value)" checked value="0" />否
-							</span>
-						</td>
-					</tr>
-					<tr id="yans_erSaiTask" style="display:none;">
-				    	<th width="150px" >验收数量：</th>
-						<td width=174px style="text-align:left" colspan=2 >
-							<input  name="yansNum" class="easyui-validatebox"
-							data-options="validType:'length[1,100]'"
-							style="width:330px" value="0"/>
-						</td>
-					</tr>
-			    </table>
-			   </div>
-			  </div>
-			  </c:when>
-			  </c:choose>
+			</div> --%>
+				<c:choose>
+					<c:when test="${taskOrder.status==24}">
+					<div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
+					<div id="yans_panding" title="是否需要验收" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
+						<table cellSpacing=0 cellPadding=5>
+							<tr>
+						    	<th width="150px" >是否需要验收：</th>
+								<td width=174px style="text-align:left" colspan=2 >
+									<span style="white-space:nowrap;">
+										<input type="radio" style="width:30px" name="yansFlag" onclick="setAttachRow(this.value)" value="1" />是
+										<input type="radio" style="width:30px" name="yansFlag" onclick="setAttachRow(this.value)" checked value="0" />否
+									</span>
+								</td>
+							</tr>
+							<tr id="yans_erSaiTask" style="display:none;">
+						    	<th width="150px" >验收数量：</th>
+								<td width=174px style="text-align:left" colspan=2 >
+									<input  name="yansNum" class="easyui-validatebox"
+									data-options="validType:'length[1,100]'"
+									style="width:330px" value="0"/>
+								</td>
+							</tr>
+					    </table>
+					   </div>
+					  </div>
+					  </c:when>
+				  </c:choose>
 		</c:when>
 	</c:choose>
 	</form>

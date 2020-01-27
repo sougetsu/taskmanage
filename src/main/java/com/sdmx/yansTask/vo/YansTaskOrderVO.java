@@ -53,6 +53,8 @@ public class YansTaskOrderVO {
 	private String ersaiLsh;
 	private int urgency;
 	private int urgencyState;//修改状态
+	private int borrow;
+	private String borrowState;
 	
 	public String getOrderId() {
 		return orderId;
@@ -323,6 +325,18 @@ public class YansTaskOrderVO {
 	}
 	public void setUrgencyState(int urgencyState) {
 		this.urgencyState = urgencyState;
+	}
+	public int getBorrow() {
+		return borrow;
+	}
+	public void setBorrow(int borrow) {
+		this.borrow = borrow;
+	}
+	public String getBorrowState() {
+		return borrowState;
+	}
+	public void setBorrowState(String borrowState) {
+		this.borrowState = borrowState;
 	}
 	
 }

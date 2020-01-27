@@ -115,14 +115,14 @@ public class ErsaiTaskOrderController {
 	@RequestMapping("/detailPage")
 	public ModelAndView detailPage(String id, HttpServletRequest request) {
 		ErsaiTaskOrderVO tInfo = ersaiTaskOrderService.getTaskOrderById(id);
-		if(tInfo.getStatus() == ErsaiTaskOrderStatus.COMPLETED.getValue() ||
-			tInfo.getStatus() == ErsaiTaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
-			tInfo.getStatus() == ErsaiTaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
-			List<TaskPriceVO> taskPriceList = ersaiTaskOrderService.getTaskPriceListById(id);
-			TaskScheduleVO taskSchedule = ersaiTaskOrderService.getTaskScheduleById(id);
-			request.setAttribute("taskPrice", taskPriceList);
-			request.setAttribute("taskSchedule", taskSchedule);
-		}
+//		if(tInfo.getStatus() == ErsaiTaskOrderStatus.COMPLETED.getValue() ||
+//			tInfo.getStatus() == ErsaiTaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
+//			tInfo.getStatus() == ErsaiTaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
+//			List<TaskPriceVO> taskPriceList = ersaiTaskOrderService.getTaskPriceListById(id);
+//			TaskScheduleVO taskSchedule = ersaiTaskOrderService.getTaskScheduleById(id);
+//			request.setAttribute("taskPrice", taskPriceList);
+//			request.setAttribute("taskSchedule", taskSchedule);
+//		}
 		request.setAttribute("taskOrder", tInfo);
 		return new ModelAndView("/taskmanage/erSaiTaskDetail");
 	}
@@ -245,14 +245,14 @@ public class ErsaiTaskOrderController {
 	@RequestMapping("/fixPage")
 	public ModelAndView fixPage(String id, HttpServletRequest request) {
 		ErsaiTaskOrderVO tInfo = ersaiTaskOrderService.getTaskOrderById(id);
-		if(tInfo.getStatus() == ErsaiTaskOrderStatus.COMPLETED.getValue() ||
-			tInfo.getStatus() == ErsaiTaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
-			tInfo.getStatus() == ErsaiTaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
-			List<TaskPriceVO> taskPriceList = ersaiTaskOrderService.getTaskPriceListById(id);
-			TaskScheduleVO taskSchedule = ersaiTaskOrderService.getTaskScheduleById(id);
-			request.setAttribute("taskPrice", taskPriceList);
-			request.setAttribute("taskSchedule", taskSchedule);
-		}
+//		if(tInfo.getStatus() == ErsaiTaskOrderStatus.COMPLETED.getValue() ||
+//			tInfo.getStatus() == ErsaiTaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
+//			tInfo.getStatus() == ErsaiTaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
+//			List<TaskPriceVO> taskPriceList = ersaiTaskOrderService.getTaskPriceListById(id);
+//			TaskScheduleVO taskSchedule = ersaiTaskOrderService.getTaskScheduleById(id);
+//			request.setAttribute("taskPrice", taskPriceList);
+//			request.setAttribute("taskSchedule", taskSchedule);
+//		}
 		request.setAttribute("taskOrder", tInfo);
 		return new ModelAndView("/taskmanage/erSaiTaskFix");
 	}
