@@ -1057,6 +1057,23 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
         String totalHql = "select count(*) " + hql;
         return taskOrderDao.count(totalHql,params).intValue();
 	}
+	
+	@Transactional
+	public void cancel(String id){
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
+		TaskOrder taskOrder = taskOrderDao.get(TaskOrder.class, Long.valueOf(id));
+		taskOrder.setStatus(TaskOrderStatus.CANCELED.getValue());
+		taskOrderDao.update(taskOrder);
+		//操作日志
+  		OperateLog opLog = new OperateLog();
+  		opLog.setLshId(taskOrder.getLsh());
+  		opLog.setContent(sessionInfo.getLoginName()+"取消了任务单"+id);
+  		opLog.setMemberId(Long.valueOf(sessionInfo.getUserId()));
+  		opLog.setCreatetime(new Date());
+  		operatelogDao.save(opLog);
+	}
+	
 	@Transactional
 	public void remove(String id){
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();

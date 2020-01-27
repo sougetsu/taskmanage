@@ -830,16 +830,31 @@
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check3" name="checkTypeId" value="25" ${taskOrder.checkTypeId == 25 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check3">第三方直检</label>
 					</td>
 				</tr>
-				<tr>
-					<th width="150px" >紧急程度：</th>
-					<td style="text-align:left" colspan=7>
-						<span style="white-space:nowrap;">
-						<input type="radio" style="width:30px" name="urgency" value="0" ${taskOrder.urgency == 0 ? 'checked' : ''}  ${taskOrder.urgencyState == 0 ? 'disabled' : ''}/>一般
-						<input type="radio" style="width:30px" name="urgency" value="1" ${taskOrder.urgency == 1 ? 'checked' : ''}   ${taskOrder.urgencyState == 0 ? 'disabled' : ''}/>紧急
-						<input type="radio" style="width:30px" name="urgency" value="2" ${taskOrder.urgency == 2 ? 'checked' : ''}   ${taskOrder.urgencyState == 0 ? 'disabled' : ''}/>超紧急
-						</span>
-					</td>
-				</tr>
+				<c:choose>
+				   	<c:when test="${taskOrder.urgencyState==0}">
+						<tr>
+							<th width="150px" >紧急程度：</th>
+							<td style="text-align:left" colspan=7>
+								<span style="white-space:nowrap;">
+									${taskOrder.urgencyName}
+									<input type="hidden" style="width:30px" value="${taskOrder.urgency}" name="urgency" />
+								</span>
+							</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<th width="150px" >紧急程度：</th>
+							<td style="text-align:left" colspan=7>
+								<span style="white-space:nowrap;">
+								<input type="radio" style="width:30px" name="urgency" value="0" ${taskOrder.urgency == 0 ? 'checked' : ''} />一般
+								<input type="radio" style="width:30px" name="urgency" value="1" ${taskOrder.urgency == 1 ? 'checked' : ''} />紧急
+								<input type="radio" style="width:30px" name="urgency" value="2" ${taskOrder.urgency == 2 ? 'checked' : ''} />超紧急
+								</span>
+							</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
 				<tr>
 					<th width="150px" >申请原因及说明：</th>
 					<td colspan=7>

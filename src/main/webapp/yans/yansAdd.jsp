@@ -71,7 +71,7 @@
 			ersaiNumSelect.style.display = "table-row";
 		}
 	}
-	function checkAndSubmit(){
+	function checkAndSubmityans(){
 		var submitForm = $('#taskOrderyans_createForm');
 		if(submitForm.form('validate')){
 			parent.$.messager.progress({
@@ -148,7 +148,7 @@
 				<tr>
 					<th width="150px">课题号</th>
 					<td width=174 colspan=2>
-						<input name="topicId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/topicList',parentField : 'pid',required:'true'"
+						<input name="topicId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/yanstopicList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false"/>
 					</td>
 					<th width=121 colspan=2>项目负责人</th>
@@ -255,7 +255,7 @@
 				</tr>
 				<tr>
 			         <td colspan=8 style="text-align:center">
-			         	<a id="yansAdd_zxcl_submit" class="l-btn" href="javascript:void(0);" onclick="javascript:checkAndSubmit()">
+			         	<a id="yansAdd_zxcl_submit" class="l-btn" href="javascript:void(0);" onclick="javascript:checkAndSubmityans()">
 			         		<span class="l-btn-left">
 			         			<span class="l-btn-text icon-save l-btn-icon-left" style="padding-left: 20px; ">提交审核</span>
 			         		</span>

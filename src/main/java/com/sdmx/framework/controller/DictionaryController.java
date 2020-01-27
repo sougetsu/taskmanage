@@ -90,4 +90,25 @@ public class DictionaryController {
 	public List<DictionaryInfo> getTopicList(HttpServletRequest request) {
 		return dictionaryService.getTopicList();
 	}
+	
+	/**
+	 * 获得二筛课题号
+	 * @param request
+	 * @return List<DictionaryInfo> 对象列表
+	 */
+	@RequestMapping("/ersaitopicList")
+	@ResponseBody
+	public List<DictionaryInfo> getErsaiTopicList(HttpServletRequest request) {
+		return dictionaryService.getErsaiTopicList();
+	}
+	/**
+	 * 获得验收课题号
+	 * @param request
+	 * @return List<DictionaryInfo> 对象列表
+	 */
+	@RequestMapping("/yanstopicList")
+	@ResponseBody
+	public List<DictionaryInfo> getYansTopicList(HttpServletRequest request) {
+		return dictionaryService.getYansTopicList();
+	}
 }

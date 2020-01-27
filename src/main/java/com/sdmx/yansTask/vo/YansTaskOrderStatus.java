@@ -10,7 +10,8 @@ public enum YansTaskOrderStatus {
 	WAITTOCONFIRM_TESTCENTERMANAGE(41,"封测中心待审核"),
 	WAITTOCHARGE_TESTCENTERMANAGE(42,"封测中心待核价"),
 	WAITTOFIX_TESTCENTERMANAGE(43,"封测中心待确认"),
-	COMPLETED(51,"完成");
+	COMPLETED(51,"完成"),
+	CANCELED(99,"取消");
 	private YansTaskOrderStatus(int value,String label){this.value=value;this.label=label;}
 	private final int value;
 	private final String label;

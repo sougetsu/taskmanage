@@ -14,7 +14,8 @@ public enum TaskOrderStatus {
 	WAITTOCONFIRM_KANGJIAMANAGE(61,"抗加中心待审核"),
 	WAITTOFIX_KANGJIAMANAGE(62,"抗加中心待确认"),
 	WAITTOFIX_DEPARTMANAGE(13,"部门待确认"),
-	COMPLETED(51,"完成");
+	COMPLETED(51,"完成"),
+	CANCELED(99,"取消");
 	private TaskOrderStatus(int value,String label){this.value=value;this.label=label;}
 	private final int value;
 	private final String label;

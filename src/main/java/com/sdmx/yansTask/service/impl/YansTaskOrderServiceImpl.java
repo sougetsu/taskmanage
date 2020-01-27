@@ -773,6 +773,24 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
         String totalHql = "select count(*) " + hql;
         return yansTaskOrderDao.count(totalHql,params).intValue();
 	}
+	
+	@Override
+	@Transactional
+	public void cancel(String id) {
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
+        YansTaskOrder taskOrder = yansTaskOrderDao.get(YansTaskOrder.class, Long.valueOf(id));
+		taskOrder.setStatus(YansTaskOrderStatus.CANCELED.getValue());
+		yansTaskOrderDao.update(taskOrder);
+		//操作日志
+  		OperateLog opLog = new OperateLog();
+  		opLog.setLshId(taskOrder.getLsh());
+  		opLog.setContent(sessionInfo.getLoginName()+"取消了任务单"+id);
+  		opLog.setMemberId(Long.valueOf(sessionInfo.getUserId()));
+  		opLog.setCreatetime(new Date());
+  		operatelogDao.save(opLog);
+	}
+	
 	@Override
 	@Transactional
 	public void remove(String id) {

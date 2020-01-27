@@ -654,6 +654,20 @@ public class ErsaiTaskOrderController {
 		mdoc.createDoc(dataMap, fileName,"ersai.ftl");
 		return fileName;
 	}
+	
+	/**
+	 * 任务单取消
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/cancelTaskOrder")
+	@ResponseBody
+	public JsonResult cancelTaskOrder(String id) {
+		ersaiTaskOrderService.cancel(id);
+		return JsonResult.success("取消该任务单成功！", id);
+	}
+	
 	/**
 	 * 任务单删除
 	 * 

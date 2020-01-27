@@ -608,6 +608,21 @@ public class TaskOrderController {
 		return JsonResult.success("删除成功！", id);
 	}
 	
+	
+	
+	/**
+	 * 任务单取消
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/cancelTaskOrder")
+	@ResponseBody
+	public JsonResult cancelTaskOrder(String id) {
+		taskOrderService.cancel(id);
+		return JsonResult.success("取消成功！", id);
+	}
+	
 	/**
 	 * 任务单删除
 	 * 

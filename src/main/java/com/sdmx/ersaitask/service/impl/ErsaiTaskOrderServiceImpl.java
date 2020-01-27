@@ -785,6 +785,24 @@ public class ErsaiTaskOrderServiceImpl implements IErsaiTaskOrderService{
         return ersaiTaskOrderDao.count(totalHql,params).intValue();
 	
 	}
+	
+	@Override
+	@Transactional
+	public void cancel(String id) {
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
+        ErsaiTaskOrder taskOrder = ersaiTaskOrderDao.get(ErsaiTaskOrder.class, Long.valueOf(id));
+		taskOrder.setStatus(ErsaiTaskOrderStatus.CANCELED.getValue());
+		ersaiTaskOrderDao.update(taskOrder);
+		//操作日志
+  		OperateLog opLog = new OperateLog();
+  		opLog.setLshId(taskOrder.getLsh());
+  		opLog.setContent(sessionInfo.getLoginName()+"取消了该任务单"+id);
+  		opLog.setMemberId(Long.valueOf(sessionInfo.getUserId()));
+  		opLog.setCreatetime(new Date());
+  		operatelogDao.save(opLog);
+	}
+	
 	@Override
 	@Transactional
 	public void remove(String id) {

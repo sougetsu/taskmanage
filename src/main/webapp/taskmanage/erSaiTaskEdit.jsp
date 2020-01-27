@@ -157,7 +157,7 @@
 				<tr>
 					<th width="150px">课题号</th>
 					<td width=174 colspan=2>
-						<input name="topicId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/topicList',parentField : 'pid',required:'true'"
+						<input name="topicId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/ersaitopicList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false" value="${taskOrder.topicId}"/>
 					</td>
 					<th width=121 colspan=2>项目负责人</th>

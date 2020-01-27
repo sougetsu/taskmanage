@@ -64,7 +64,7 @@
 			attachSubmit.style.display = (document.all ? "block" : "table-row");
 		}
 	}
-	function checkAndSubmit(){
+	function checkAndSubmitErsai(){
 		var submitForm = $('#taskOrderErsai_createForm');
 		if(submitForm.form('validate')){
 			parent.$.messager.progress({
@@ -146,7 +146,7 @@
 				<tr>
 					<th width="150px">课题号</th>
 					<td width=174 colspan=2>
-						<input name="topicId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/topicList',parentField : 'pid',required:'true'"
+						<input name="topicId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/ersaitopicList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false"/>
 					</td>
 					
@@ -230,7 +230,7 @@
 				</tr>
 				<tr>
 			         <td colspan=8 style="text-align:center">
-			         	<a id="erSaiAdd_zxcl_submit" class="l-btn" href="javascript:void(0);" onclick="javascript:checkAndSubmit()">
+			         	<a id="erSaiAdd_zxcl_submit" class="l-btn" href="javascript:void(0);" onclick="javascript:checkAndSubmitErsai()">
 			         		<span class="l-btn-left">
 			         			<span class="l-btn-text icon-save l-btn-icon-left" style="padding-left: 20px; ">提交审核</span>
 			         		</span>

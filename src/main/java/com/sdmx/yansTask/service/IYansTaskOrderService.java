@@ -26,5 +26,6 @@ public interface IYansTaskOrderService {
 	public YansTaskOrder checkPrice(PriceCheckVO priceCheckVO);
 	public int getTaskNum();
 	public void remove(String id);
+	public void cancel(String id);
 	public DataGrid logList(LogVO logVO);
 }

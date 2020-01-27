@@ -11,7 +11,8 @@ public enum ErsaiTaskOrderStatus {
 	WAITTOCHARGE_TESTCENTERMANAGE(42,"封测中心待核价"),
 	WAITTOFIX_TESTCENTERMANAGE(43,"封测中心待确认"),
 	COMPLETED(51,"完成"),
-	COMPLETEDTOYANS(52,"完成转验收");
+	COMPLETEDTOYANS(52,"完成转验收"),
+	CANCELED(99,"取消");
 	private ErsaiTaskOrderStatus(int value,String label){this.value=value;this.label=label;}
 	private final int value;
 	private final String label;

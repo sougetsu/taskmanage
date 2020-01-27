@@ -63,6 +63,10 @@
 			}
 			if(row.deleteState==1){
 				str += '&nbsp;';
+				str += formatString('<span onclick="yans_taskorder_list_cancel(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>取消</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+			}
+			if(row.deleteState==1){
+				str += '&nbsp;';
 				str += formatString('<span onclick="yans_taskorder_list_delete(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>删除</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 			}
 		return str;
@@ -120,6 +124,25 @@
 				msg : "开始时间大于结束时间"
 			});
 		}
+	}
+	function yans_taskorder_list_cancel(id) {
+		$.messager.confirm('确认', '您是否要取消该任务单？', function(r) {
+			if (r) {
+				$.ajax({
+					url : '${pageContext.request.contextPath}/yansTaskManage/cancelTaskOrder?id='+id,
+					dataType : 'json',
+					success : function(result) {
+						if (result.success) {
+							$('#yans_taskorder_list_datagrid').datagrid('load');
+						}
+						$.messager.show({
+							title : '提示',
+							msg : result.msg
+						});
+					}
+				});
+			}
+		});
 	}
 	function yans_taskorder_list_delete(id) {
 		$.messager.confirm('确认', '您是否要删除该任务单？', function(r) {
