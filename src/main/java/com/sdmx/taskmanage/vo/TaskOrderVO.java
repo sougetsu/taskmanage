@@ -102,6 +102,40 @@ public class TaskOrderVO implements java.io.Serializable {
 	private String markDemand;// 打标要求
 	private String discNum; //使用圆片号
 	private int waferFlag; //是否中测
+	
+	private int mixPackageFlag;// 1 有混合封装。0无混合封装
+	private String mpackageStatusIds; // 封装状态Id
+	private String mpackageStatusNames; // 封装状态名称
+	private String mqualityLevel;// 质量等级;
+	private String mdiscBatch;// 圆片批次;
+	private Integer mpackageNum;// 数 量
+	private String mchipLabel; // 芯片标识
+	private String mshellType;// 管壳型号
+	private String mbondNum;// 压焊图号
+	private String mpackageShape;// 封装形式
+	private String mmarkDemand;// 打标要求
+	private String mdiscNum; //使用圆片号
+	private int mwaferFlag; //是否中测
+	private int mchipNum;
+	private int mstockFlag;
+	
+	
+	private int mcpackageFlag;// 1 有多芯片封装。0无多芯片封装
+	private String mcpackageStatusIds; // 封装状态Id
+	private String mcpackageStatusNames; // 封装状态名称
+	private String mcqualityLevel;// 质量等级;
+	private String mcdiscBatch;// 圆片批次;
+	private Integer mcpackageNum;// 数 量
+	private String mcchipLabel; // 芯片标识
+	private String mcshellType;// 管壳型号
+	private String mcbondNum;// 压焊图号
+	private String mcpackageShape;// 封装形式
+	private String mcmarkDemand;// 打标要求
+	private String mcdiscNum; //使用圆片号
+	private int mcwaferFlag; //是否中测
+	private int mcchipNum;
+	private int mcstockFlag;
+	
 	private String orderTypeId;
 	private String orderTypeName;
 	
@@ -732,7 +766,245 @@ public class TaskOrderVO implements java.io.Serializable {
 	public void setOrderTypeName(String orderTypeName) {
 		this.orderTypeName = orderTypeName;
 	}
-	
-	
+
+	public int getMixPackageFlag() {
+		return mixPackageFlag;
+	}
+
+	public void setMixPackageFlag(int mixPackageFlag) {
+		this.mixPackageFlag = mixPackageFlag;
+	}
+
+	public String getMpackageStatusIds() {
+		return mpackageStatusIds;
+	}
+
+	public void setMpackageStatusIds(String mpackageStatusIds) {
+		this.mpackageStatusIds = mpackageStatusIds;
+	}
+
+	public String getMpackageStatusNames() {
+		return mpackageStatusNames;
+	}
+
+	public void setMpackageStatusNames(String mpackageStatusNames) {
+		this.mpackageStatusNames = mpackageStatusNames;
+	}
+
+	public String getMqualityLevel() {
+		return mqualityLevel;
+	}
+
+	public void setMqualityLevel(String mqualityLevel) {
+		this.mqualityLevel = mqualityLevel;
+	}
+
+	public String getMdiscBatch() {
+		return mdiscBatch;
+	}
+
+	public void setMdiscBatch(String mdiscBatch) {
+		this.mdiscBatch = mdiscBatch;
+	}
+
+	public Integer getMpackageNum() {
+		return mpackageNum;
+	}
+
+	public void setMpackageNum(Integer mpackageNum) {
+		this.mpackageNum = mpackageNum;
+	}
+
+	public String getMchipLabel() {
+		return mchipLabel;
+	}
+
+	public void setMchipLabel(String mchipLabel) {
+		this.mchipLabel = mchipLabel;
+	}
+
+	public String getMshellType() {
+		return mshellType;
+	}
+
+	public void setMshellType(String mshellType) {
+		this.mshellType = mshellType;
+	}
+
+	public String getMbondNum() {
+		return mbondNum;
+	}
+
+	public void setMbondNum(String mbondNum) {
+		this.mbondNum = mbondNum;
+	}
+
+	public String getMpackageShape() {
+		return mpackageShape;
+	}
+
+	public void setMpackageShape(String mpackageShape) {
+		this.mpackageShape = mpackageShape;
+	}
+
+	public String getMmarkDemand() {
+		return mmarkDemand;
+	}
+
+	public void setMmarkDemand(String mmarkDemand) {
+		this.mmarkDemand = mmarkDemand;
+	}
+
+	public String getMdiscNum() {
+		return mdiscNum;
+	}
+
+	public void setMdiscNum(String mdiscNum) {
+		this.mdiscNum = mdiscNum;
+	}
+
+	public int getMwaferFlag() {
+		return mwaferFlag;
+	}
+
+	public void setMwaferFlag(int mwaferFlag) {
+		this.mwaferFlag = mwaferFlag;
+	}
+
+	public int getMchipNum() {
+		return mchipNum;
+	}
+
+	public void setMchipNum(int mchipNum) {
+		this.mchipNum = mchipNum;
+	}
+
+	public int getMstockFlag() {
+		return mstockFlag;
+	}
+
+	public void setMstockFlag(int mstockFlag) {
+		this.mstockFlag = mstockFlag;
+	}
+
+	public int getMcpackageFlag() {
+		return mcpackageFlag;
+	}
+
+	public void setMcpackageFlag(int mcpackageFlag) {
+		this.mcpackageFlag = mcpackageFlag;
+	}
+
+	public String getMcpackageStatusIds() {
+		return mcpackageStatusIds;
+	}
+
+	public void setMcpackageStatusIds(String mcpackageStatusIds) {
+		this.mcpackageStatusIds = mcpackageStatusIds;
+	}
+
+	public String getMcpackageStatusNames() {
+		return mcpackageStatusNames;
+	}
+
+	public void setMcpackageStatusNames(String mcpackageStatusNames) {
+		this.mcpackageStatusNames = mcpackageStatusNames;
+	}
+
+	public String getMcqualityLevel() {
+		return mcqualityLevel;
+	}
+
+	public void setMcqualityLevel(String mcqualityLevel) {
+		this.mcqualityLevel = mcqualityLevel;
+	}
+
+	public String getMcdiscBatch() {
+		return mcdiscBatch;
+	}
+
+	public void setMcdiscBatch(String mcdiscBatch) {
+		this.mcdiscBatch = mcdiscBatch;
+	}
+
+	public Integer getMcpackageNum() {
+		return mcpackageNum;
+	}
+
+	public void setMcpackageNum(Integer mcpackageNum) {
+		this.mcpackageNum = mcpackageNum;
+	}
+
+	public String getMcchipLabel() {
+		return mcchipLabel;
+	}
+
+	public void setMcchipLabel(String mcchipLabel) {
+		this.mcchipLabel = mcchipLabel;
+	}
+
+	public String getMcshellType() {
+		return mcshellType;
+	}
+
+	public void setMcshellType(String mcshellType) {
+		this.mcshellType = mcshellType;
+	}
+
+	public String getMcbondNum() {
+		return mcbondNum;
+	}
+
+	public void setMcbondNum(String mcbondNum) {
+		this.mcbondNum = mcbondNum;
+	}
+
+	public String getMcpackageShape() {
+		return mcpackageShape;
+	}
+
+	public void setMcpackageShape(String mcpackageShape) {
+		this.mcpackageShape = mcpackageShape;
+	}
+
+	public String getMcmarkDemand() {
+		return mcmarkDemand;
+	}
+
+	public void setMcmarkDemand(String mcmarkDemand) {
+		this.mcmarkDemand = mcmarkDemand;
+	}
+
+	public String getMcdiscNum() {
+		return mcdiscNum;
+	}
+
+	public void setMcdiscNum(String mcdiscNum) {
+		this.mcdiscNum = mcdiscNum;
+	}
+
+	public int getMcwaferFlag() {
+		return mcwaferFlag;
+	}
+
+	public void setMcwaferFlag(int mcwaferFlag) {
+		this.mcwaferFlag = mcwaferFlag;
+	}
+
+	public int getMcchipNum() {
+		return mcchipNum;
+	}
+
+	public void setMcchipNum(int mcchipNum) {
+		this.mcchipNum = mcchipNum;
+	}
+
+	public int getMcstockFlag() {
+		return mcstockFlag;
+	}
+
+	public void setMcstockFlag(int mcstockFlag) {
+		this.mcstockFlag = mcstockFlag;
+	}
 	
 }

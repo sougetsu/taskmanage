@@ -106,6 +106,48 @@
 				});
 			}
 		}
+		if(type==22){
+			var taskpackage = document.getElementById("edit_task_mixpackage");
+			taskpackage.style.display = "none";
+			if(checktype){
+				taskpackage.style.display = (document.all ? "block" : "table-row");
+				$('#edit_mixpackage_table input').validatebox({ 
+					required:true 
+				});
+			}else{
+				$('#edit_mixpackage_table input').validatebox({ 
+					required:false
+				});
+			}
+			var selectVal = $("input[name='mpackageStatusIds']:checked").val();
+			if(selectVal == 30)
+			{
+				$('#edit_mixpackage_table input[name="mdiscNum"]').validatebox({ 
+					required:false
+				});
+			}
+		}
+		if(type==23){
+			var taskpackage = document.getElementById("edit_task_multipackage");
+			taskpackage.style.display = "none";
+			if(checktype){
+				taskpackage.style.display = (document.all ? "block" : "table-row");
+				$('#edit_multipackage_table input').validatebox({ 
+					required:true 
+				});
+			}else{
+				$('#edit_multipackage_table input').validatebox({ 
+					required:false
+				});
+			}
+			var selectVal = $("input[name='mcpackageStatusIds']:checked").val();
+			if(selectVal == 30)
+			{
+				$('#edit_multipackage_table input[name="mcdiscNum"]').validatebox({ 
+					required:false
+				});
+			}
+		}
 	}
 	function setPackageRow(value){
 		if(value==30){
@@ -114,6 +156,28 @@
 			});
 		}else{
 			$('#edit_package_table input[name="discNum"]').validatebox({ 
+				required:true
+			});
+		}
+	}
+	function setmPackageRow(value){
+		if(value==30){
+			$('#edit_mixpackage_table input[name="mdiscNum"]').validatebox({ 
+				required:false
+			});
+		}else{
+			$('#edit_mixpackage_table input[name="mdiscNum"]').validatebox({ 
+				required:true
+			});
+		}
+	}
+	function setmcPackageRow(value){
+		if(value==30){
+			$('#edit_multipackage_table input[name="mcdiscNum"]').validatebox({ 
+				required:false
+			});
+		}else{
+			$('#edit_multipackage_table input[name="mcdiscNum"]').validatebox({ 
 				required:true
 			});
 		}
@@ -333,7 +397,9 @@
 						<input type="checkbox" id="checkbox1" style="vertical-align:middle;width:30px" name="applyContentIds" onclick="setDetailRow(this.value,this.checked)" value="8" ${fn:contains(taskOrder.applyContentIds, '8')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox1">圆片减薄</label>
 						<input type="checkbox" id="checkbox2" style="vertical-align:middle;width:30px" name="applyContentIds" onclick="setDetailRow(this.value,this.checked)" value="9" ${fn:contains(taskOrder.applyContentIds, '9')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox2">圆片划片</label>
 						<input type="checkbox" id="checkbox3" style="vertical-align:middle;width:30px" name="applyContentIds" value="10" ${fn:contains(taskOrder.applyContentIds, '10')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox3">中测</label>
-						<input type="checkbox" id="checkbox4" style="vertical-align:middle;width:30px" name="applyContentIds" onclick="setDetailRow(this.value,this.checked)" value="11" ${fn:contains(taskOrder.applyContentIds, '11')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox4">封装</label>
+						<input type="checkbox" id="checkbox4" style="vertical-align:middle;width:30px" name="applyContentIds" onclick="setDetailRow(this.value,this.checked)" value="11" ${fn:contains(taskOrder.applyContentIds, '11')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox4">单片封装</label>
+						<input type="checkbox" id="checkbox15" style="vertical-align:middle;width:30px" name="applyContentIds"onclick="setDetailRow(this.value,this.checked)" value="22"  ${fn:contains(taskOrder.applyContentIds, '22')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox15">混合封装</label>
+						<input type="checkbox" id="checkbox16" style="vertical-align:middle;width:30px" name="applyContentIds"onclick="setDetailRow(this.value,this.checked)" value="23"  ${fn:contains(taskOrder.applyContentIds, '23')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox16">多芯片封装</label>
 						<input type="checkbox" id="checkbox5" style="vertical-align:middle;width:30px" name="applyContentIds" value="12" ${fn:contains(taskOrder.applyContentIds, '12')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox5">去封装</label>
 						<input type="checkbox" id="checkbox6" style="vertical-align:middle;width:30px" name="applyContentIds" value="13" ${fn:contains(taskOrder.applyContentIds, '13')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox6">测试</label>
 						<input type="checkbox" id="checkbox7" style="vertical-align:middle;width:30px" name="applyContentIds" value="14" ${fn:contains(taskOrder.applyContentIds, '14')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox7">老化</label>
@@ -817,6 +883,596 @@
 											<input type="radio" style="width:30px" name="waferFlag" value="0" ${taskOrder.waferFlag== 0 ? 'checked' : ''} />否
 									    </td>
 									</tr>
+								</table>
+							</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+				   	<c:when test="${taskOrder.mixPackageFlag==1}">
+					<tr id="edit_task_mixpackage">
+						<th width="150px"></th>
+						<td width=558 colspan=7>
+							<table id="edit_mixpackage_table" border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
+							   <tr >
+							    <td width=31 rowspan=7 >
+							    <p ><b><span >混合封装</span></b></p>
+							    </td>
+							    <td width=83 >
+							    <p ><b><span
+							    >封装状态</span></b></p>
+							    </td>
+							    <td width=505 colspan=3 >
+							    	<input type="radio" id="package11" style="vertical-align:middle;width:30px" name="mpackageStatusIds" value="27" onclick="setmPackageRow(this.value)" ${fn:contains(taskOrder.mpackageStatusIds, '27')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="package11">初样</label>
+									<input type="radio" id="package12" style="vertical-align:middle;width:30px" name="mpackageStatusIds" value="28" onclick="setmPackageRow(this.value)" ${fn:contains(taskOrder.mpackageStatusIds, '28')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="package12">正样</label>
+									<input type="radio" id="package13" style="vertical-align:middle;width:30px" name="mpackageStatusIds" value="29" onclick="setmPackageRow(this.value)" ${fn:contains(taskOrder.mpackageStatusIds, '29')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="package13">鉴定生产</label>
+									<input type="radio" id="package14" style="vertical-align:middle;width:30px" name="mpackageStatusIds" value="30" onclick="setmPackageRow(this.value)" ${fn:contains(taskOrder.mpackageStatusIds, '30')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="package14">供货生产</label>
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >质量等级</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mqualityLevel"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mqualityLevel}"/>
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >圆片批次</span></b></p>
+							    </td>
+							    <td width=194 >
+							  		<input name="mdiscBatch"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mdiscBatch}"/>
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >数 量</span></b></p>
+							    </td>
+							    <td width=194 >
+							   	<input name="mpackageNum"
+									class="easyui-numberbox"
+									data-options="validType:'length[1,30]',required:true"
+									style="width:98%" value="${taskOrder.mpackageNum}"/>
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >芯片标识</span></b></p>
+							    </td>
+							    <td width=194 >
+							    	<input name="mchipLabel"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mchipLabel}"/>
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >管壳型号</span></b></p>
+							    </td>
+							    <td width=194 >
+							    <input name="mshellType"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mshellType}"/>
+							    </td>
+							    <td width=87 >
+							    <p ><b><span
+							    >压焊图号</span></b></p>
+							    </td>
+							    <td width=194 >
+							    	<input name="mbondNum"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mbondNum}"/>
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >封装形式</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mpackageShape"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mpackageShape}"/>
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >打标要求</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mmarkDemand"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mmarkDemand}"/>
+							    </td>
+							   </tr>
+							   <tr>
+									<td width=83 >
+								    <p ><b><span>使用圆片号</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input name="mdiscNum"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]',required:true"
+										style="width:98%" value="${taskOrder.mdiscNum}"/>
+								    </td>
+								    <td width=87 >
+								    <p ><b><span >圆片是否中测/修调</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input type="radio" style="width:30px" name="mwaferFlag" value="1" ${taskOrder.mwaferFlag== 1 ? 'checked' : ''} />是
+										<input type="radio" style="width:30px" name="mwaferFlag" value="0" ${taskOrder.mwaferFlag== 0 ? 'checked' : ''} />否
+								    </td>
+								</tr>
+								<tr>
+							    <td width=83 >
+							    <p ><b><span
+							    >需求芯片数</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mchipNum"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]'"
+									style="width:98%" value="${taskOrder.mchipNum}" />
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >库存是否满足</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input type="radio" style="width:30px" name="mstockFlag" value="1" ${taskOrder.mstockFlag== 1 ? 'checked' : ''} />是
+									<input type="radio" style="width:30px" name="mstockFlag" value="0" ${taskOrder.mstockFlag== 0 ? 'checked' : ''} />否
+							    </td>
+						   	</tr>
+							</table>
+						</td>
+					</tr>
+				</c:when>
+				   	<c:otherwise>
+				   		<tr id="edit_task_mixpackage" style="display:none;">
+							<th width="150px"></th>
+							<td width=558 colspan=7>
+								<table id="edit_mixpackage_table" border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
+								   <tr >
+								    <td width=31 rowspan=7 >
+								    <p ><b><span >混合封装</span></b></p>
+								    </td>
+								    <td width=83 >
+								    <p ><b><span
+								    >封装状态</span></b></p>
+								    </td>
+								    <td width=505 colspan=3 >
+								    	<input type="radio" id="package11" style="vertical-align:middle;width:30px" name="mpackageStatusIds" checked="checked" value="27" onclick="setmPackageRow(this.value)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="package11">初样</label>
+										<input type="radio" id="package12" style="vertical-align:middle;width:30px" name="mpackageStatusIds" value="28" onclick="setmPackageRow(this.value)" ><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="package12">正样</label>
+										<input type="radio" id="package13" style="vertical-align:middle;width:30px" name="mpackageStatusIds" value="29" onclick="setmPackageRow(this.value)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="package13">鉴定生产</label>
+										<input type="radio" id="package14" style="vertical-align:middle;width:30px" name="mpackageStatusIds" value="30" onclick="setmPackageRow(this.value)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="package14">供货生产</label>
+								    </td>
+								   </tr>
+								   <tr >
+								    <td width=83 >
+								    <p ><b><span
+								    >质量等级</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input name="mqualityLevel"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]'"
+										style="width:98%" />
+								    </td>
+								    <td width=87 >
+								    <p ><b><span >圆片批次</span></b></p>
+								    </td>
+								    <td width=194 >
+								  		<input name="mdiscBatch"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]'"
+										style="width:98%" />
+								    </td>
+								   </tr>
+								   <tr >
+								    <td width=83 >
+								    <p ><b><span
+								    >数 量</span></b></p>
+								    </td>
+								    <td width=194 >
+								   	<input name="mpackageNum"
+										class="easyui-numberbox"
+										data-options="validType:'length[1,30]'"
+										style="width:98%" value=0/>
+								    </td>
+								    <td width=87 >
+								    <p ><b><span >芯片标识</span></b></p>
+								    </td>
+								    <td width=194 >
+								    	<input name="mchipLabel"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]'"
+										style="width:98%" />
+								    </td>
+								   </tr>
+								   <tr >
+								    <td width=83 >
+								    <p ><b><span
+								    >管壳型号</span></b></p>
+								    </td>
+								    <td width=194 >
+								    <input name="mshellType"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]'"
+										style="width:98%" />
+								    </td>
+								    <td width=87 >
+								    <p ><b><span
+								    >压焊图号</span></b></p>
+								    </td>
+								    <td width=194 >
+								    	<input name="mbondNum"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]'"
+										style="width:98%" />
+								    </td>
+								   </tr>
+								   <tr >
+								    <td width=83 >
+								    <p ><b><span
+								    >封装形式</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input name="mpackageShape"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]'"
+										style="width:98%" />
+								    </td>
+								    <td width=87 >
+								    <p ><b><span >打标要求</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input name="mmarkDemand"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]'"
+										style="width:98% " />
+								    </td>
+								   </tr>
+								   <tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >使用圆片号</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<input name="mdiscNum"
+											class="easyui-validatebox"
+											data-options="validType:'length[1,100]'"
+											style="width:98%" />
+									    </td>
+									    <td width=87 >
+									    <p ><b><span >圆片是否中测/修调</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<input type="radio" style="width:30px" name="mwaferFlag" value="1" />是
+											<input type="radio" style="width:30px" name="mwaferFlag" value="0" checked="checked" />否
+									    </td>
+								   	</tr>
+								   	<tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >需求芯片数</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<input name="mchipNum"
+											class="easyui-validatebox"
+											data-options="validType:'length[1,100]'"
+											style="width:98%" />
+									    </td>
+									    <td width=87 >
+									    <p ><b><span >库存是否满足</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<input type="radio" style="width:30px" name="mstockFlag" value="1" />是
+											<input type="radio" style="width:30px" name="mstockFlag" value="0" checked="checked" />否
+									    </td>
+								   	</tr>
+								</table>
+							</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+				   	<c:when test="${taskOrder.mcpackageFlag==1}">
+					<tr id="edit_task_multipackage">
+						<th width="150px"></th>
+						<td width=558 colspan=7>
+							<table id="edit_multipackage_table" border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
+							   <tr >
+							    <td width=31 rowspan=7 >
+							    <p ><b><span >多芯片封装</span></b></p>
+							    </td>
+							    <td width=83 >
+							    <p ><b><span
+							    >封装状态</span></b></p>
+							    </td>
+							    <td width=505 colspan=3 >
+							    	<input type="radio" id="package21" style="vertical-align:middle;width:30px" name="mcpackageStatusIds" value="27" onclick="setmcPackageRow(this.value)" ${fn:contains(taskOrder.mcpackageStatusIds, '27')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="package21">初样</label>
+									<input type="radio" id="package22" style="vertical-align:middle;width:30px" name="mcpackageStatusIds" value="28" onclick="setmcPackageRow(this.value)" ${fn:contains(taskOrder.mcpackageStatusIds, '28')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="package22">正样</label>
+									<input type="radio" id="package23" style="vertical-align:middle;width:30px" name="mcpackageStatusIds" value="29" onclick="setmcPackageRow(this.value)" ${fn:contains(taskOrder.mcpackageStatusIds, '29')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="package23">鉴定生产</label>
+									<input type="radio" id="package24" style="vertical-align:middle;width:30px" name="mcpackageStatusIds" value="30" onclick="setmcPackageRow(this.value)" ${fn:contains(taskOrder.mcpackageStatusIds, '30')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="package24">供货生产</label>
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >质量等级</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mcqualityLevel"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mcqualityLevel}"/>
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >圆片批次</span></b></p>
+							    </td>
+							    <td width=194 >
+							  		<input name="mcdiscBatch"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mcdiscBatch}"/>
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >数 量</span></b></p>
+							    </td>
+							    <td width=194 >
+							   	<input name="mcpackageNum"
+									class="easyui-numberbox"
+									data-options="validType:'length[1,30]',required:true"
+									style="width:98%" value="${taskOrder.mcpackageNum}"/>
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >芯片标识</span></b></p>
+							    </td>
+							    <td width=194 >
+							    	<input name="mcchipLabel"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mcchipLabel}"/>
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >管壳型号</span></b></p>
+							    </td>
+							    <td width=194 >
+							    <input name="mcshellType"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mcshellType}"/>
+							    </td>
+							    <td width=87 >
+							    <p ><b><span
+							    >压焊图号</span></b></p>
+							    </td>
+							    <td width=194 >
+							    	<input name="mcbondNum"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mcbondNum}"/>
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >封装形式</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mcpackageShape"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mcpackageShape}"/>
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >打标要求</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mcmarkDemand"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]',required:true"
+									style="width:98%" value="${taskOrder.mcmarkDemand}"/>
+							    </td>
+							   </tr>
+							   <tr>
+									<td width=83 >
+								    <p ><b><span>使用圆片号</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input name="mcdiscNum"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]',required:true"
+										style="width:98%" value="${taskOrder.mcdiscNum}"/>
+								    </td>
+								    <td width=87 >
+								    <p ><b><span >圆片是否中测/修调</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input type="radio" style="width:30px" name="mcwaferFlag" value="1" ${taskOrder.mcwaferFlag== 1 ? 'checked' : ''} />是
+										<input type="radio" style="width:30px" name="mcwaferFlag" value="0" ${taskOrder.mcwaferFlag== 0 ? 'checked' : ''} />否
+								    </td>
+								</tr>
+								<tr>
+							    <td width=83 >
+							    <p ><b><span
+							    >需求芯片数</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mcchipNum"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]'"
+									style="width:98%" value="${taskOrder.mcchipNum}" />
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >库存是否满足</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input type="radio" style="width:30px" name="mcstockFlag" value="1" ${taskOrder.mcstockFlag== 1 ? 'checked' : ''} />是
+									<input type="radio" style="width:30px" name="mcstockFlag" value="0" ${taskOrder.mcstockFlag== 0 ? 'checked' : ''} />否
+							    </td>
+						   	</tr>
+							</table>
+						</td>
+					</tr>
+				</c:when>
+				   	<c:otherwise>
+				   		<tr id="edit_task_multipackage" style="display:none;">
+							<th width="150px"></th>
+							<td width=558 colspan=7>
+								<table id="edit_multipackage_table" border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
+								<tr >
+							    <td width=31 rowspan=7 >
+							    <p ><b><span >多芯片封装</span></b></p>
+							    </td>
+							    <td width=83 >
+							    <p ><b><span
+							    >封装状态</span></b></p>
+							    </td>
+							    <td width=505 colspan=3 >
+							    	<input type="radio" id="package21" style="vertical-align:middle;width:30px" name="mcpackageStatusIds" checked="checked" value="27" onclick="setmcPackageRow(this.value)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="package21">初样</label>
+									<input type="radio" id="package22" style="vertical-align:middle;width:30px" name="mcpackageStatusIds" value="28" onclick="setmcPackageRow(this.value)" ><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="package22">正样</label>
+									<input type="radio" id="package23" style="vertical-align:middle;width:30px" name="mcpackageStatusIds" value="29" onclick="setmcPackageRow(this.value)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="package23">鉴定生产</label>
+									<input type="radio" id="package24" style="vertical-align:middle;width:30px" name="mcpackageStatusIds" value="30" onclick="setmcPackageRow(this.value)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="package24">供货生产</label>
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >质量等级</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mcqualityLevel"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]'"
+									style="width:98%" />
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >圆片批次</span></b></p>
+							    </td>
+							    <td width=194 >
+							  		<input name="mcdiscBatch"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]'"
+									style="width:98%" />
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >数 量</span></b></p>
+							    </td>
+							    <td width=194 >
+							   	<input name="mcpackageNum"
+									class="easyui-numberbox"
+									data-options="validType:'length[1,30]'"
+									style="width:98%" value=0/>
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >芯片标识</span></b></p>
+							    </td>
+							    <td width=194 >
+							    	<input name="mcchipLabel"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]'"
+									style="width:98%" />
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >管壳型号</span></b></p>
+							    </td>
+							    <td width=194 >
+							    <input name="mcshellType"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]'"
+									style="width:98%" />
+							    </td>
+							    <td width=87 >
+							    <p ><b><span
+							    >压焊图号</span></b></p>
+							    </td>
+							    <td width=194 >
+							    	<input name="mcbondNum"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]'"
+									style="width:98%" />
+							    </td>
+							   </tr>
+							   <tr >
+							    <td width=83 >
+							    <p ><b><span
+							    >封装形式</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mcpackageShape"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]'"
+									style="width:98%" />
+							    </td>
+							    <td width=87 >
+							    <p ><b><span >打标要求</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input name="mcmarkDemand"
+									class="easyui-validatebox"
+									data-options="validType:'length[1,100]'"
+									style="width:98% " />
+							    </td>
+							   </tr>
+							   <tr>
+								    <td width=83 >
+								    <p ><b><span
+								    >使用圆片号</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input name="mcdiscNum"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]'"
+										style="width:98%" />
+								    </td>
+								    <td width=87 >
+								    <p ><b><span >圆片是否中测/修调</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input type="radio" style="width:30px" name="mcwaferFlag" value="1" />是
+										<input type="radio" style="width:30px" name="mcwaferFlag" value="0" checked="checked" />否
+								    </td>
+							   	</tr>
+							   	<tr>
+								    <td width=83 >
+								    <p ><b><span
+								    >需求芯片数</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input name="mcchipNum"
+										class="easyui-validatebox"
+										data-options="validType:'length[1,100]'"
+										style="width:98%" />
+								    </td>
+								    <td width=87 >
+								    <p ><b><span >库存是否满足</span></b></p>
+								    </td>
+								    <td width=194 >
+								   		<input type="radio" style="width:30px" name="mcstockFlag" value="1" />是
+										<input type="radio" style="width:30px" name="mcstockFlag" value="0" checked="checked" />否
+								    </td>
+							   	</tr> 	  
 								</table>
 							</td>
 						</tr>

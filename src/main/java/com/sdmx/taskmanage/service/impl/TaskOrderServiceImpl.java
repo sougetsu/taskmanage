@@ -40,6 +40,8 @@ import com.sdmx.taskmanage.dao.ILshDao;
 import com.sdmx.taskmanage.dao.IOperateLogDao;
 import com.sdmx.taskmanage.dao.IPriceItemDao;
 import com.sdmx.taskmanage.dao.ITaskDicingDao;
+import com.sdmx.taskmanage.dao.ITaskMixPackageDao;
+import com.sdmx.taskmanage.dao.ITaskMultiChipPackageDao;
 import com.sdmx.taskmanage.dao.ITaskOrderDao;
 import com.sdmx.taskmanage.dao.ITaskPackageDao;
 import com.sdmx.taskmanage.dao.ITaskPriceDao;
@@ -48,6 +50,8 @@ import com.sdmx.taskmanage.entity.Attachment;
 import com.sdmx.taskmanage.entity.OperateLog;
 import com.sdmx.taskmanage.entity.PriceItem;
 import com.sdmx.taskmanage.entity.TaskDicing;
+import com.sdmx.taskmanage.entity.TaskMixPackage;
+import com.sdmx.taskmanage.entity.TaskMultiChipPackage;
 import com.sdmx.taskmanage.entity.TaskOrder;
 import com.sdmx.taskmanage.entity.TaskPackage;
 import com.sdmx.taskmanage.entity.TaskPrice;
@@ -87,6 +91,10 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 	private ITaskDicingDao taskDicingDao;
 	@Autowired
 	private ITaskPackageDao taskPackageDao;
+	@Autowired
+	private ITaskMixPackageDao taskMixPackageDao;
+	@Autowired
+	private ITaskMultiChipPackageDao taskMultiChipPackageDao;
 	@Autowired
 	private ITaskReductionDao taskReductionDao;
 	@Autowired
@@ -297,6 +305,58 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskPackageDao.save(taskPackage);
 				taskOrder.setTaskPackage(taskPackage);
 			}
+			//混合封装
+			if(StringUtils.isHave(contentIds, "22")){
+				TaskMixPackage taskPackage = new TaskMixPackage();
+				List<Dictionary> packageStatus = new  ArrayList<Dictionary>();
+				if (UtilValidate.isNotEmpty(taskOrdervo.getMpackageStatusIds())) {
+					for (String packageStatusId : taskOrdervo.getMpackageStatusIds().split(",")) {
+						Dictionary d = dictionaryDao.get(Dictionary.class, Long.parseLong(packageStatusId));
+						packageStatus.add(d);
+					}
+				}
+				taskPackage.setMpackageStatus(packageStatus);
+				taskPackage.setMbondNum(taskOrdervo.getMbondNum());
+				taskPackage.setMchipLabel(taskOrdervo.getMchipLabel());
+				taskPackage.setMdiscBatch(taskOrdervo.getMdiscBatch());
+				taskPackage.setMmarkDemand(taskOrdervo.getMmarkDemand());
+				taskPackage.setMpackageNum(taskOrdervo.getMpackageNum());
+				taskPackage.setMpackageShape(taskOrdervo.getMpackageShape());
+				taskPackage.setMqualityLevel(taskOrdervo.getMqualityLevel());
+				taskPackage.setMshellType(taskOrdervo.getMshellType());
+				taskPackage.setMdiscNum(taskOrdervo.getMdiscNum());
+				taskPackage.setMwaferFlag(taskOrdervo.getMwaferFlag());
+				taskPackage.setMchipNum(taskOrdervo.getMchipNum());
+				taskPackage.setMstockFlag(taskOrdervo.getMstockFlag());
+				taskMixPackageDao.save(taskPackage);
+				taskOrder.setTaskMixPackage(taskPackage);
+			}
+			//多芯片封装
+			if(StringUtils.isHave(contentIds, "23")){
+				TaskMultiChipPackage taskPackage = new TaskMultiChipPackage();
+				List<Dictionary> packageStatus = new  ArrayList<Dictionary>();
+				if (UtilValidate.isNotEmpty(taskOrdervo.getMcpackageStatusIds())) {
+					for (String packageStatusId : taskOrdervo.getMcpackageStatusIds().split(",")) {
+						Dictionary d = dictionaryDao.get(Dictionary.class, Long.parseLong(packageStatusId));
+						packageStatus.add(d);
+					}
+				}
+				taskPackage.setMcpackageStatus(packageStatus);
+				taskPackage.setMcbondNum(taskOrdervo.getMcbondNum());
+				taskPackage.setMcchipLabel(taskOrdervo.getMcchipLabel());
+				taskPackage.setMcdiscBatch(taskOrdervo.getMcdiscBatch());
+				taskPackage.setMcmarkDemand(taskOrdervo.getMcmarkDemand());
+				taskPackage.setMcpackageNum(taskOrdervo.getMcpackageNum());
+				taskPackage.setMcpackageShape(taskOrdervo.getMcpackageShape());
+				taskPackage.setMcqualityLevel(taskOrdervo.getMcqualityLevel());
+				taskPackage.setMcshellType(taskOrdervo.getMcshellType());
+				taskPackage.setMcdiscNum(taskOrdervo.getMcdiscNum());
+				taskPackage.setMcwaferFlag(taskOrdervo.getMcwaferFlag());
+				taskPackage.setMcchipNum(taskOrdervo.getMcchipNum());
+				taskPackage.setMcstockFlag(taskOrdervo.getMcstockFlag());
+				taskMultiChipPackageDao.save(taskPackage);
+				taskOrder.setTaskMultiChipPackage(taskPackage);
+			}
 		}
 		taskOrder.setApplyContent(applyContent);
 		//鉴定方式
@@ -437,6 +497,66 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskOrderVO.setShellType(taskPackage.getShellType());
 				taskOrderVO.setDiscNum(taskPackage.getDiscNum());
 				taskOrderVO.setWaferFlag(taskPackage.getWaferFlag());
+			}
+			//混合封装
+			if(StringUtils.isHave(contentIds, "22")){
+				taskOrderVO.setMixPackageFlag(1);
+				TaskMixPackage taskPackage = taskOrder.getTaskMixPackage();
+				List<Dictionary> packageStatus = taskPackage.getMpackageStatus();
+				String packageStatusIds = "";
+				String packageStatusNames = "";
+				for(Dictionary dic: packageStatus){
+					if (packageStatusIds.length() > 0) {
+						packageStatusIds += ",";
+						packageStatusNames +=",";
+					}
+					packageStatusIds += dic.getDictionaryId();
+					packageStatusNames += dic.getValue();
+				}
+				taskOrderVO.setMpackageStatusIds(packageStatusIds);
+				taskOrderVO.setMpackageStatusNames(packageStatusNames);
+				taskOrderVO.setMbondNum(taskPackage.getMbondNum());
+				taskOrderVO.setMchipLabel(taskPackage.getMchipLabel());
+				taskOrderVO.setMdiscBatch(taskPackage.getMdiscBatch());
+				taskOrderVO.setMmarkDemand(taskPackage.getMmarkDemand());
+				taskOrderVO.setMpackageNum(taskPackage.getMpackageNum());
+				taskOrderVO.setMpackageShape(taskPackage.getMpackageShape());
+				taskOrderVO.setMqualityLevel(taskPackage.getMqualityLevel());
+				taskOrderVO.setMshellType(taskPackage.getMshellType());
+				taskOrderVO.setMdiscNum(taskPackage.getMdiscNum());
+				taskOrderVO.setMwaferFlag(taskPackage.getMwaferFlag());
+				taskOrderVO.setMchipNum(taskPackage.getMchipNum());
+				taskOrderVO.setMstockFlag(taskPackage.getMstockFlag());
+			}
+			//多芯片封装
+			if(StringUtils.isHave(contentIds, "23")){
+				taskOrderVO.setMcpackageFlag(1);
+				TaskMultiChipPackage taskPackage = taskOrder.getTaskMultiChipPackage();
+				List<Dictionary> packageStatus = taskPackage.getMcpackageStatus();
+				String packageStatusIds = "";
+				String packageStatusNames = "";
+				for(Dictionary dic: packageStatus){
+					if (packageStatusIds.length() > 0) {
+						packageStatusIds += ",";
+						packageStatusNames +=",";
+					}
+					packageStatusIds += dic.getDictionaryId();
+					packageStatusNames += dic.getValue();
+				}
+				taskOrderVO.setMcpackageStatusIds(packageStatusIds);
+				taskOrderVO.setMcpackageStatusNames(packageStatusNames);
+				taskOrderVO.setMcbondNum(taskPackage.getMcbondNum());
+				taskOrderVO.setMcchipLabel(taskPackage.getMcchipLabel());
+				taskOrderVO.setMcdiscBatch(taskPackage.getMcdiscBatch());
+				taskOrderVO.setMcmarkDemand(taskPackage.getMcmarkDemand());
+				taskOrderVO.setMcpackageNum(taskPackage.getMcpackageNum());
+				taskOrderVO.setMcpackageShape(taskPackage.getMcpackageShape());
+				taskOrderVO.setMcqualityLevel(taskPackage.getMcqualityLevel());
+				taskOrderVO.setMcshellType(taskPackage.getMcshellType());
+				taskOrderVO.setMcdiscNum(taskPackage.getMcdiscNum());
+				taskOrderVO.setMcwaferFlag(taskPackage.getMcwaferFlag());
+				taskOrderVO.setMcchipNum(taskPackage.getMcchipNum());
+				taskOrderVO.setMcstockFlag(taskPackage.getMcstockFlag());
 			}
 		}
 		//任务类型

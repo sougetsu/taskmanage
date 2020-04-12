@@ -62,6 +62,8 @@ public class TaskOrder implements Serializable {
 	private TaskReduction taskReduction;//减薄
 	private TaskDicing taskDicing;//划片
 	private TaskPackage taskPackage;//封装
+	private TaskMixPackage taskMixPackage;//混合封装
+	private TaskMultiChipPackage taskMultiChipPackage;//多芯片封装
 	private Set<TaskPrice> taskPriceList = new  HashSet<TaskPrice>();//工单核价内容
 	private TaskSchedule taskSchedule;//工单日程
 	private Double sumPrice;
@@ -288,6 +290,23 @@ public class TaskOrder implements Serializable {
 	}
 	public void setTaskPackage(TaskPackage taskPackage) {
 		this.taskPackage = taskPackage;
+	}
+	
+	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
+    @JoinColumn(name="taskMixPackageId")
+	public TaskMixPackage getTaskMixPackage() {
+		return taskMixPackage;
+	}
+	public void setTaskMixPackage(TaskMixPackage taskMixPackage) {
+		this.taskMixPackage = taskMixPackage;
+	}
+	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
+    @JoinColumn(name="taskMultiPackageId")
+	public TaskMultiChipPackage getTaskMultiChipPackage() {
+		return taskMultiChipPackage;
+	}
+	public void setTaskMultiChipPackage(TaskMultiChipPackage taskMultiChipPackage) {
+		this.taskMultiChipPackage = taskMultiChipPackage;
 	}
 	@OneToMany(mappedBy="taskOrder",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	public Set<TaskPrice> getTaskPriceList() {
