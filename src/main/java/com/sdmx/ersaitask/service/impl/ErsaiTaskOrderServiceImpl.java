@@ -138,6 +138,20 @@ public class ErsaiTaskOrderServiceImpl implements IErsaiTaskOrderService{
 				}
 			}
 		}
+		//需要验收
+		if(ersaiTaskOrdervo.getCheckFlag()==1){
+			ErsaiTaskOrderVO evo = getDtoData(taskOrder);
+			YansTaskOrderVO yansTaskOrderVO = new YansTaskOrderVO();
+			BeanUtilsEx.copyProperties(yansTaskOrderVO, evo);
+			yansTaskOrderVO.setErsaiFlag(1);
+			yansTaskOrderVO.setErsaiLsh(taskOrder.getLsh());
+			yansTaskOrderVO.setAttachmentFlag(taskOrder.getAttachmentFlag());
+			yansTaskOrderVO.setTaskType("验收任务");
+			yansTaskOrderVO.setSumPrice(0.0);
+			yansTaskOrderVO.setWantedEndDate(taskOrder.getWantedEndDate());
+			yansTaskOrderService.create(yansTaskOrderVO);
+		}
+		
 		OperateLog opLog = new OperateLog();
 		opLog.setLshId(taskOrder.getLsh());
 		opLog.setContent(sessionInfo.getLoginName()+"创建了任务单"+taskOrder.toLogInfo());

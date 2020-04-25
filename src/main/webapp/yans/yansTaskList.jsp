@@ -53,6 +53,10 @@
 				str += '&nbsp;';
 				str += formatString('<span onclick="yans_taskorder_list_price(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>核价</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 			}
+			if(row.borrowEditState==1){
+				str += '&nbsp;';
+				str += formatString('<span onclick="yans_taskorder_list_editBor(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>修改借库</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+			}
 			if(row.priceEditState==1){
 				str += '&nbsp;';
 				str += formatString('<span onclick="yans_taskorder_list_edit(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>修改</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
@@ -90,6 +94,39 @@
 			title : '验收任务修改页',
 			closable : true,
 			href : '${pageContext.request.contextPath}/yansTaskManage/editPage?id='+id
+		});
+	}
+	function yans_taskorder_list_editBor(id) {
+		$.messager.confirm('确认', '请选择是否借库，借库选择确认，不借库选择取消', function(r) {
+			if (r) {
+				$.ajax({
+					url : '${pageContext.request.contextPath}/yansTaskManage/borrowStock?id='+id,
+					dataType : 'json',
+					success : function(result) {
+						if (result.success) {
+							$('#yans_taskorder_list_datagrid').datagrid('load');
+						}
+						$.messager.show({
+							title : '提示',
+							msg : result.msg
+						});
+					}
+				});
+			}else{
+				$.ajax({
+					url : '${pageContext.request.contextPath}/yansTaskManage/noborrowStock?id='+id,
+					dataType : 'json',
+					success : function(result) {
+						if (result.success) {
+							$('#yans_taskorder_list_datagrid').datagrid('load');
+						}
+						$.messager.show({
+							title : '提示',
+							msg : result.msg
+						});
+					}
+				});
+			}
 		});
 	}
 	function yans_taskorder_list_price(id) {

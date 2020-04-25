@@ -642,6 +642,10 @@ public class ErsaiTaskOrderController {
 		dataMap.put("pmPhone", UtilValidate.isEmpty(ersaiTaskOrderVO.getProjectManagerPhone())?"":ersaiTaskOrderVO.getProjectManagerPhone());
 		dataMap.put("helpDeptName", UtilValidate.isEmpty(ersaiTaskOrderVO.getHelpDeptName())?"":ersaiTaskOrderVO.getHelpDeptName());
 		dataMap.put("wantedEndDate", DateUtil.formatYMD(ersaiTaskOrderVO.getWantedEndDate()));
+		dataMap.put("checkFlag", ersaiTaskOrderVO.getCheckFlag()==1?"是":"否");
+		dataMap.put("outputFlag", ersaiTaskOrderVO.getOutputFlag()==1?"是":"否");
+		dataMap.put("goldcutFlag", ersaiTaskOrderVO.getGoldcutFlag()==1?"是":"否");
+		dataMap.put("goldcutNo", UtilValidate.isEmpty(ersaiTaskOrderVO.getGoldcutNo())?"":ersaiTaskOrderVO.getGoldcutNo());
 		dataMap.put("applyReason", UtilValidate.isEmpty(ersaiTaskOrderVO.getApplyReason())?"":ersaiTaskOrderVO.getApplyReason());
 		dataMap.put("detailRequire", UtilValidate.isEmpty(ersaiTaskOrderVO.getDetailRequire())?"":ersaiTaskOrderVO.getDetailRequire());
 		dataMap.put("remarks", UtilValidate.isEmpty(ersaiTaskOrderVO.getRemarks())?"":ersaiTaskOrderVO.getRemarks());

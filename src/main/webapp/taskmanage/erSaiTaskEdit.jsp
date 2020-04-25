@@ -66,6 +66,7 @@
 				}
 			},"json");
 		});
+		
 	});
 	function editSubmit(){
 		var submitForm = $('#erSai_taskOrder_editForm');
@@ -102,13 +103,20 @@
     	}
 	}
 	function setErsaiEditAttachRow(value){
-		var taskedit_attachSelect = document.getElementById("erSai_taskedit_attachSelect");
-		var taskedit_attachSubmit = document.getElementById("erSai_taskedit_attachSubmit");
-		taskedit_attachSelect.style.display = "none";
-		taskedit_attachSubmit.style.display = "none";
+		var taskEdit_attachSelect = document.getElementById("erSai_taskEdit_attachSelect");
+		var taskEdit_attachSubmit = document.getElementById("erSai_taskEdit_attachSubmit");
+		taskEdit_attachSelect.style.display = "none";
+		taskEdit_attachSubmit.style.display = "none";
 		if(value==1){
-			taskedit_attachSelect.style.display = (document.all ? "block" : "table-row");
-			taskedit_attachSubmit.style.display = (document.all ? "block" : "table-row");
+			taskEdit_attachSelect.style.display = (document.all ? "block" : "table-row");
+			taskEdit_attachSubmit.style.display = (document.all ? "block" : "table-row");
+		}
+	}
+	function setGoldCutRow(value){
+		var goldCutSelect = document.getElementById("ersai_Edit_goldno");
+		goldCutSelect.style.display = "none";
+		if(value==1){
+			goldCutSelect.style.display = "table-row";
 		}
 	}
 </script>
@@ -182,11 +190,60 @@
 									onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" style="width:330px" value="<fmt:formatDate value="${taskOrder.wantedEndDate}" pattern="yyyy-MM-dd" />"/></td>
 				</tr>
 				<tr>
+					<th width="150px" >是否验收：</th>
+					<td width=174px style="text-align:left" colspan=2 >
+						<span style="white-space:nowrap;">
+							<input type="radio" style="width:30px" name="checkFlag"  value="1"  ${taskOrder.checkFlag == 1 ? 'checked' : ''} />是
+							<input type="radio" style="width:30px" name="checkFlag"  value="0"  ${taskOrder.checkFlag == 0 ? 'checked' : ''} />否
+						</span>
+					</td>
+					<th width=121 colspan=2>电路是否出库：</th>
+					<td width=264 colspan=3>
+						<span style="white-space:nowrap;">
+							<input type="radio" style="width:30px" name="outputFlag"  value="1" ${taskOrder.outputFlag == 1 ? 'checked' : ''}/>是
+							<input type="radio" style="width:30px" name="outputFlag"  value="0" ${taskOrder.outputFlag == 0 ? 'checked' : ''}/>否
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th width="150px" >是否切金：</th>
+					<td width=174px style="text-align:left" colspan=2 >
+						<span style="white-space:nowrap;">
+							<input type="radio" style="width:30px" name="goldcutFlag"  onclick="setGoldCutRow(this.value)" value="1" ${taskOrder.goldcutFlag == 1 ? 'checked' : ''} />是
+							<input type="radio" style="width:30px" name="goldcutFlag"  onclick="setGoldCutRow(this.value)" value="0" ${taskOrder.goldcutFlag == 0 ? 'checked' : ''} />否
+						</span>
+					</td>
+					<th width=121 colspan=2></th>
+					<td width=264 colspan=3></td>
+				</tr>
+				<c:choose>
+				   	<c:when test="${taskOrder.goldcutFlag==1}">
+						<tr id="ersai_Edit_goldno" >
+							<th width="150px" >切金编号</th>
+							<td width=174px style="text-align:left" colspan=2 >
+								<input name="goldcutNo" style="width:330px" value="${taskOrder.goldcutNo}"/>
+							</td>
+							<th width=121 colspan=2></th>
+							<td width=264 colspan=3></td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<tr id="ersai_Edit_goldno" style="display:none;">
+							<th width="150px" >切金编号</th>
+							<td width=174px style="text-align:left" colspan=2 >
+								<input name="goldcutNo" style="width:330px"/>
+							</td>
+							<th width=121 colspan=2></th>
+							<td width=264 colspan=3></td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+				<tr>
 					<th width="150px" >是否有附件：</th>
 					<td width=174px style="text-align:left" colspan=7>
 					 	<span style="white-space:nowrap;">
-							<input type="radio" style="width:30px" id="attachmentYes" name="attachmentFlag" onclick="setErsaiEditAttachRow(this.value)" value="1" ${taskOrder.attachmentFlag == 1 ? 'checked' : ''}/>是
-							<input type="radio" style="width:30px" id="attachmentNo" name="attachmentFlag" onclick="setErsaiEditAttachRow(this.value)" value="0" ${taskOrder.attachmentFlag == 0 ? 'checked' : ''}/>否
+							<input type="radio" style="width:30px" name="attachmentFlag" onclick="setErsaiEditAttachRow(this.value)" value="1" ${taskOrder.attachmentFlag == 1 ? 'checked' : ''}/>是
+							<input type="radio" style="width:30px" name="attachmentFlag" onclick="setErsaiEditAttachRow(this.value)" value="0" ${taskOrder.attachmentFlag == 0 ? 'checked' : ''}/>否
 						</span>
 					</td>
 				</tr>

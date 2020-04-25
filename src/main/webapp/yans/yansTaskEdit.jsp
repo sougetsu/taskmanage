@@ -118,6 +118,13 @@
 			ersaiNumSelect.style.display = "table-row";
 		}
 	}
+	function setGoldCutRow(value){
+		var goldCutSelect = document.getElementById("yans_Edit_goldno");
+		goldCutSelect.style.display = "none";
+		if(value==1){
+			goldCutSelect.style.display = "table-row";
+		}
+	}
 </script>
 <div class="easyui-layout" data-options="fit : true,border : false">
 <div data-options="region:'center',border:false">
@@ -189,6 +196,41 @@
 					<td width=264 colspan=3><input id="wantedEndDate" name="wantedEndDate" class="easyui-validatebox" data-options="required:true"
 									onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" style="width:330px" value="<fmt:formatDate value="${taskOrder.wantedEndDate}" pattern="yyyy-MM-dd" />"/></td>
 				</tr>
+				<tr>
+					<th width="150px" >是否切金：</th>
+					<td width=174px style="text-align:left" colspan=2 >
+						<span style="white-space:nowrap;">
+							<input type="radio" style="width:30px" name="goldcutFlag"  onclick="setGoldCutRow(this.value)" value="1" ${taskOrder.goldcutFlag == 1 ? 'checked' : ''}/>是
+							<input type="radio" style="width:30px" name="goldcutFlag"  onclick="setGoldCutRow(this.value)" value="0" ${taskOrder.goldcutFlag == 0 ? 'checked' : ''}/>否
+						</span>
+					</td>
+					<th width=121 colspan=2></th>
+					<td width=264 colspan=3></td>
+				</tr>
+				
+				<c:choose>
+				   	<c:when test="${taskOrder.goldcutFlag==1}">
+						<tr id="yans_Edit_goldno" >
+							<th width="150px" >切金编号</th>
+							<td width=174px style="text-align:left" colspan=2 >
+								<input name="goldcutNo" style="width:330px" value="${taskOrder.goldcutNo}"/>
+							</td>
+							<th width=121 colspan=2></th>
+							<td width=264 colspan=3></td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<tr id="yans_Edit_goldno" style="display:none;">
+							<th width="150px" >切金编号</th>
+							<td width=174px style="text-align:left" colspan=2 >
+								<input name="goldcutNo" style="width:330px"/>
+							</td>
+							<th width=121 colspan=2></th>
+							<td width=264 colspan=3></td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+				
 				<tr>
 					<th width="150px" >是否有附件：</th>
 					<td width=174px style="text-align:left" colspan=7>
@@ -290,10 +332,12 @@
 					<th width="150px" >电路是否借库</th>
 					<td width=174px style="text-align:left" colspan=2 >
 						<span style="white-space:nowrap;">
-							<input type="radio" style="width:30px" name="borrow"  value="1" ${taskOrder.borrow == 1 ? 'checked' : ''}/>是
-							<input type="radio" style="width:30px" name="borrow"  value="0" ${taskOrder.borrow == 0 ? 'checked' : ''}/>否
+							<input type="radio" style="width:30px" name="borrow"  value="1" ${taskOrder.borrow == 1 ? 'checked' : ''} ${taskOrder.borrowEditState == 0 ? 'disabled' : ''} />是
+							<input type="radio" style="width:30px" name="borrow"  value="0" ${taskOrder.borrow == 0 ? 'checked' : ''} ${taskOrder.borrowEditState == 0 ? 'disabled' : ''}/>否
 						</span>
 					</td>
+					<th width=121 colspan=2></th>
+					<td width=264 colspan=3></td>
 				</tr>
 				<tr>
 					<th width="150px" >紧急程度：</th>

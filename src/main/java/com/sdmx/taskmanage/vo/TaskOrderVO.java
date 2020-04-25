@@ -116,7 +116,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	private String mmarkDemand;// 打标要求
 	private String mdiscNum; //使用圆片号
 	private int mwaferFlag; //是否中测
-	private int mchipNum;
+	private Integer mchipNum;
 	private int mstockFlag;
 	
 	
@@ -133,7 +133,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	private String mcmarkDemand;// 打标要求
 	private String mcdiscNum; //使用圆片号
 	private int mcwaferFlag; //是否中测
-	private int mcchipNum;
+	private Integer mcchipNum;
 	private int mcstockFlag;
 	
 	private String orderTypeId;
@@ -871,11 +871,11 @@ public class TaskOrderVO implements java.io.Serializable {
 		this.mwaferFlag = mwaferFlag;
 	}
 
-	public int getMchipNum() {
+	public Integer getMchipNum() {
 		return mchipNum;
 	}
 
-	public void setMchipNum(int mchipNum) {
+	public void setMchipNum(Integer mchipNum) {
 		this.mchipNum = mchipNum;
 	}
 
@@ -991,11 +991,11 @@ public class TaskOrderVO implements java.io.Serializable {
 		this.mcwaferFlag = mcwaferFlag;
 	}
 
-	public int getMcchipNum() {
+	public Integer getMcchipNum() {
 		return mcchipNum;
 	}
 
-	public void setMcchipNum(int mcchipNum) {
+	public void setMcchipNum(Integer mcchipNum) {
 		this.mcchipNum = mcchipNum;
 	}
 

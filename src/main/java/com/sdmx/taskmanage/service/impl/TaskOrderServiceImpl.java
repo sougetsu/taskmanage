@@ -306,7 +306,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskOrder.setTaskPackage(taskPackage);
 			}
 			//混合封装
-			if(StringUtils.isHave(contentIds, "22")){
+			if(StringUtils.isHave(contentIds, "3022")){
 				TaskMixPackage taskPackage = new TaskMixPackage();
 				List<Dictionary> packageStatus = new  ArrayList<Dictionary>();
 				if (UtilValidate.isNotEmpty(taskOrdervo.getMpackageStatusIds())) {
@@ -332,7 +332,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskOrder.setTaskMixPackage(taskPackage);
 			}
 			//多芯片封装
-			if(StringUtils.isHave(contentIds, "23")){
+			if(StringUtils.isHave(contentIds, "3023")){
 				TaskMultiChipPackage taskPackage = new TaskMultiChipPackage();
 				List<Dictionary> packageStatus = new  ArrayList<Dictionary>();
 				if (UtilValidate.isNotEmpty(taskOrdervo.getMcpackageStatusIds())) {
@@ -499,7 +499,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskOrderVO.setWaferFlag(taskPackage.getWaferFlag());
 			}
 			//混合封装
-			if(StringUtils.isHave(contentIds, "22")){
+			if(StringUtils.isHave(contentIds, "3022")){
 				taskOrderVO.setMixPackageFlag(1);
 				TaskMixPackage taskPackage = taskOrder.getTaskMixPackage();
 				List<Dictionary> packageStatus = taskPackage.getMpackageStatus();
@@ -529,7 +529,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskOrderVO.setMstockFlag(taskPackage.getMstockFlag());
 			}
 			//多芯片封装
-			if(StringUtils.isHave(contentIds, "23")){
+			if(StringUtils.isHave(contentIds, "3023")){
 				taskOrderVO.setMcpackageFlag(1);
 				TaskMultiChipPackage taskPackage = taskOrder.getTaskMultiChipPackage();
 				List<Dictionary> packageStatus = taskPackage.getMcpackageStatus();

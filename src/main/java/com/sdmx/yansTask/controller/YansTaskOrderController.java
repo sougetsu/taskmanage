@@ -640,6 +640,18 @@ public class YansTaskOrderController {
 		dataMap.put("pmPhone", UtilValidate.isEmpty(yansTaskOrderVO.getProjectManagerPhone())?"":yansTaskOrderVO.getProjectManagerPhone());
 		dataMap.put("helpDeptName", UtilValidate.isEmpty(yansTaskOrderVO.getHelpDeptName())?"":yansTaskOrderVO.getHelpDeptName());
 		dataMap.put("wantedEndDate", DateUtil.formatYMD(yansTaskOrderVO.getWantedEndDate()));
+		dataMap.put("goldcutFlag", yansTaskOrderVO.getGoldcutFlag()==1?"是":"否");
+		dataMap.put("goldcutNo", UtilValidate.isEmpty(yansTaskOrderVO.getGoldcutNo())?"":yansTaskOrderVO.getGoldcutNo());
+		dataMap.put("borrowState", UtilValidate.isEmpty(yansTaskOrderVO.getBorrowState())?"":yansTaskOrderVO.getBorrowState());
+		String urgencyStatus = "";
+		if(yansTaskOrderVO.getUrgency()==1){
+			urgencyStatus = "紧急";
+		}else if(yansTaskOrderVO.getUrgency()==2){
+			urgencyStatus = "超紧急";
+		}else {
+			urgencyStatus = "一般";
+		}
+		dataMap.put("urgency", urgencyStatus);
 		dataMap.put("applyReason", UtilValidate.isEmpty(yansTaskOrderVO.getApplyReason())?"":yansTaskOrderVO.getApplyReason());
 		dataMap.put("detailRequire", UtilValidate.isEmpty(yansTaskOrderVO.getDetailRequire())?"":yansTaskOrderVO.getDetailRequire());
 		dataMap.put("remarks", UtilValidate.isEmpty(yansTaskOrderVO.getRemarks())?"":yansTaskOrderVO.getRemarks());
@@ -665,6 +677,33 @@ public class YansTaskOrderController {
 		yansTaskOrderService.cancel(id);
 		return JsonResult.success("取消成功！", id);
 	}
+	
+	/**
+	 * 任务单借库修改
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/borrowStock")
+	@ResponseBody
+	public JsonResult borrowStock(String id) {
+		yansTaskOrderService.borrowStock(id);
+		return JsonResult.success("修改成功！", id);
+	}
+	
+	/**
+	 * 任务单借库修改
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/noborrowStock")
+	@ResponseBody
+	public JsonResult noborrowStock(String id) {
+		yansTaskOrderService.noborrowStock(id);
+		return JsonResult.success("修改成功！", id);
+	}
+	
 	
 	/**
 	 * 任务单删除

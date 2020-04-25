@@ -106,7 +106,7 @@
 				});
 			}
 		}
-		if(type==22){
+		if(type==3022){
 			var taskpackage = document.getElementById("confirm_task_mixpackage");
 			taskpackage.style.display = "none";
 			if(checktype){
@@ -127,7 +127,7 @@
 				});
 			}
 		}
-		if(type==23){
+		if(type==3023){
 			var taskpackage = document.getElementById("confirm_task_multipackage");
 			taskpackage.style.display = "none";
 			if(checktype){
@@ -432,8 +432,8 @@
 						<input type="checkbox" id="checkbox2" style="vertical-align:middle;width:30px" name="applyContentIds" onclick="setDetailRow(this.value,this.checked)" value="9" ${fn:contains(taskOrder.applyContentIds, '9')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox2">圆片划片</label>
 						<input type="checkbox" id="checkbox3" style="vertical-align:middle;width:30px" name="applyContentIds" value="10" ${fn:contains(taskOrder.applyContentIds, '10')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox3">中测</label>
 						<input type="checkbox" id="checkbox4" style="vertical-align:middle;width:30px" name="applyContentIds" onclick="setDetailRow(this.value,this.checked)" value="11" ${fn:contains(taskOrder.applyContentIds, '11')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox4">单片封装</label>
-						<input type="checkbox" id="checkbox15" style="vertical-align:middle;width:30px" name="applyContentIds"onclick="setDetailRow(this.value,this.checked)" value="22"  ${fn:contains(taskOrder.applyContentIds, '22')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox15">混合封装</label>
-						<input type="checkbox" id="checkbox16" style="vertical-align:middle;width:30px" name="applyContentIds"onclick="setDetailRow(this.value,this.checked)" value="23"  ${fn:contains(taskOrder.applyContentIds, '23')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox16">多芯片封装</label>
+						<input type="checkbox" id="checkbox15" style="vertical-align:middle;width:30px" name="applyContentIds"onclick="setDetailRow(this.value,this.checked)" value="3022"  ${fn:contains(taskOrder.applyContentIds, '3022')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox15">混合封装</label>
+						<input type="checkbox" id="checkbox16" style="vertical-align:middle;width:30px" name="applyContentIds"onclick="setDetailRow(this.value,this.checked)" value="3023"  ${fn:contains(taskOrder.applyContentIds, '3023')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox16">多芯片封装</label>
 						<input type="checkbox" id="checkbox5" style="vertical-align:middle;width:30px" name="applyContentIds" value="12" ${fn:contains(taskOrder.applyContentIds, '12')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox5">去封装</label>
 						<input type="checkbox" id="checkbox6" style="vertical-align:middle;width:30px" name="applyContentIds" value="13" ${fn:contains(taskOrder.applyContentIds, '13')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox6">测试</label>
 						<input type="checkbox" id="checkbox7" style="vertical-align:middle;width:30px" name="applyContentIds" value="14" ${fn:contains(taskOrder.applyContentIds, '14')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox7">老化</label>
@@ -1053,8 +1053,8 @@
 							    </td>
 							    <td width=194 >
 							   		<input name="mchipNum"
-									class="easyui-validatebox"
-									data-options="validType:'length[1,100]'"
+									class="easyui-numberbox"
+									data-options="validType:'length[1,30]'"
 									style="width:98%" value="${taskOrder.mchipNum}" />
 							    </td>
 							    <td width=87 >
@@ -1200,9 +1200,9 @@
 									    </td>
 									    <td width=194 >
 									   		<input name="mchipNum"
-											class="easyui-validatebox"
-											data-options="validType:'length[1,100]'"
-											style="width:98%" />
+											class="easyui-numberbox"
+											data-options="validType:'length[1,30]'"
+											style="width:98%" value=0/>
 									    </td>
 									    <td width=87 >
 									    <p ><b><span >库存是否满足</span></b></p>
@@ -1348,8 +1348,8 @@
 							    </td>
 							    <td width=194 >
 							   		<input name="mcchipNum"
-									class="easyui-validatebox"
-									data-options="validType:'length[1,100]'"
+									class="easyui-numberbox"
+									data-options="validType:'length[1,30]'"
 									style="width:98%" value="${taskOrder.mcchipNum}" />
 							    </td>
 							    <td width=87 >
@@ -1495,9 +1495,9 @@
 								    </td>
 								    <td width=194 >
 								   		<input name="mcchipNum"
-										class="easyui-validatebox"
-										data-options="validType:'length[1,100]'"
-										style="width:98%" />
+										class="easyui-numberbox"
+										data-options="validType:'length[1,30]'"
+										style="width:98%" value=0/>
 								    </td>
 								    <td width=87 >
 								    <p ><b><span >库存是否满足</span></b></p>
@@ -1512,13 +1512,17 @@
 						</tr>
 					</c:otherwise>
 				</c:choose>
-				<tr>
-					<th width="150px" >任务类型：</th>
-					<td style="text-align:left" colspan=7>
-						<input  name="orderType" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/orderTypeList',parentField : 'pid'"
-						lines="true" cascadeCheck="false" value="${taskOrder.orderType}"/>	
-					</td>
-				</tr>
+				<c:choose>
+				   	<c:when test="${taskOrder.urgencyState==1}">
+						<tr>
+							<th width="150px" >任务类型：</th>
+							<td style="text-align:left" colspan=7>
+								<input  name="orderTypeId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/orderTypeList',parentField : 'pid'"
+								lines="true" cascadeCheck="false" value="${taskOrder.orderTypeId}"/>	
+							</td>
+						</tr>
+					</c:when>
+				</c:choose>
 				<tr>
 					<th width="150px" >鉴定方式：</th>
 					<td style="text-align:left" colspan=7>

@@ -55,6 +55,9 @@ public class YansTaskOrderVO {
 	private int urgencyState;//修改状态
 	private int borrow;
 	private String borrowState;
+	private int borrowEditState; //借库修改状态
+	private int goldcutFlag;// 是否切金
+	private String  goldcutNo;// 切金编号
 	
 	public String getOrderId() {
 		return orderId;
@@ -337,6 +340,24 @@ public class YansTaskOrderVO {
 	}
 	public void setBorrowState(String borrowState) {
 		this.borrowState = borrowState;
+	}
+	public int getGoldcutFlag() {
+		return goldcutFlag;
+	}
+	public void setGoldcutFlag(int goldcutFlag) {
+		this.goldcutFlag = goldcutFlag;
+	}
+	public String getGoldcutNo() {
+		return goldcutNo;
+	}
+	public void setGoldcutNo(String goldcutNo) {
+		this.goldcutNo = goldcutNo;
+	}
+	public int getBorrowEditState() {
+		return borrowEditState;
+	}
+	public void setBorrowEditState(int borrowEditState) {
+		this.borrowEditState = borrowEditState;
 	}
 	
 }

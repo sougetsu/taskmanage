@@ -53,7 +53,12 @@ public class ErsaiTaskOrder implements Serializable {
 	private Double sumPrice;
 	private String lsh;
 	private Integer attachmentFlag;// 是否有附件
+	private Integer outputFlag;// 电路是否已出库
+	private Integer checkFlag;// 是否验收
+	private Integer goldcutFlag;// 是否切金
+	private String  goldcutNo;// 切金编号
 	private Integer urgency;
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_ErsaiOrder_ID")
@@ -299,6 +304,39 @@ public class ErsaiTaskOrder implements Serializable {
 
 	public void setUrgency(Integer urgency) {
 		this.urgency = urgency;
+	}
+	
+	@Column(columnDefinition = "INT default 0")
+	public Integer getOutputFlag() {
+		return outputFlag;
+	}
+
+	public void setOutputFlag(Integer outputFlag) {
+		this.outputFlag = outputFlag;
+	}
+	@Column(columnDefinition = "INT default 0")
+	public Integer getCheckFlag() {
+		return checkFlag;
+	}
+
+	public void setCheckFlag(Integer checkFlag) {
+		this.checkFlag = checkFlag;
+	}
+	@Column(columnDefinition = "INT default 0")
+	public Integer getGoldcutFlag() {
+		return goldcutFlag;
+	}
+
+	public void setGoldcutFlag(Integer goldcutFlag) {
+		this.goldcutFlag = goldcutFlag;
+	}
+
+	public String getGoldcutNo() {
+		return goldcutNo;
+	}
+
+	public void setGoldcutNo(String goldcutNo) {
+		this.goldcutNo = goldcutNo;
 	}
     
 }

@@ -50,6 +50,31 @@
 					<td colspan=4></td>
 				</tr>
 				<tr>
+					<th width="150px" >是否切金：</th>
+					<td width=174px style="text-align:left" colspan=2 >
+						<c:choose>
+						   	<c:when test="${taskOrder.goldcutFlag==1}">
+						   		是
+						   	</c:when>
+						   	<c:otherwise>
+						   		否
+						   	</c:otherwise>
+						</c:choose>
+					</td>
+					<th width=121 colspan=2></th>
+					<td width=264 colspan=3></td>
+				</tr>
+				<c:choose>
+				   	<c:when test="${taskOrder.goldcutFlag==1}">
+						<tr id="yans_detail_goldcut">
+							<th style="width: 150px">切金编号</th>
+							<td width=174 colspan=2>${taskOrder.goldcutNo}</td>
+							<th width=121 colspan=2></th>
+							<td width=264 colspan=3></td>
+						</tr>
+					</c:when>
+				</c:choose>
+				<tr>
 					<th width=88 >是否有附件：</th>
 					<td width=194px colspan=2>
 						<c:choose>

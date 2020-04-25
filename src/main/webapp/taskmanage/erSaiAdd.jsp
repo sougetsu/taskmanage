@@ -64,6 +64,13 @@
 			attachSubmit.style.display = (document.all ? "block" : "table-row");
 		}
 	}
+	function setGoldCutRow(value){
+		var goldCutSelect = document.getElementById("ersai_Add_goldno");
+		goldCutSelect.style.display = "none";
+		if(value==1){
+			goldCutSelect.style.display = "table-row";
+		}
+	}
 	function checkAndSubmitErsai(){
 		var submitForm = $('#taskOrderErsai_createForm');
 		if(submitForm.form('validate')){
@@ -170,6 +177,41 @@
 									onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" style="width:330px"/></td>
 				</tr>
 				<tr>
+					<th width="150px" >是否验收：</th>
+					<td width=174px style="text-align:left" colspan=2 >
+						<span style="white-space:nowrap;">
+							<input type="radio" style="width:30px" name="checkFlag"  value="1" />是
+							<input type="radio" style="width:30px" name="checkFlag"  checked value="0" />否
+						</span>
+					</td>
+					<th width=121 colspan=2>电路是否出库：</th>
+					<td width=264 colspan=3>
+						<span style="white-space:nowrap;">
+							<input type="radio" style="width:30px" name="outputFlag"  value="1" />是
+							<input type="radio" style="width:30px" name="outputFlag"  checked value="0" />否
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th width="150px" >是否切金：</th>
+					<td width=174px style="text-align:left" colspan=2 >
+						<span style="white-space:nowrap;">
+							<input type="radio" style="width:30px" name="goldcutFlag"  onclick="setGoldCutRow(this.value)" value="1" />是
+							<input type="radio" style="width:30px" name="goldcutFlag"  onclick="setGoldCutRow(this.value)" checked value="0" />否
+						</span>
+					</td>
+					<th width=121 colspan=2></th>
+					<td width=264 colspan=3></td>
+				</tr>
+				<tr id="ersai_Add_goldno" style="display:none;">
+					<th width="150px" >切金编号</th>
+					<td width=174px style="text-align:left" colspan=2 >
+						<input name="goldcutNo" style="width:330px"/>
+					</td>
+					<th width=121 colspan=2></th>
+					<td width=264 colspan=3></td>
+				</tr>
+				<tr>
 					<th width="150px" >是否有附件：</th>
 					<td width=174px style="text-align:left" colspan=2 >
 						<span style="white-space:nowrap;">
@@ -177,7 +219,6 @@
 							<input type="radio" style="width:30px" name="attachmentFlag" onclick="setErsaiAddAttachRow(this.value)" checked value="0" />否
 						</span>
 					</td>
-					
 				</tr>
 				<tr id="erSaiAdd_attachSelect" style="display:none;">
 					<th width="150px" >附件上传：</th>

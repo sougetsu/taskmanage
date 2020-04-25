@@ -311,6 +311,7 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
 				yansTaskOrderVO.setEditState(1);
 				yansTaskOrderVO.setDeleteState(1);
 				yansTaskOrderVO.setUrgencyState(1);
+				//yansTaskOrderVO.setBorrowEditState(1);
 				break;
 			}
 			case TestCenterManage:{
@@ -324,6 +325,7 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
 					yansTaskOrderVO.setFixState(1);
 					yansTaskOrderVO.setPriceEditState(1);
 				}
+				yansTaskOrderVO.setBorrowEditState(1);
 				break;
 			}
 			default:{
@@ -827,5 +829,35 @@ public class YansTaskOrderServiceImpl implements IYansTaskOrderService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Transactional
+	public void borrowStock(String id) {
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
+        YansTaskOrder taskOrder = yansTaskOrderDao.get(YansTaskOrder.class, Long.valueOf(id));
+		taskOrder.setBorrow(1);
+		yansTaskOrderDao.update(taskOrder);
+		//操作日志
+  		OperateLog opLog = new OperateLog();
+  		opLog.setLshId(taskOrder.getLsh());
+  		opLog.setContent(sessionInfo.getLoginName()+"设置任务单借库为是"+id);
+  		opLog.setMemberId(Long.valueOf(sessionInfo.getUserId()));
+  		opLog.setCreatetime(new Date());
+  		operatelogDao.save(opLog);
+	}
 	
+	@Transactional
+	public void noborrowStock(String id) {
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
+        YansTaskOrder taskOrder = yansTaskOrderDao.get(YansTaskOrder.class, Long.valueOf(id));
+		taskOrder.setBorrow(0);
+		yansTaskOrderDao.update(taskOrder);
+		//操作日志
+  		OperateLog opLog = new OperateLog();
+  		opLog.setLshId(taskOrder.getLsh());
+  		opLog.setContent(sessionInfo.getLoginName()+"设置任务单借库为否"+id);
+  		opLog.setMemberId(Long.valueOf(sessionInfo.getUserId()));
+  		opLog.setCreatetime(new Date());
+  		operatelogDao.save(opLog);
+	}
 }

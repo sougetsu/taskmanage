@@ -27,5 +27,7 @@ public interface IYansTaskOrderService {
 	public int getTaskNum();
 	public void remove(String id);
 	public void cancel(String id);
+	public void borrowStock(String id);
+	public void noborrowStock(String id);
 	public DataGrid logList(LogVO logVO);
 }

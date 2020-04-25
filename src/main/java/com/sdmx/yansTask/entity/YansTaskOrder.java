@@ -58,6 +58,8 @@ public class YansTaskOrder implements Serializable {
 	private String ersaiLsh;//二筛流水号
 	private Integer urgency;
 	private Integer borrow;//电路是否借库
+	private Integer goldcutFlag;// 是否切金
+	private String  goldcutNo;// 切金编号
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_YansOrder_ID")
@@ -337,6 +339,23 @@ public class YansTaskOrder implements Serializable {
 
 	public void setBorrow(Integer borrow) {
 		this.borrow = borrow;
+	}
+	
+	@Column(columnDefinition = "INT default 0")
+	public Integer getGoldcutFlag() {
+		return goldcutFlag;
+	}
+
+	public void setGoldcutFlag(Integer goldcutFlag) {
+		this.goldcutFlag = goldcutFlag;
+	}
+
+	public String getGoldcutNo() {
+		return goldcutNo;
+	}
+
+	public void setGoldcutNo(String goldcutNo) {
+		this.goldcutNo = goldcutNo;
 	}
     
 }

@@ -51,6 +51,10 @@ public class ErsaiTaskOrderVO {
 	private Double sumPrice;
 	private int yansFlag;
 	private int yansNum;
+	private int outputFlag;// 电路是否已出库
+	private int checkFlag;// 是否验收
+	private int goldcutFlag;// 是否切金
+	private String  goldcutNo;// 切金编号
 	
 	public String getOrderId() {
 		return orderId;
@@ -310,5 +314,31 @@ public class ErsaiTaskOrderVO {
 	public void setUrgencyState(int urgencyState) {
 		this.urgencyState = urgencyState;
 	}
+	public int getOutputFlag() {
+		return outputFlag;
+	}
+	public void setOutputFlag(int outputFlag) {
+		this.outputFlag = outputFlag;
+	}
+	public int getCheckFlag() {
+		return checkFlag;
+	}
+	public void setCheckFlag(int checkFlag) {
+		this.checkFlag = checkFlag;
+	}
+	public int getGoldcutFlag() {
+		return goldcutFlag;
+	}
+	public void setGoldcutFlag(int goldcutFlag) {
+		this.goldcutFlag = goldcutFlag;
+	}
+	public String getGoldcutNo() {
+		return goldcutNo;
+	}
+	public void setGoldcutNo(String goldcutNo) {
+		this.goldcutNo = goldcutNo;
+	}
+	
+	
 	
 }

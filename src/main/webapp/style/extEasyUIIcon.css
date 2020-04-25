@@ -15,6 +15,9 @@ input{
 	font-size: 12px;
 	width: 130px;
 }
+textarea{
+	font-size: 12px;
+}
 .tableForm {
 	border-collapse: collapse;
 }

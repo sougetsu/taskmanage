@@ -312,8 +312,8 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 							<td width=558 colspan=7>
 								<table border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=6 >
-								    <p ><b><span >封装</span></b></p>
+								    <td width=31 rowspan=7 >
+								    <p ><b><span >混合封装</span></b></p>
 								    </td>
 								    <td width=83 >
 								    <p ><b><span
@@ -440,8 +440,8 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 							<td width=558 colspan=7>
 								<table border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=6 >
-								    <p ><b><span >封装</span></b></p>
+								    <td width=31 rowspan=7 >
+								    <p ><b><span >多芯片封装</span></b></p>
 								    </td>
 								    <td width=83 >
 								    <p ><b><span
@@ -561,6 +561,12 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 						</tr>
 				   	</c:when>
 				</c:choose>
+				<tr>
+					<th width="150px" >任务类型：</th>
+					<td style="text-align:left" colspan=7>
+						${taskOrder.orderTypeName}
+					</td>
+				</tr>
 				<tr>
 					<th width=88 >鉴定方式：</th>
 					<td width=558 colspan=7>

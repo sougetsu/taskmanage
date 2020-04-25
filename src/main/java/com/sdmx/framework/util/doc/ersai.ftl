@@ -1638,6 +1638,256 @@ ABI0Vng=
             </w:p>
           </w:tc>
         </w:tr>
+        <w:tr wsp:rsidR="00F4593D" wsp:rsidRPr="00553F55" wsp:rsidTr="00F4593D">
+          <w:trPr>
+            <w:trHeight w:val="561"/>
+            <w:jc w:val="center"/>
+          </w:trPr>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1544" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p wsp:rsidR="006F40BF" wsp:rsidRPr="001175AA" wsp:rsidRDefault="004E79F1" wsp:rsidP="001175AA">
+              <w:pPr>
+                <w:tabs>
+                  <w:tab w:val="left" w:pos="8640"/>
+                </w:tabs>
+                <w:rPr>
+                  <w:rFonts w:fareast="黑体"/>
+                  <w:b/>
+                  <w:sz w:val="24"/>
+                  <w:sz-cs w:val="24"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:rFonts w:fareast="黑体" w:hint="fareast"/>
+                  <wx:font wx:val="黑体"/>
+                  <w:b/>
+                  <w:sz w:val="24"/>
+                  <w:sz-cs w:val="24"/>
+                </w:rPr>
+                <w:t>是否验收</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="2125" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p wsp:rsidR="006F40BF" wsp:rsidRDefault="00F4593D" wsp:rsidP="006F40BF">
+              <w:pPr>
+                <w:tabs>
+                  <w:tab w:val="left" w:pos="8640"/>
+                </w:tabs>
+                <w:rPr>
+                  <w:rFonts w:ascii="宋体" w:hint="fareast"/>
+                  <wx:font wx:val="宋体"/>
+                  <w:snapToGrid w:val="off"/>
+                  <w:spacing w:val="20"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
+                  <wx:font wx:val="Arial"/>
+                  <w:color w:val="333333"/>
+                  <w:sz-cs w:val="21"/>
+                  <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
+                </w:rPr>
+                <w:t>${checkFlag}</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1701" w:type="dxa"/>
+              <w:gridSpan w:val="2"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p wsp:rsidR="006F40BF" wsp:rsidRPr="001175AA" wsp:rsidRDefault="006F40BF" wsp:rsidP="001175AA">
+              <w:pPr>
+                <w:tabs>
+                  <w:tab w:val="left" w:pos="8640"/>
+                </w:tabs>
+                <w:jc w:val="center"/>
+                <w:rPr>
+                  <w:rFonts w:fareast="黑体"/>
+                  <w:b/>
+                  <w:sz w:val="24"/>
+                  <w:sz-cs w:val="24"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r wsp:rsidRPr="001175AA">
+                <w:rPr>
+                  <w:rFonts w:fareast="黑体" w:hint="fareast"/>
+                  <wx:font wx:val="黑体"/>
+                  <w:b/>
+                  <w:sz w:val="24"/>
+                  <w:sz-cs w:val="24"/>
+                </w:rPr>
+                <w:t>电路是否出库</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="4326" w:type="dxa"/>
+              <w:gridSpan w:val="4"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p wsp:rsidR="006F40BF" wsp:rsidRPr="00553F55" wsp:rsidRDefault="00F4593D" wsp:rsidP="005F6AD9">
+              <w:pPr>
+                <w:tabs>
+                  <w:tab w:val="left" w:pos="8640"/>
+                </w:tabs>
+                <w:rPr>
+                  <w:rFonts w:ascii="宋体"/>
+                  <wx:font wx:val="宋体"/>
+                  <w:snapToGrid w:val="off"/>
+                  <w:spacing w:val="20"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
+                  <wx:font wx:val="Arial"/>
+                  <w:color w:val="333333"/>
+                  <w:sz-cs w:val="21"/>
+                  <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
+                </w:rPr>
+                <w:t>${outputFlag}</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+        <w:tr wsp:rsidR="00F4593D" wsp:rsidRPr="00553F55" wsp:rsidTr="00F4593D">
+          <w:trPr>
+            <w:trHeight w:val="561"/>
+            <w:jc w:val="center"/>
+          </w:trPr>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1544" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p wsp:rsidR="006F40BF" wsp:rsidRPr="001175AA" wsp:rsidRDefault="004E79F1" wsp:rsidP="001175AA">
+              <w:pPr>
+                <w:tabs>
+                  <w:tab w:val="left" w:pos="8640"/>
+                </w:tabs>
+                <w:rPr>
+                  <w:rFonts w:fareast="黑体"/>
+                  <w:b/>
+                  <w:sz w:val="24"/>
+                  <w:sz-cs w:val="24"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:rFonts w:fareast="黑体" w:hint="fareast"/>
+                  <wx:font wx:val="黑体"/>
+                  <w:b/>
+                  <w:sz w:val="24"/>
+                  <w:sz-cs w:val="24"/>
+                </w:rPr>
+                <w:t>是否切金</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="2125" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p wsp:rsidR="006F40BF" wsp:rsidRDefault="00F4593D" wsp:rsidP="006F40BF">
+              <w:pPr>
+                <w:tabs>
+                  <w:tab w:val="left" w:pos="8640"/>
+                </w:tabs>
+                <w:rPr>
+                  <w:rFonts w:ascii="宋体" w:hint="fareast"/>
+                  <wx:font wx:val="宋体"/>
+                  <w:snapToGrid w:val="off"/>
+                  <w:spacing w:val="20"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
+                  <wx:font wx:val="Arial"/>
+                  <w:color w:val="333333"/>
+                  <w:sz-cs w:val="21"/>
+                  <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
+                </w:rPr>
+                <w:t>${goldcutFlag}</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1701" w:type="dxa"/>
+              <w:gridSpan w:val="2"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p wsp:rsidR="006F40BF" wsp:rsidRPr="001175AA" wsp:rsidRDefault="006F40BF" wsp:rsidP="001175AA">
+              <w:pPr>
+                <w:tabs>
+                  <w:tab w:val="left" w:pos="8640"/>
+                </w:tabs>
+                <w:jc w:val="center"/>
+                <w:rPr>
+                  <w:rFonts w:fareast="黑体"/>
+                  <w:b/>
+                  <w:sz w:val="24"/>
+                  <w:sz-cs w:val="24"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r wsp:rsidRPr="001175AA">
+                <w:rPr>
+                  <w:rFonts w:fareast="黑体" w:hint="fareast"/>
+                  <wx:font wx:val="黑体"/>
+                  <w:b/>
+                  <w:sz w:val="24"/>
+                  <w:sz-cs w:val="24"/>
+                </w:rPr>
+                <w:t>切金编号</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="4326" w:type="dxa"/>
+              <w:gridSpan w:val="4"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p wsp:rsidR="006F40BF" wsp:rsidRPr="00553F55" wsp:rsidRDefault="00F4593D" wsp:rsidP="005F6AD9">
+              <w:pPr>
+                <w:tabs>
+                  <w:tab w:val="left" w:pos="8640"/>
+                </w:tabs>
+                <w:rPr>
+                  <w:rFonts w:ascii="宋体"/>
+                  <wx:font wx:val="宋体"/>
+                  <w:snapToGrid w:val="off"/>
+                  <w:spacing w:val="20"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
+                  <wx:font wx:val="Arial"/>
+                  <w:color w:val="333333"/>
+                  <w:sz-cs w:val="21"/>
+                  <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
+                </w:rPr>
+                <w:t>${goldcutNo}</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
         <w:tr wsp:rsidR="006F40BF" wsp:rsidRPr="00553F55" wsp:rsidTr="00A70CA8">
           <w:trPr>
             <w:cantSplit/>

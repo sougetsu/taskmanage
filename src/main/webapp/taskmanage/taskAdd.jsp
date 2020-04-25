@@ -103,7 +103,7 @@
 				});
 			}
 		}
-		if(type==22){
+		if(type==3022){
 			var taskpackage = document.getElementById("task_mix_package");
 			taskpackage.style.display = "none";
 			if(checktype){
@@ -124,7 +124,7 @@
 				});
 			}
 		}
-		if(type==23){
+		if(type==3023){
 			var taskpackage = document.getElementById("task_multichip_package");
 			taskpackage.style.display = "none";
 			if(checktype){
@@ -360,8 +360,8 @@
 						<input type="checkbox" id="checkbox2" style="vertical-align:middle;width:30px" name="applyContentIds" value="9" onclick="setDetailRow(this.value,this.checked)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="checkbox2">圆片划片</label>
 						<input type="checkbox" id="checkbox3" style="vertical-align:middle;width:30px" name="applyContentIds" value="10"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="checkbox3">中测</label>
 						<input type="checkbox" id="checkbox4" style="vertical-align:middle;width:30px" name="applyContentIds" value="11" onclick="setDetailRow(this.value,this.checked)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="checkbox4">单片封装</label>
-						<input type="checkbox" id="checkbox15" style="vertical-align:middle;width:30px" name="applyContentIds" value="22" onclick="setDetailRow(this.value,this.checked)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="checkbox15">混合封装</label>
-						<input type="checkbox" id="checkbox16" style="vertical-align:middle;width:30px" name="applyContentIds" value="23" onclick="setDetailRow(this.value,this.checked)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="checkbox16">多芯片封装</label>
+						<input type="checkbox" id="checkbox15" style="vertical-align:middle;width:30px" name="applyContentIds" value="3022" onclick="setDetailRow(this.value,this.checked)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="checkbox15">混合封装</label>
+						<input type="checkbox" id="checkbox16" style="vertical-align:middle;width:30px" name="applyContentIds" value="3023" onclick="setDetailRow(this.value,this.checked)"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="checkbox16">多芯片封装</label>
 						<input type="checkbox" id="checkbox5" style="vertical-align:middle;width:30px" name="applyContentIds" value="12"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="checkbox5">去封装</label>
 						<input type="checkbox" id="checkbox6" style="vertical-align:middle;width:30px" name="applyContentIds" value="13"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="checkbox6">测试</label>
 						<input type="checkbox" id="checkbox7" style="vertical-align:middle;width:30px" name="applyContentIds" value="14"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="checkbox7">老化</label>
@@ -734,9 +734,9 @@
 							    </td>
 							    <td width=194 >
 							   		<input name="mchipNum"
-									class="easyui-validatebox"
-									data-options="validType:'length[1,100]'"
-									style="width:98%" />
+									class="easyui-numberbox"
+									data-options="validType:'length[1,30]'"
+									style="width:98%" value=0/>
 							    </td>
 							    <td width=87 >
 							    <p ><b><span >库存是否满足</span></b></p>
@@ -879,9 +879,9 @@
 							    </td>
 							    <td width=194 >
 							   		<input name="mcchipNum"
-									class="easyui-validatebox"
-									data-options="validType:'length[1,100]'"
-									style="width:98%" />
+									class="easyui-numberbox"
+									data-options="validType:'length[1,30]'"
+									style="width:98%" value=0 />
 							    </td>
 							    <td width=87 >
 							    <p ><b><span >库存是否满足</span></b></p>
