@@ -78,7 +78,7 @@ public class YansTaskOrderVO {
 		this.reportNo = reportNo;
 	}
 	public String getInternalModel() {
-		return internalModel;
+		return  (internalModel==null?internalModel:internalModel.replace("	"," "));
 	}
 	public void setInternalModel(String internalModel) {
 		this.internalModel = internalModel;
@@ -120,19 +120,19 @@ public class YansTaskOrderVO {
 		this.wantedEndDate = wantedEndDate;
 	}
 	public String getApplyReason() {
-		return applyReason;
+		return  (applyReason==null?applyReason:applyReason.replace("	"," ")); 
 	}
 	public void setApplyReason(String applyReason) {
 		this.applyReason = applyReason;
 	}
 	public String getDetailRequire() {
-		return detailRequire;
+		return (detailRequire==null?detailRequire:detailRequire.replace("	"," "));
 	}
 	public void setDetailRequire(String detailRequire) {
 		this.detailRequire = detailRequire;
 	}
 	public String getRemarks() {
-		return remarks;
+		return (remarks==null?remarks:remarks.replace("	"," "));
 	}
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;

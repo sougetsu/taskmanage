@@ -1,5 +1,10 @@
 package com.sdmx.ersaitask.service.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,6 +64,8 @@ import com.sdmx.taskmanage.vo.PriceCheckVO;
 import com.sdmx.taskmanage.vo.TaskOrderStatus;
 import com.sdmx.taskmanage.vo.TaskPriceVO;
 import com.sdmx.taskmanage.vo.TaskScheduleVO;
+import com.sdmx.yansTask.entity.YansAttachment;
+import com.sdmx.yansTask.service.IYansAttachmentService;
 import com.sdmx.yansTask.service.IYansTaskOrderService;
 import com.sdmx.yansTask.vo.YansTaskOrderStatus;
 import com.sdmx.yansTask.vo.YansTaskOrderVO;
@@ -82,6 +90,8 @@ public class ErsaiTaskOrderServiceImpl implements IErsaiTaskOrderService{
 	private IBaseDao<ErsaiTaskSchedule> baseDao;
 	@Autowired
 	private IYansTaskOrderService yansTaskOrderService;
+	@Autowired
+	private IYansAttachmentService yansAttachmentService;
 	@Autowired
 	private IErsaiAttachmentService ersaiAttachmentService;
 	@Autowired
@@ -149,7 +159,43 @@ public class ErsaiTaskOrderServiceImpl implements IErsaiTaskOrderService{
 			yansTaskOrderVO.setTaskType("验收任务");
 			yansTaskOrderVO.setSumPrice(0.0);
 			yansTaskOrderVO.setWantedEndDate(taskOrder.getWantedEndDate());
+			if(ersaiTaskOrdervo.getAttachmentFlag() == 1){
+				// 给附件指定所属信息项
+				if (ersaiTaskOrdervo.getAttachids() != null) {
+					Integer[] yansAttids = new Integer[ersaiTaskOrdervo.getAttachids().length];
+					int i=0;
+					for (Integer aid : ersaiTaskOrdervo.getAttachids()) {
+						ErsaiAttachment att = ersaiAttachmentDao.get(ErsaiAttachment.class, aid);
+						
+						String filePath = ResourceUtil.getUploadPath()
+								+ ResourceUtil.getErsaiUploadDirectory() + "/" + att.getNewName();// 文件保存目录路径
+						File uploadedFile = new File(filePath);
+						String savePath = ResourceUtil.getUploadPath()
+								+ ResourceUtil.getYansUploadDirectory() + "/";// 文件保存目录路径
+						try {
+							SaveFileFromInputStream(new FileInputStream(uploadedFile),
+									savePath, att.getNewName());
+							
+							YansAttachment yansAtt = new YansAttachment();
+							yansAtt.setAttachSize(att.getAttachSize());
+							yansAtt.setContentType(att.getContentType());
+							yansAtt.setCreateDate(att.getCreateDate());
+							yansAtt.setNewName(att.getNewName());
+							yansAtt.setOldName(att.getOldName());
+							yansAtt = yansAttachmentService.create(yansAtt);
+							yansAttids[i] = yansAtt.getId();
+						} catch (IOException e) {
+							System.out.println(e.getMessage());
+							return null;
+						}
+						i++;
+					}
+					yansTaskOrderVO.setAttachids(yansAttids);
+				}
+				yansTaskOrderVO.setAttachmentFlag(1);	
+			}
 			yansTaskOrderService.create(yansTaskOrderVO);
+			
 		}
 		
 		OperateLog opLog = new OperateLog();
@@ -840,5 +886,24 @@ public class ErsaiTaskOrderServiceImpl implements IErsaiTaskOrderService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+//	public static void main(String[] args) {
+//		String testurl = "BSV2CQRH	1729批\\r\\n";
+//		testurl = testurl.replace("	"," ");
+//		String testurl1 = "BSV2CQRH	1729批\\r\\n";
+//		String str2= testurl1.replaceAll("\\s*", "");
+//		System.out.println(testurl);
+//		System.out.println(str2);
+//	}
+	public void SaveFileFromInputStream(InputStream stream, String path,
+			String filename) throws IOException {
+		FileOutputStream fs = new FileOutputStream(path + "/" + filename);
+		byte[] buffer = new byte[1024 * 1024];
+		int byteread = 0;
+		while ((byteread = stream.read(buffer)) != -1) {
+			fs.write(buffer, 0, byteread);
+			fs.flush();
+		}
+		fs.close();
+		stream.close();
+	}
 }

@@ -25,7 +25,7 @@ public class DictionaryInfo {
 		this.pid = pid;
 	}
 	public String getText() {
-		return text;
+		return (text==null?text:text.replace("	"," "));
 	}
 	public void setText(String text) {
 		this.text = text;
@@ -49,7 +49,7 @@ public class DictionaryInfo {
 		this.value = value;
 	}
 	public String getAnnotation() {
-		return annotation;
+		return (annotation==null?annotation:annotation.replace("	"," "));
 	}
 	public void setAnnotation(String annotation) {
 		this.annotation = annotation;
