@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
 	$(function() {
 		parent.$.messager.progress('close');
@@ -248,16 +249,18 @@
 						style="width:330px" value="0"/>
 					</td>
 				</tr>
+				<c:if test="${sessionScope.sessionInfo.roleNames eq '生产部门管理员'}">
 				<tr>
 					<th width="150px" >紧急程度：</th>
 					<td style="text-align:left" colspan=7>
 						<span style="white-space:nowrap;">
-						<input type="radio" style="width:30px" name="urgency" value="0" checked="checked" disabled="disabled"/>一般
-						<input type="radio" style="width:30px" name="urgency" value="1" disabled="disabled" />紧急
-						<input type="radio" style="width:30px" name="urgency" value="2" disabled="disabled"/>超紧急
+						<input type="radio" style="width:30px" name="urgency" value="0" checked="checked" />一般
+						<input type="radio" style="width:30px" name="urgency" value="1"  />紧急
+						<input type="radio" style="width:30px" name="urgency" value="2" />超紧急
 						</span>
 					</td>
 				</tr>
+				</c:if>
 				<tr>
 					<th width="150px" >申请原因及说明</th>
 					<td colspan=7>

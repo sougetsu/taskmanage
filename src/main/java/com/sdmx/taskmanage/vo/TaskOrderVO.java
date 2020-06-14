@@ -349,7 +349,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getApplyReason() {
-		return applyReason;
+		return (applyReason==null?applyReason:applyReason.replace("	"," "));
 	}
 
 	public void setApplyReason(String applyReason) {
@@ -357,7 +357,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getRemarks() {
-		return remarks;
+		return  (remarks==null?remarks:remarks.replace("	"," "));
 	}
 
 	public void setRemarks(String remarks) {
