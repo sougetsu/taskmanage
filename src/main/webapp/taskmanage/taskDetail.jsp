@@ -39,8 +39,9 @@
 					<td width=194 colspan=2>
 						${taskOrder.projectName}
 					</td>
-					<th width=101 colspan=2></th>
+					<th width=101 colspan=2>任务单号</th>
 					<td width=264 colspan=3>
+						${taskOrder.lsh}
 					</td>
 				</tr>
 				<tr>

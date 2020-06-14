@@ -29,6 +29,8 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,6 +40,8 @@ import com.sdmx.framework.util.ExceptionUtil;
 import com.sdmx.framework.util.ResourceUtil;
 import com.sdmx.framework.vo.DataGrid;
 import com.sdmx.framework.vo.JsonResult;
+import com.sdmx.framework.vo.RoleType;
+import com.sdmx.framework.vo.SessionInfo;
 import com.sdmx.taskmanage.entity.Attachment;
 import com.sdmx.taskmanage.service.IAttachmentService;
 import com.sdmx.taskmanage.service.IPriceItemService;
@@ -185,6 +189,7 @@ public class TaskOrderController {
 		taskOrdervo.setClType(OperatorQueryType.SuspendingQuery.getValue());
 		return taskOrderService.listSusTaskOrder(taskOrdervo);
 	}
+	
 	
 	/**
 	 * 查询-详细页面

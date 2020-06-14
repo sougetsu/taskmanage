@@ -277,8 +277,9 @@
 						<input id="Confirm_projectId" name="projectId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/projectList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false" value="${taskOrder.projectId}"/>
 					</td>
-					<th width=121 colspan=2></th>
+					<th width=101 colspan=2>任务单号</th>
 					<td width=264 colspan=3>
+						${taskOrder.lsh}
 					</td>
 					<%--<th width=121 colspan=2></th>
 					<td width=264 colspan=3>

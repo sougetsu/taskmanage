@@ -18,8 +18,9 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 					<td whidth=194 colspan=2>
 						${taskOrder.projectName}
 					</td>
-					<th width=101 colspan=2></th>
+					<th width=101 colspan=2>ÈÎÎñµ¥ºÅ</th>
 					<td width=264 colspan=3>
+						${taskOrder.lsh}
 					</td>
 				</tr>
 				<tr>

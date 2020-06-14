@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
 	$(function() {
 		parent.$.messager.progress('close');
@@ -894,6 +895,15 @@
 						  </table>
 					</td>
 				</tr>
+				<c:if test="${sessionScope.sessionInfo.roleNames eq '生产部门管理员'}">
+					<tr>
+						<th width="150px" >任务类型：</th>
+						<td style="text-align:left" colspan=7>
+							<input  name="orderTypeId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/orderTypeList',parentField : 'pid'"
+							lines="true" cascadeCheck="false" value="${taskOrder.orderTypeId}"/>	
+						</td>
+					</tr>
+				</c:if>
 				<tr>
 					<th width="150px" >鉴定方式：</th>
 					<td style="text-align:left" colspan=7>
@@ -902,17 +912,18 @@
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check3" name="checkTypeId" value="25"><label style="vertical-align:middle;display:inline-block;font-size:12px;" for="check3">第三方直检</label>
 					</td>
 				</tr>
-				<tr>
-					<th width="150px" >紧急程度：</th>
-					<td style="text-align:left" colspan=7>
-						<span style="white-space:nowrap;">
-						<input type="radio" style="width:30px" name="urgency" value="0" checked="checked" disabled="disabled"/>一般
-						<input type="radio" style="width:30px" name="urgency" value="1" disabled="disabled" />紧急
-						<input type="radio" style="width:30px" name="urgency" value="2" disabled="disabled"/>超紧急
-						</span>
-					</td>
-				</tr>
-				
+				<c:if test="${sessionScope.sessionInfo.roleNames eq '生产部门管理员'}">
+					<tr>
+						<th width="150px" >紧急程度：</th>
+						<td style="text-align:left" colspan=7>
+							<span style="white-space:nowrap;">
+							<input type="radio" style="width:30px" name="urgency" value="0" checked="checked" />一般
+							<input type="radio" style="width:30px" name="urgency" value="1"  />紧急
+							<input type="radio" style="width:30px" name="urgency" value="2" />超紧急
+							</span>
+						</td>
+					</tr>
+				</c:if>
 				<tr>
 					<th width="150px" >申请原因及说明：</th>
 					<td colspan=7>
