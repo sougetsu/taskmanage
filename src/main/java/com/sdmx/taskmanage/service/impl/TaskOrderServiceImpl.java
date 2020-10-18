@@ -254,6 +254,13 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		//协助部门
 		Dictionary helpDept = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getHelpDeptId()));
 		taskOrder.setHelpDept(helpDept);
+		
+		//任务类型
+		if(UtilValidate.isNotEmpty(taskOrdervo.getOrderTypeId())) {
+			Dictionary orderType = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getOrderTypeId()));
+			taskOrder.setOrderType(orderType);
+		}
+				
 		//业务申请内容
 		List<Dictionary> applyContent = new  ArrayList<Dictionary>();
 		if (UtilValidate.isNotEmpty(taskOrdervo.getApplyContentIds())) {
@@ -302,6 +309,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskPackage.setShellType(taskOrdervo.getShellType());
 				taskPackage.setDiscNum(taskOrdervo.getDiscNum());
 				taskPackage.setWaferFlag(taskOrdervo.getWaferFlag());
+				taskPackage.setStockName(taskOrdervo.getStockName());
 				taskPackageDao.save(taskPackage);
 				taskOrder.setTaskPackage(taskPackage);
 			}
@@ -328,6 +336,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskPackage.setMwaferFlag(taskOrdervo.getMwaferFlag());
 				taskPackage.setMchipNum(taskOrdervo.getMchipNum());
 				taskPackage.setMstockFlag(taskOrdervo.getMstockFlag());
+				taskPackage.setMstockName(taskOrdervo.getMstockName());
 				taskMixPackageDao.save(taskPackage);
 				taskOrder.setTaskMixPackage(taskPackage);
 			}
@@ -354,6 +363,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskPackage.setMcwaferFlag(taskOrdervo.getMcwaferFlag());
 				taskPackage.setMcchipNum(taskOrdervo.getMcchipNum());
 				taskPackage.setMcstockFlag(taskOrdervo.getMcstockFlag());
+				taskPackage.setMcstockName(taskOrdervo.getMcstockName());
 				taskMultiChipPackageDao.save(taskPackage);
 				taskOrder.setTaskMultiChipPackage(taskPackage);
 			}
@@ -474,89 +484,99 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			if(StringUtils.isHave(contentIds, "11")){
 				taskOrderVO.setPackageFlag(1);
 				TaskPackage taskPackage = taskOrder.getTaskPackage();
-				List<Dictionary> packageStatus = taskPackage.getPackageStatus();
-				String packageStatusIds = "";
-				String packageStatusNames = "";
-				for(Dictionary dic: packageStatus){
-					if (packageStatusIds.length() > 0) {
-						packageStatusIds += ",";
-						packageStatusNames +=",";
+				if(UtilValidate.isNotEmpty(taskPackage)) {
+					List<Dictionary> packageStatus = taskPackage.getPackageStatus();
+					String packageStatusIds = "";
+					String packageStatusNames = "";
+					for(Dictionary dic: packageStatus){
+						if (packageStatusIds.length() > 0) {
+							packageStatusIds += ",";
+							packageStatusNames +=",";
+						}
+						packageStatusIds += dic.getDictionaryId();
+						packageStatusNames += dic.getValue();
 					}
-					packageStatusIds += dic.getDictionaryId();
-					packageStatusNames += dic.getValue();
+					taskOrderVO.setPackageStatusIds(packageStatusIds);
+					taskOrderVO.setPackageStatusNames(packageStatusNames);
+					taskOrderVO.setBondNum(taskPackage.getBondNum());
+					taskOrderVO.setChipLabel(taskPackage.getChipLabel());
+					taskOrderVO.setDiscBatch(taskPackage.getDiscBatch());
+					taskOrderVO.setMarkDemand(taskPackage.getMarkDemand());
+					taskOrderVO.setPackageNum(taskPackage.getPackageNum());
+					taskOrderVO.setPackageShape(taskPackage.getPackageShape());
+					taskOrderVO.setQualityLevel(taskPackage.getQualityLevel());
+					taskOrderVO.setShellType(taskPackage.getShellType());
+					taskOrderVO.setDiscNum(taskPackage.getDiscNum());
+					taskOrderVO.setWaferFlag(taskPackage.getWaferFlag());
+					taskOrderVO.setStockName(taskPackage.getStockName());
 				}
-				taskOrderVO.setPackageStatusIds(packageStatusIds);
-				taskOrderVO.setPackageStatusNames(packageStatusNames);
-				taskOrderVO.setBondNum(taskPackage.getBondNum());
-				taskOrderVO.setChipLabel(taskPackage.getChipLabel());
-				taskOrderVO.setDiscBatch(taskPackage.getDiscBatch());
-				taskOrderVO.setMarkDemand(taskPackage.getMarkDemand());
-				taskOrderVO.setPackageNum(taskPackage.getPackageNum());
-				taskOrderVO.setPackageShape(taskPackage.getPackageShape());
-				taskOrderVO.setQualityLevel(taskPackage.getQualityLevel());
-				taskOrderVO.setShellType(taskPackage.getShellType());
-				taskOrderVO.setDiscNum(taskPackage.getDiscNum());
-				taskOrderVO.setWaferFlag(taskPackage.getWaferFlag());
 			}
 			//混合封装
 			if(StringUtils.isHave(contentIds, "3022")){
 				taskOrderVO.setMixPackageFlag(1);
-				TaskMixPackage taskPackage = taskOrder.getTaskMixPackage();
-				List<Dictionary> packageStatus = taskPackage.getMpackageStatus();
-				String packageStatusIds = "";
-				String packageStatusNames = "";
-				for(Dictionary dic: packageStatus){
-					if (packageStatusIds.length() > 0) {
-						packageStatusIds += ",";
-						packageStatusNames +=",";
+				TaskMixPackage tasMixkPackage = taskOrder.getTaskMixPackage();
+				if(UtilValidate.isNotEmpty(tasMixkPackage)) {
+					List<Dictionary> packageStatus = tasMixkPackage.getMpackageStatus();
+					String packageStatusIds = "";
+					String packageStatusNames = "";
+					for(Dictionary dic: packageStatus){
+						if (packageStatusIds.length() > 0) {
+							packageStatusIds += ",";
+							packageStatusNames +=",";
+						}
+						packageStatusIds += dic.getDictionaryId();
+						packageStatusNames += dic.getValue();
 					}
-					packageStatusIds += dic.getDictionaryId();
-					packageStatusNames += dic.getValue();
+					taskOrderVO.setMpackageStatusIds(packageStatusIds);
+					taskOrderVO.setMpackageStatusNames(packageStatusNames);
+					taskOrderVO.setMbondNum(tasMixkPackage.getMbondNum());
+					taskOrderVO.setMchipLabel(tasMixkPackage.getMchipLabel());
+					taskOrderVO.setMdiscBatch(tasMixkPackage.getMdiscBatch());
+					taskOrderVO.setMmarkDemand(tasMixkPackage.getMmarkDemand());
+					taskOrderVO.setMpackageNum(tasMixkPackage.getMpackageNum());
+					taskOrderVO.setMpackageShape(tasMixkPackage.getMpackageShape());
+					taskOrderVO.setMqualityLevel(tasMixkPackage.getMqualityLevel());
+					taskOrderVO.setMshellType(tasMixkPackage.getMshellType());
+					taskOrderVO.setMdiscNum(tasMixkPackage.getMdiscNum());
+					taskOrderVO.setMwaferFlag(tasMixkPackage.getMwaferFlag());
+					taskOrderVO.setMchipNum(tasMixkPackage.getMchipNum());
+					taskOrderVO.setMstockFlag(tasMixkPackage.getMstockFlag());
+					taskOrderVO.setMstockName(tasMixkPackage.getMstockName());
+					
 				}
-				taskOrderVO.setMpackageStatusIds(packageStatusIds);
-				taskOrderVO.setMpackageStatusNames(packageStatusNames);
-				taskOrderVO.setMbondNum(taskPackage.getMbondNum());
-				taskOrderVO.setMchipLabel(taskPackage.getMchipLabel());
-				taskOrderVO.setMdiscBatch(taskPackage.getMdiscBatch());
-				taskOrderVO.setMmarkDemand(taskPackage.getMmarkDemand());
-				taskOrderVO.setMpackageNum(taskPackage.getMpackageNum());
-				taskOrderVO.setMpackageShape(taskPackage.getMpackageShape());
-				taskOrderVO.setMqualityLevel(taskPackage.getMqualityLevel());
-				taskOrderVO.setMshellType(taskPackage.getMshellType());
-				taskOrderVO.setMdiscNum(taskPackage.getMdiscNum());
-				taskOrderVO.setMwaferFlag(taskPackage.getMwaferFlag());
-				taskOrderVO.setMchipNum(taskPackage.getMchipNum());
-				taskOrderVO.setMstockFlag(taskPackage.getMstockFlag());
 			}
 			//多芯片封装
 			if(StringUtils.isHave(contentIds, "3023")){
 				taskOrderVO.setMcpackageFlag(1);
-				TaskMultiChipPackage taskPackage = taskOrder.getTaskMultiChipPackage();
-				List<Dictionary> packageStatus = taskPackage.getMcpackageStatus();
-				String packageStatusIds = "";
-				String packageStatusNames = "";
-				for(Dictionary dic: packageStatus){
-					if (packageStatusIds.length() > 0) {
-						packageStatusIds += ",";
-						packageStatusNames +=",";
+				TaskMultiChipPackage taskMultiPackage = taskOrder.getTaskMultiChipPackage();
+				if(UtilValidate.isNotEmpty(taskMultiPackage)) {
+					List<Dictionary> packageStatus = taskMultiPackage.getMcpackageStatus();
+					String packageStatusIds = "";
+					String packageStatusNames = "";
+					for(Dictionary dic: packageStatus){
+						if (packageStatusIds.length() > 0) {
+							packageStatusIds += ",";
+							packageStatusNames +=",";
+						}
+						packageStatusIds += dic.getDictionaryId();
+						packageStatusNames += dic.getValue();
 					}
-					packageStatusIds += dic.getDictionaryId();
-					packageStatusNames += dic.getValue();
+					taskOrderVO.setMcpackageStatusIds(packageStatusIds);
+					taskOrderVO.setMcpackageStatusNames(packageStatusNames);
+					taskOrderVO.setMcbondNum(taskMultiPackage.getMcbondNum());
+					taskOrderVO.setMcchipLabel(taskMultiPackage.getMcchipLabel());
+					taskOrderVO.setMcdiscBatch(taskMultiPackage.getMcdiscBatch());
+					taskOrderVO.setMcmarkDemand(taskMultiPackage.getMcmarkDemand());
+					taskOrderVO.setMcpackageNum(taskMultiPackage.getMcpackageNum());
+					taskOrderVO.setMcpackageShape(taskMultiPackage.getMcpackageShape());
+					taskOrderVO.setMcqualityLevel(taskMultiPackage.getMcqualityLevel());
+					taskOrderVO.setMcshellType(taskMultiPackage.getMcshellType());
+					taskOrderVO.setMcdiscNum(taskMultiPackage.getMcdiscNum());
+					taskOrderVO.setMcwaferFlag(taskMultiPackage.getMcwaferFlag());
+					taskOrderVO.setMcchipNum(taskMultiPackage.getMcchipNum());
+					taskOrderVO.setMcstockFlag(taskMultiPackage.getMcstockFlag());
+					taskOrderVO.setMcstockName(taskMultiPackage.getMcstockName());
 				}
-				taskOrderVO.setMcpackageStatusIds(packageStatusIds);
-				taskOrderVO.setMcpackageStatusNames(packageStatusNames);
-				taskOrderVO.setMcbondNum(taskPackage.getMcbondNum());
-				taskOrderVO.setMcchipLabel(taskPackage.getMcchipLabel());
-				taskOrderVO.setMcdiscBatch(taskPackage.getMcdiscBatch());
-				taskOrderVO.setMcmarkDemand(taskPackage.getMcmarkDemand());
-				taskOrderVO.setMcpackageNum(taskPackage.getMcpackageNum());
-				taskOrderVO.setMcpackageShape(taskPackage.getMcpackageShape());
-				taskOrderVO.setMcqualityLevel(taskPackage.getMcqualityLevel());
-				taskOrderVO.setMcshellType(taskPackage.getMcshellType());
-				taskOrderVO.setMcdiscNum(taskPackage.getMcdiscNum());
-				taskOrderVO.setMcwaferFlag(taskPackage.getMcwaferFlag());
-				taskOrderVO.setMcchipNum(taskPackage.getMcchipNum());
-				taskOrderVO.setMcstockFlag(taskPackage.getMcstockFlag());
 			}
 		}
 		//任务类型
@@ -777,11 +797,65 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				taskPackage.setShellType(taskOrdervo.getShellType());
 				taskPackage.setDiscNum(taskOrdervo.getDiscNum());
 				taskPackage.setWaferFlag(taskOrdervo.getWaferFlag());
+				taskPackage.setStockName(taskOrdervo.getStockName());
 				taskPackageDao.save(taskPackage);
 				taskOrder.setTaskPackage(taskPackage);
 			}
+			//混合封装
+			if(StringUtils.isHave(contentIds, "3022")){
+				TaskMixPackage taskPackage = new TaskMixPackage();
+				List<Dictionary> packageStatus = new  ArrayList<Dictionary>();
+				if (UtilValidate.isNotEmpty(taskOrdervo.getMpackageStatusIds())) {
+					for (String packageStatusId : taskOrdervo.getMpackageStatusIds().split(",")) {
+						Dictionary d = dictionaryDao.get(Dictionary.class, Long.parseLong(packageStatusId));
+						packageStatus.add(d);
+					}
+				}
+				taskPackage.setMpackageStatus(packageStatus);
+				taskPackage.setMbondNum(taskOrdervo.getMbondNum());
+				taskPackage.setMchipLabel(taskOrdervo.getMchipLabel());
+				taskPackage.setMdiscBatch(taskOrdervo.getMdiscBatch());
+				taskPackage.setMmarkDemand(taskOrdervo.getMmarkDemand());
+				taskPackage.setMpackageNum(taskOrdervo.getMpackageNum());
+				taskPackage.setMpackageShape(taskOrdervo.getMpackageShape());
+				taskPackage.setMqualityLevel(taskOrdervo.getMqualityLevel());
+				taskPackage.setMshellType(taskOrdervo.getMshellType());
+				taskPackage.setMdiscNum(taskOrdervo.getMdiscNum());
+				taskPackage.setMwaferFlag(taskOrdervo.getMwaferFlag());
+				taskPackage.setMchipNum(taskOrdervo.getMchipNum());
+				taskPackage.setMstockFlag(taskOrdervo.getMstockFlag());
+				taskPackage.setMstockName(taskOrdervo.getMstockName());
+				taskMixPackageDao.save(taskPackage);
+				taskOrder.setTaskMixPackage(taskPackage);
+			}
+			//多芯片封装
+			if(StringUtils.isHave(contentIds, "3023")){
+				TaskMultiChipPackage taskPackage = new TaskMultiChipPackage();
+				List<Dictionary> packageStatus = new  ArrayList<Dictionary>();
+				if (UtilValidate.isNotEmpty(taskOrdervo.getMcpackageStatusIds())) {
+					for (String packageStatusId : taskOrdervo.getMcpackageStatusIds().split(",")) {
+						Dictionary d = dictionaryDao.get(Dictionary.class, Long.parseLong(packageStatusId));
+						packageStatus.add(d);
+					}
+				}
+				taskPackage.setMcpackageStatus(packageStatus);
+				taskPackage.setMcbondNum(taskOrdervo.getMcbondNum());
+				taskPackage.setMcchipLabel(taskOrdervo.getMcchipLabel());
+				taskPackage.setMcdiscBatch(taskOrdervo.getMcdiscBatch());
+				taskPackage.setMcmarkDemand(taskOrdervo.getMcmarkDemand());
+				taskPackage.setMcpackageNum(taskOrdervo.getMcpackageNum());
+				taskPackage.setMcpackageShape(taskOrdervo.getMcpackageShape());
+				taskPackage.setMcqualityLevel(taskOrdervo.getMcqualityLevel());
+				taskPackage.setMcshellType(taskOrdervo.getMcshellType());
+				taskPackage.setMcdiscNum(taskOrdervo.getMcdiscNum());
+				taskPackage.setMcwaferFlag(taskOrdervo.getMcwaferFlag());
+				taskPackage.setMcchipNum(taskOrdervo.getMcchipNum());
+				taskPackage.setMcstockFlag(taskOrdervo.getMcstockFlag());
+				taskPackage.setMcstockName(taskOrdervo.getMcstockName());
+				taskMultiChipPackageDao.save(taskPackage);
+				taskOrder.setTaskMultiChipPackage(taskPackage);
+			}
 		}
-		taskOrder.setApplyContent(applyContent);
 		taskOrder.setApplyContent(applyContent);
 		//鉴定方式
 		List<Dictionary> checkType = new  ArrayList<Dictionary>();
@@ -1225,6 +1299,15 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
   		opLog.setCreatetime(new Date());
   		operatelogDao.save(opLog);
 	}
+	
+	@Transactional
+	public void copy(String id){
+		TaskOrder taskOrder = taskOrderDao.get(TaskOrder.class, Long.valueOf(id));
+		TaskOrderVO taskOrderVO = getDtoData(taskOrder);
+		taskOrderVO.setOrderId(null);
+		create(taskOrderVO);
+	}
+	
 	
 	@Transactional
 	public void remove(String id){

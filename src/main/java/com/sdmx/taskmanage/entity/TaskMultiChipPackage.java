@@ -40,6 +40,7 @@ public class TaskMultiChipPackage implements Serializable{
 	private int mcwaferFlag; //是否中测
 	private int mcchipNum; //需求芯片数量
 	private int mcstockFlag; //库存是否满足
+	private String mcstockName;//使用库存
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_MultiChip_Package_ID")
@@ -132,6 +133,13 @@ public class TaskMultiChipPackage implements Serializable{
 	}
 	public void setMcstockFlag(int mcstockFlag) {
 		this.mcstockFlag = mcstockFlag;
+	}
+	@Column(nullable=true)
+	public String getMcstockName() {
+		return mcstockName;
+	}
+	public void setMcstockName(String mcstockName) {
+		this.mcstockName = mcstockName;
 	}
 	
 	

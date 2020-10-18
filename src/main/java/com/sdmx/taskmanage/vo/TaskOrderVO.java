@@ -102,6 +102,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	private String markDemand;// 打标要求
 	private String discNum; //使用圆片号
 	private int waferFlag; //是否中测
+	private String stockName; //使用库存
 	
 	private int mixPackageFlag;// 1 有混合封装。0无混合封装
 	private String mpackageStatusIds; // 封装状态Id
@@ -118,7 +119,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	private int mwaferFlag; //是否中测
 	private Integer mchipNum;
 	private int mstockFlag;
-	
+	private String mstockName; //使用库存
 	
 	private int mcpackageFlag;// 1 有多芯片封装。0无多芯片封装
 	private String mcpackageStatusIds; // 封装状态Id
@@ -135,7 +136,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	private int mcwaferFlag; //是否中测
 	private Integer mcchipNum;
 	private int mcstockFlag;
-	
+	private String mcstockName; //使用库存
 	private String orderTypeId;
 	private String orderTypeName;
 	
@@ -1005,6 +1006,30 @@ public class TaskOrderVO implements java.io.Serializable {
 
 	public void setMcstockFlag(int mcstockFlag) {
 		this.mcstockFlag = mcstockFlag;
+	}
+
+	public String getStockName() {
+		return stockName;
+	}
+
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
+	}
+
+	public String getMstockName() {
+		return mstockName;
+	}
+
+	public void setMstockName(String mstockName) {
+		this.mstockName = mstockName;
+	}
+
+	public String getMcstockName() {
+		return mcstockName;
+	}
+
+	public void setMcstockName(String mcstockName) {
+		this.mcstockName = mcstockName;
 	}
 	
 }

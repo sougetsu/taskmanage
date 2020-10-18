@@ -81,6 +81,17 @@ public class DictionaryController {
 	}
 	
 	/**
+	 * 获得库存名称
+	 * @param request
+	 * @return List<DictionaryInfo> 对象列表
+	 */
+	@RequestMapping("/storeList")
+	@ResponseBody
+	public List<DictionaryInfo> getStoreList(HttpServletRequest request) {
+		return dictionaryService.getStoreList();
+	}
+	
+	/**
 	 * 获得成本归集课题号
 	 * @param request
 	 * @return List<DictionaryInfo> 对象列表

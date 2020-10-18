@@ -245,7 +245,7 @@
 							<td width=558 colspan=7>
 								<table border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=6 >
+								    <td width=31 rowspan=7 >
 								    <p ><b><span >封装</span></b></p>
 								    </td>
 								    <td width=83 >
@@ -339,6 +339,27 @@
 										</c:choose>
 								    </td>
 								   </tr>
+								   <tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >库存</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<c:choose>
+										   	<c:when test="${taskOrder.stockName==1}">
+										   		北微库
+										   	</c:when>
+										   	<c:otherwise>
+										   		民芯库
+										   	</c:otherwise>
+										</c:choose>
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
 								</table>
 							</td>
 						</tr>
@@ -348,7 +369,7 @@
 				   	<c:when test="${taskOrder.mixPackageFlag==1}">
 				   		<tr>
 							<th width=88></th>
-							<td width=558 colspan=7>
+							<td width=558 colspan=8>
 								<table border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
 								    <td width=31 rowspan=7 >
@@ -467,6 +488,27 @@
 										</c:choose>
 								    </td>
 								   </tr>
+								    <tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >库存</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<c:choose>
+										   	<c:when test="${taskOrder.mstockName==1}">
+										   		北微库
+										   	</c:when>
+										   	<c:otherwise>
+										   		民芯库
+										   	</c:otherwise>
+										</c:choose>
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
 								</table>
 							</td>
 						</tr>
@@ -595,6 +637,27 @@
 										</c:choose>
 								    </td>
 								   </tr>
+								    <tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >库存</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<c:choose>
+										   	<c:when test="${taskOrder.mcstockName==1}">
+										   		北微库
+										   	</c:when>
+										   	<c:otherwise>
+										   		民芯库
+										   	</c:otherwise>
+										</c:choose>
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
 								</table>
 							</td>
 						</tr>
@@ -1022,7 +1085,7 @@
 							<td width=558 colspan=7>
 								<table border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=6 >
+								    <td width=31 rowspan=7 >
 								    <p ><b><span >封装</span></b></p>
 								    </td>
 								    <td width=83 >
@@ -1116,6 +1179,27 @@
 										</c:choose>
 								    </td>
 								   </tr>
+								   <tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >库存</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<c:choose>
+										   	<c:when test="${taskOrder.stockName==1}">
+										   		北微库
+										   	</c:when>
+										   	<c:otherwise>
+										   		民芯库
+										   	</c:otherwise>
+										</c:choose>
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
 								</table>
 							</td>
 						</tr>
@@ -1128,7 +1212,7 @@
 							<td width=558 colspan=7>
 								<table border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=6 >
+								    <td width=31 rowspan=8 >
 								    <p ><b><span >封装</span></b></p>
 								    </td>
 								    <td width=83 >
@@ -1244,6 +1328,27 @@
 										</c:choose>
 								    </td>
 								   </tr>
+								   <tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >库存</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<c:choose>
+										   	<c:when test="${taskOrder.mstockName==1}">
+										   		北微库
+										   	</c:when>
+										   	<c:otherwise>
+										   		民芯库
+										   	</c:otherwise>
+										</c:choose>
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
 								</table>
 							</td>
 						</tr>
@@ -1256,7 +1361,7 @@
 							<td width=558 colspan=7>
 								<table border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=6 >
+								    <td width=31 rowspan=8 >
 								    <p ><b><span >封装</span></b></p>
 								    </td>
 								    <td width=83 >
@@ -1372,6 +1477,27 @@
 										</c:choose>
 								    </td>
 								   </tr>
+								   <tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >库存</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<c:choose>
+										   	<c:when test="${taskOrder.mcstockName==1}">
+										   		北微库
+										   	</c:when>
+										   	<c:otherwise>
+										   		民芯库
+										   	</c:otherwise>
+										</c:choose>
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
 								</table>
 							</td>
 						</tr>

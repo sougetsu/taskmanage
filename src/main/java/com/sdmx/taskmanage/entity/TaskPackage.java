@@ -3,6 +3,7 @@ package com.sdmx.taskmanage.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -38,6 +40,7 @@ public class TaskPackage implements Serializable{
 	private String markDemand;// 打标要求
 	private String discNum; //使用圆片号
 	private int waferFlag; //是否中测
+	private String stockName;//使用库存
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_Package_ID")
@@ -119,5 +122,13 @@ public class TaskPackage implements Serializable{
 	public void setWaferFlag(int waferFlag) {
 		this.waferFlag = waferFlag;
 	}
+	@Column(nullable=true)
+	public String getStockName() {
+		return stockName;
+	}
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
+	}
+	
 	
 }

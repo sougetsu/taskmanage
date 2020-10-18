@@ -207,7 +207,7 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 							<td width=558 colspan=7>
 								<table border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=6 >
+								    <td width=31 rowspan=7 >
 								    <p ><b><span >·â×°</span></b></p>
 								    </td>
 								    <td width=83 >
@@ -301,6 +301,27 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 										</c:choose>
 								    </td>
 								   </tr>
+								   <tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >¿â´æ</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<c:choose>
+										   	<c:when test="${taskOrder.stockName==1}">
+										   		±±Î¢¿â
+										   	</c:when>
+										   	<c:otherwise>
+										   		ÃñÐ¾¿â
+										   	</c:otherwise>
+										</c:choose>
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
 								</table>
 							</td>
 						</tr>
@@ -313,7 +334,7 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 							<td width=558 colspan=7>
 								<table border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=7 >
+								    <td width=31 rowspan=8 >
 								    <p ><b><span >»ìºÏ·â×°</span></b></p>
 								    </td>
 								    <td width=83 >
@@ -428,6 +449,28 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 										   	</c:otherwise>
 										</c:choose>
 								    </td>
+								    <tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >¿â´æ</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<c:choose>
+										   	<c:when test="${taskOrder.mstockName==1}">
+										   		±±Î¢¿â
+										   	</c:when>
+										   	<c:otherwise>
+										   		ÃñÐ¾¿â
+										   	</c:otherwise>
+										</c:choose>
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
+								    
 								   </tr>
 								</table>
 							</td>
@@ -441,7 +484,7 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 							<td width=558 colspan=7>
 								<table border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=7 >
+								    <td width=31 rowspan=8 >
 								    <p ><b><span >¶àÐ¾Æ¬·â×°</span></b></p>
 								    </td>
 								    <td width=83 >
@@ -557,6 +600,27 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 										</c:choose>
 								    </td>
 								   </tr>
+								   <tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >¿â´æ</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<c:choose>
+										   	<c:when test="${taskOrder.mcstockName==1}">
+										   		±±Î¢¿â
+										   	</c:when>
+										   	<c:otherwise>
+										   		ÃñÐ¾¿â
+										   	</c:otherwise>
+										</c:choose>
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
 								</table>
 							</td>
 						</tr>

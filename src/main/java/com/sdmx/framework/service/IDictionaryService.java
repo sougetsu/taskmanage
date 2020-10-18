@@ -42,4 +42,5 @@ public interface IDictionaryService extends IService {
 	public List<DictionaryInfo> getErsaiTopicList();
 	public List<DictionaryInfo> getYansTopicList();
 	public List<DictionaryInfo> getOrderTypeList();
+	public List<DictionaryInfo> getStoreList();
 }

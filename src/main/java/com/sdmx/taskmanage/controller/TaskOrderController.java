@@ -629,6 +629,20 @@ public class TaskOrderController {
 	}
 	
 	/**
+	 * 任务单复制下单
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/copyTaskOrder")
+	@ResponseBody
+	public JsonResult copyTaskOrder(String id) {
+		taskOrderService.copy(id);
+		return JsonResult.success("复制下单成功！", id);
+	}
+	
+	
+	/**
 	 * 任务单删除
 	 * 
 	 * @param id

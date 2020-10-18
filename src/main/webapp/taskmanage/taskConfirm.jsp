@@ -674,7 +674,7 @@
 						<td width=558 colspan=7>
 							<table id="confirm_package_table" border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 							   <tr >
-							    <td width=31 rowspan=6 >
+							    <td width=31 rowspan=7 >
 							    <p ><b><span >封装</span></b></p>
 							    </td>
 							    <td width=83 >
@@ -791,6 +791,21 @@
 										<input type="radio" style="width:30px" name="waferFlag" value="0" ${taskOrder.waferFlag== 0 ? 'checked' : ''} />否
 								    </td>
 								</tr>
+								<tr>
+							    <td width=83 >
+							    <p ><b><span
+							    >库存</span></b></p>
+							    </td>
+						    	<td width=194 >
+							   		<input type="radio" style="width:30px" name="stockName" value="1" ${taskOrder.stockName== 1 ? 'checked' : ''} />北微库
+									<input type="radio" style="width:30px" name="stockName" value="0" ${taskOrder.stockName== 0 ? 'checked' : ''} />民芯库
+							    </td>
+							    <td width=87 >
+							    <p ><b><span ></span></b></p>
+							    </td>
+							    <td width=194 >
+							    </td>
+						   	</tr>
 							</table>
 						</td>
 					</tr>
@@ -801,7 +816,7 @@
 							<td width=558 colspan=7>
 								<table id="confirm_package_table" border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=6 >
+								    <td width=31 rowspan=7 >
 								    <p ><b><span >封装</span></b></p>
 								    </td>
 								    <td width=83 >
@@ -918,6 +933,21 @@
 											<input type="radio" style="width:30px" name="waferFlag" value="0" ${taskOrder.waferFlag== 0 ? 'checked' : ''} />否
 									    </td>
 									</tr>
+									<tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >库存</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<input type="radio" style="width:30px" name="stockName" value="1" /> 北微库
+											<input type="radio" style="width:30px" name="stockName" value="0" checked="checked" />民芯库
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
 								</table>
 							</td>
 						</tr>
@@ -930,7 +960,7 @@
 						<td width=558 colspan=7>
 							<table id="confirm_mixpackage_table" border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 							   <tr >
-							    <td width=31 rowspan=7 >
+							    <td width=31 rowspan=8 >
 							    <p ><b><span >混合封装</span></b></p>
 							    </td>
 							    <td width=83 >
@@ -1066,6 +1096,21 @@
 									<input type="radio" style="width:30px" name="mstockFlag" value="0" ${taskOrder.mstockFlag== 0 ? 'checked' : ''} />否
 							    </td>
 						   	</tr>
+						   	<tr>
+							    <td width=83 >
+							    <p ><b><span
+							    >库存</span></b></p>
+							    </td>
+						    	<td width=194 >
+							   		<input type="radio" style="width:30px" name="mstockName" value="1" ${taskOrder.mstockName== 1 ? 'checked' : ''} />北微库
+									<input type="radio" style="width:30px" name="mstockName" value="0" ${taskOrder.mstockName== 0 ? 'checked' : ''} />民芯库
+							    </td>
+							    <td width=87 >
+							    <p ><b><span ></span></b></p>
+							    </td>
+							    <td width=194 >
+							    </td>
+						   	</tr>
 							</table>
 						</td>
 					</tr>
@@ -1076,7 +1121,7 @@
 							<td width=558 colspan=7>
 								<table id="confirm_mixpackage_table" border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								   <tr >
-								    <td width=31 rowspan=7 >
+								    <td width=31 rowspan=8 >
 								    <p ><b><span >混合封装</span></b></p>
 								    </td>
 								    <td width=83 >
@@ -1213,6 +1258,21 @@
 											<input type="radio" style="width:30px" name="mstockFlag" value="0" checked="checked" />否
 									    </td>
 								   	</tr>
+								   	<tr>
+									    <td width=83 >
+									    <p ><b><span
+									    >库存</span></b></p>
+									    </td>
+									    <td width=194 >
+									   		<input type="radio" style="width:30px" name="mstockName" value="1" /> 北微库
+											<input type="radio" style="width:30px" name="mstockName" value="0" checked="checked" />民芯库
+									    </td>
+									    <td width=87 >
+									    <p ><b><span ></span></b></p>
+									    </td>
+									    <td width=194 >
+									    </td>
+								   	</tr>
 								</table>
 							</td>
 						</tr>
@@ -1225,7 +1285,7 @@
 						<td width=558 colspan=7>
 							<table id="confirm_multipackage_table" border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 							   <tr >
-							    <td width=31 rowspan=7 >
+							    <td width=31 rowspan=8 >
 							    <p ><b><span >多芯片封装</span></b></p>
 							    </td>
 							    <td width=83 >
@@ -1361,6 +1421,21 @@
 									<input type="radio" style="width:30px" name="mcstockFlag" value="0" ${taskOrder.mcstockFlag== 0 ? 'checked' : ''} />否
 							    </td>
 						   	</tr>
+						   	<tr>
+							    <td width=83 >
+							    <p ><b><span
+							    >库存</span></b></p>
+							    </td>
+						    	<td width=194 >
+							   		<input type="radio" style="width:30px" name="mcstockName" value="1" ${taskOrder.mcstockName== 1 ? 'checked' : ''} />北微库
+									<input type="radio" style="width:30px" name="mcstockName" value="0" ${taskOrder.mcstockName== 0 ? 'checked' : ''} />民芯库
+							    </td>
+							    <td width=87 >
+							    <p ><b><span ></span></b></p>
+							    </td>
+							    <td width=194 >
+							    </td>
+						   	</tr>
 							</table>
 						</td>
 					</tr>
@@ -1371,7 +1446,7 @@
 							<td width=558 colspan=7>
 								<table id="confirm_multipackage_table" border="1" bordercolor="#B5C0C4" style="border-collapse:collapse;">
 								<tr >
-							    <td width=31 rowspan=7 >
+							    <td width=31 rowspan=8 >
 							    <p ><b><span >多芯片封装</span></b></p>
 							    </td>
 							    <td width=83 >
@@ -1507,7 +1582,22 @@
 								   		<input type="radio" style="width:30px" name="mcstockFlag" value="1" />是
 										<input type="radio" style="width:30px" name="mcstockFlag" value="0" checked="checked" />否
 								    </td>
-							   	</tr> 	  
+							   	</tr> 
+							   	<tr>
+							    <td width=83 >
+							    <p ><b><span
+							    >库存</span></b></p>
+							    </td>
+							    <td width=194 >
+							   		<input type="radio" style="width:30px" name="mcstockName" value="1" /> 北微库
+									<input type="radio" style="width:30px" name="mcstockName" value="0" checked="checked" />民芯库
+							    </td>
+							    <td width=87 >
+							    <p ><b><span ></span></b></p>
+							    </td>
+							    <td width=194 >
+							    </td>
+						   	</tr>	  
 								</table>
 							</td>
 						</tr>

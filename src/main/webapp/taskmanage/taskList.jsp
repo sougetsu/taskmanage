@@ -51,6 +51,10 @@
 				str += '&nbsp;';
 				str += formatString('<span onclick="taskorder_list_edit(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>修改</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 			}
+			if(row.editState==1){ 
+				str += '&nbsp;';
+				str += formatString('<span onclick="taskorder_list_copy(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>拷贝下单</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+			}
 			if(row.priceState==1){
 				str += '&nbsp;';
 				str += formatString('<span onclick="taskorder_list_price(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>核价</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
@@ -127,6 +131,26 @@
 			});
 		}
 	}
+	function taskorder_list_copy(id) {
+		$.messager.confirm('确认', '您确定要复制该任务单并下单？', function(r) {
+			if (r) {
+				$.ajax({
+					url : '${pageContext.request.contextPath}/taskManage/copyTaskOrder?id='+id,
+					dataType : 'json',
+					success : function(result) {
+						if (result.success) {
+							$('#taskorder_list_datagrid').datagrid('load');
+						}
+						$.messager.show({
+							title : '提示',
+							msg : result.msg
+						});
+					}
+				});
+			}
+		});
+	}
+	
 	function taskorder_list_cancel(id) {
 		$.messager.confirm('确认', '您确定要取消该任务单？', function(r) {
 			if (r) {

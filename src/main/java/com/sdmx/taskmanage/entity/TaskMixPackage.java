@@ -40,7 +40,7 @@ public class TaskMixPackage implements Serializable{
 	private int mwaferFlag; //是否中测
 	private int mchipNum; //需求芯片数量
 	private int mstockFlag; //库存是否满足
-	
+	private String mstockName;//使用库存
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_Mix_Package_ID")
 	@SequenceGenerator(name = "S_Mix_Package_ID", sequenceName = "S_Mix_Package_ID",allocationSize=1)
@@ -132,6 +132,13 @@ public class TaskMixPackage implements Serializable{
 	}
 	public void setMstockFlag(int mstockFlag) {
 		this.mstockFlag = mstockFlag;
+	}
+	@Column(nullable=true)
+	public String getMstockName() {
+		return mstockName;
+	}
+	public void setMstockName(String mstockName) {
+		this.mstockName = mstockName;
 	}
 	
 	
