@@ -20,8 +20,9 @@
 			selectOnCheck : false,
 			singleSelect:true,
 			columns : [ [ 
+				{field : 'action',title : '操作',width : 180,formatter : formatZxcxOperation},
 			    {field : 'orderId',title : '序号',hidden:true,width : 80}, 
-			    {field : 'lsh',title : '任务单号',width : 180}, 
+			    {field : 'lsh',title : '任务单号',width : 130}, 
 			    {field : 'projectName',title : '项目名称',width : 100,sortable : true},
 			    {field : 'internalModel',title : '所内型号',width : 120},
 			    {field : 'applyDept',title : '申请部门',width : 100,sortable : true}, 
@@ -32,12 +33,14 @@
 			    {field : 'wantedEndDate',title : '希望完成时间',width : 120,sortable : true},
 			    {field : 'statusName',title : '任务单状态',width : 100,sortable : true},
 			    {field : 'sumPrice',title : '价格',width : 100,sortable : true},
-			    {field : 'urgencyName',title : '紧急程度',width : 100,sortable : true},
-			    {field : 'action',title : '操作',width : 180,formatter : formatZxcxOperation} 
+			    {field : 'urgencyName',title : '紧急程度',width : 100,sortable : true}
 			    ] ],
 		    onLoadSuccess : function() {
 				parent.$.messager.progress('close');
-			}
+			},
+			onDblClickRow: function (rowIndex, rowData) { 
+				taskorder_list_detail(rowData.orderId);
+		    }
 		});
 	});
 	function formatZxcxOperation(value, row, index){

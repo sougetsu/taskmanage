@@ -156,7 +156,7 @@
 				<tr>
 					<th width="150px">课题号</th>
 					<td width=174 colspan=2>
-						<input name="topicId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/yanstopicList',parentField : 'pid',required:'true'"
+						<input name="topicId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/yanstopicList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false"/>
 					</td>
 					<th width=121 colspan=2>项目负责人</th>
@@ -172,7 +172,7 @@
 				</tr>
 				<tr>
 					<th width="150px">请求协助部门</th>
-					<td width=174 colspan=2><input name="helpDeptId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"
+					<td width=174 colspan=2><input name="helpDeptId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false"/></td>
 					<th width="121" colspan=2>希望完成时间</th>
 					<td width=264 colspan=3><input id="wantedEndDate" name="wantedEndDate" class="easyui-validatebox" data-options="required:true"

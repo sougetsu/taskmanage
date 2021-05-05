@@ -69,6 +69,21 @@ public class DictionaryController {
     	String memberId = sessionInfo.getUserId();
 		return dictionaryService.getOrganizationObjectByRoleAndMember(roleType, memberId,2);
 	}
+	
+	/**
+	 * 获得分转单位对象
+	 * @param request
+	 * @return List<DictionaryInfo> 对象列表
+	 */
+	@RequestMapping("/organizationListText")
+	@ResponseBody
+	public List<DictionaryInfo> getOrganizationObjectTextList(HttpServletRequest request) {
+    	SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
+    	RoleType roleType = RoleType.getType(sessionInfo.getRoleNames());
+    	String memberId = sessionInfo.getUserId();
+		return dictionaryService.getOrganizationObjectTextByRoleAndMember(roleType, memberId,2);
+	}
+	
 	/**
 	 * 获得项目名称
 	 * @param request
@@ -79,6 +94,18 @@ public class DictionaryController {
 	public List<DictionaryInfo> getProjectList(HttpServletRequest request) {
 		return dictionaryService.getProjectList();
 	}
+	
+	/**
+	 * 获得项目名称
+	 * @param request
+	 * @return List<DictionaryInfo> 对象列表
+	 */
+	@RequestMapping("/electricList")
+	@ResponseBody
+	public List<DictionaryInfo> getElectricList(HttpServletRequest request) {
+		return dictionaryService.getElectricList();
+	}
+	
 	
 	/**
 	 * 获得库存名称

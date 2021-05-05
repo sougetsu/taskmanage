@@ -164,7 +164,7 @@
 				<tr>
 					<th style="width: 150px">项目名称</th>
 					<td width=174 colspan=2>
-						<input id="AddTest_projectId" name="projectId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/projectList',parentField : 'pid',required:'true'"
+						<input id="AddTest_projectId" name="projectId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/projectList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false" />
 					</td>
 					<th width=121 colspan=2></th>
@@ -184,7 +184,7 @@
 						style="width:330px" /></td>
 					<th width=121 colspan=2>请求协作部门</th>
 					<td width=264 colspan=3>
-						<input name="helpDeptId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"
+						<input name="helpDeptId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false"/>
 					</td>
 				</tr>

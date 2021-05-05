@@ -33,11 +33,12 @@ public interface IDictionaryService extends IService {
 	 * @return
 	 */
 	public List<DictionaryInfo> getOrganizationObjectByRoleAndMember(RoleType roleType , String memberId,int seleT);
-	
+	public List<DictionaryInfo> getOrganizationObjectTextByRoleAndMember(RoleType roleType , String memberId,int seleT);
 	public Dictionary getStatus(String status);
 	
 	public Dictionary getLimitedDays(int limitedType);
 	public List<DictionaryInfo> getProjectList();
+	public List<DictionaryInfo> getElectricList();
 	public List<DictionaryInfo> getTopicList();
 	public List<DictionaryInfo> getErsaiTopicList();
 	public List<DictionaryInfo> getYansTopicList();

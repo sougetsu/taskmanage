@@ -36,7 +36,10 @@
 			    ] ],
 		    onLoadSuccess : function() {
 				parent.$.messager.progress('close');
-			}
+			},
+			onDblClickRow: function (rowIndex, rowData) { 
+				taskorder_list_detail(rowData.orderId);
+		    }
 		});
 	});
 	function formatZxcxOperation(value, row, index){

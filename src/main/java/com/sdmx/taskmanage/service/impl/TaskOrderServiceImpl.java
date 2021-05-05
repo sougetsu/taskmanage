@@ -211,7 +211,6 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				break;
 			}
 		}
-		
 		return hql;
 	}
 	private String addOrder(TaskOrderVO taskOrdervo, String hql){
@@ -245,9 +244,16 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		BeanUtilsEx.copyProperties(taskOrder, taskOrdervo);
 		taskOrder.setTaskOrderType(0);
 		//项目名称、课题号
-		Dictionary project = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getProjectId()));
-		taskOrder.setProject(project);
-		taskOrder.setTopic(project);
+		if(UtilValidate.isNotEmpty(taskOrdervo.getProjectId())) {
+			Dictionary project = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getProjectId()));
+			taskOrder.setProject(project);
+			taskOrder.setTopic(project);
+		}
+		//电路名称
+		if(UtilValidate.isNotEmpty(taskOrdervo.getElectricId())) {
+			Dictionary electric = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getElectricId()));
+			taskOrder.setElectric(electric);
+		}
 		//成本归集课题号
 		//Dictionary costTopicNo = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getCostTopicNoId()));
 		//taskOrder.setCostTopicNo(costTopicNo);
@@ -260,7 +266,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			Dictionary orderType = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getOrderTypeId()));
 			taskOrder.setOrderType(orderType);
 		}
-				
+		taskOrder.setProductStatus(taskOrdervo.getProductStatus());		
 		//业务申请内容
 		List<Dictionary> applyContent = new  ArrayList<Dictionary>();
 		if (UtilValidate.isNotEmpty(taskOrdervo.getApplyContentIds())) {
@@ -369,6 +375,8 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			}
 		}
 		taskOrder.setApplyContent(applyContent);
+		//委托数量
+		taskOrder.setEntrustNum(taskOrdervo.getEntrustNum());
 		//鉴定方式
 		List<Dictionary> checkType = new  ArrayList<Dictionary>();
 		if (UtilValidate.isNotEmpty(taskOrdervo.getCheckTypeId())) {
@@ -441,10 +449,16 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 	private TaskOrderVO getDtoData(TaskOrder taskOrder){
 		TaskOrderVO taskOrderVO = new TaskOrderVO();
 		BeanUtilsEx.copyProperties(taskOrderVO,taskOrder);
-		taskOrderVO.setProjectId(String.valueOf(taskOrder.getProject().getDictionaryId()));
-		taskOrderVO.setProjectName(taskOrder.getProject().getAnnotation());
-		taskOrderVO.setTopicNoId(String.valueOf(taskOrder.getProject().getDictionaryId()));
-		taskOrderVO.setTopicNo(taskOrder.getProject().getValue());
+		if(taskOrder.getProject()!=null) {
+			taskOrderVO.setProjectId(String.valueOf(taskOrder.getProject().getDictionaryId()));
+			taskOrderVO.setProjectName(taskOrder.getProject().getAnnotation());
+			taskOrderVO.setTopicNoId(String.valueOf(taskOrder.getProject().getDictionaryId()));
+			taskOrderVO.setTopicNo(taskOrder.getProject().getValue());
+		}
+		if(taskOrder.getElectric()!=null) {
+			taskOrderVO.setElectricId(String.valueOf(taskOrder.getElectric().getDictionaryId()));
+			taskOrderVO.setElectricName(taskOrder.getElectric().getValue());
+		}
 		//taskOrderVO.setCostTopicNoId(String.valueOf(taskOrder.getCostTopicNo().getDictionaryId()));
 		//taskOrderVO.setCostTopicNoName(taskOrder.getCostTopicNo().getAnnotation());
 		//业务申请内容
@@ -588,6 +602,8 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			taskOrderVO.setOrderTypeName("");
 		}
 		
+		//委托数量
+		
 		//鉴定方式
 		List<Dictionary> checkType = taskOrder.getCheckType();
 		String checkTypeIds = "";
@@ -720,6 +736,12 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		Dictionary project = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getProjectId()));
 		taskOrder.setProject(project);
 		taskOrder.setTopic(project);
+		
+		//电路名称
+		if(UtilValidate.isNotEmpty(taskOrdervo.getElectricId())) {
+			Dictionary electric = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getElectricId()));
+			taskOrder.setElectric(electric);
+		}
 		//成本归集课题号
 		//Dictionary costTopicNo = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getCostTopicNoId()));
 		//taskOrder.setCostTopicNo(costTopicNo);
@@ -747,8 +769,8 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			Dictionary orderType = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getOrderTypeId()));
 			taskOrder.setOrderType(orderType);
 		}
-	
-		
+		//产品状态
+		taskOrder.setProductStatus(taskOrdervo.getProductStatus());
 		//业务申请内容
 		List<Dictionary> applyContent = new  ArrayList<Dictionary>();
 		if (UtilValidate.isNotEmpty(taskOrdervo.getApplyContentIds())) {
@@ -857,6 +879,8 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			}
 		}
 		taskOrder.setApplyContent(applyContent);
+		//委托数量
+		taskOrder.setEntrustNum(taskOrdervo.getEntrustNum());
 		//鉴定方式
 		List<Dictionary> checkType = new  ArrayList<Dictionary>();
 		if (UtilValidate.isNotEmpty(taskOrdervo.getCheckTypeId())) {
@@ -1008,6 +1032,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		columnTitle.add("申请原因");
 		columnTitle.add("任务类型");
 		columnTitle.add("紧急程度");
+		columnTitle.add("产品状态");
 
 		return columnTitle;
 	}
@@ -1079,6 +1104,17 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				}
 			}else{
 				columns.add("一般");
+			}
+			//在研
+			if(task.getProductStatus()!=null)
+			{
+				if(task.getProductStatus() == 0) {
+					columns.add("在研");	
+				}else if(task.getProductStatus() == 1){
+					columns.add("老品");
+				}
+			}else {
+				columns.add("");
 			}
 			rows.add(columns);
 		}

@@ -186,7 +186,18 @@ public class DictionaryServiceImpl implements IDictionaryService{
 //		}
 		return getDictionarylistByHql(hql);
 	}
-	
+	public List<DictionaryInfo> getOrganizationObjectTextByRoleAndMember(RoleType roleType , String memberId,int seleT){
+		String hql = "from Dictionary t where 1=1 and t.state = '1' ";
+		if(seleT==0){
+			seleT=2;
+		}
+		if(seleT==2){
+			hql += " and (t.categoryNO = '0005' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0005' )) ";
+		}else if(seleT==1){
+			hql += " and (t.categoryNO = '0005' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0005' )) ";
+		}
+		return getDictionaryTextlistByHql(hql);
+	}
 
 	private List<DictionaryInfo> getDictionarylistByHql(String hql) {
 		List<DictionaryInfo> nl = new ArrayList<DictionaryInfo>();
@@ -203,6 +214,26 @@ public class DictionaryServiceImpl implements IDictionaryService{
 				}
 				m.setText(t.getAnnotation());
 				m.setId(String.valueOf(t.getDictionaryId()));
+				nl.add(m);
+			}
+		}
+		return nl;
+	}
+	private List<DictionaryInfo> getDictionaryTextlistByHql(String hql) {
+		List<DictionaryInfo> nl = new ArrayList<DictionaryInfo>();
+		List<Dictionary> l = baseDao.find(hql);
+		if (l != null && l.size() > 0) {
+			for (Dictionary t : l) {
+				DictionaryInfo m = new DictionaryInfo();
+				BeanUtils.copyProperties(t, m);
+				if (t.getDictionary() != null) {
+					m.setPid(String.valueOf(t.getDictionary().getDictionaryId()));
+				}
+				if (t.getDepartDicId() != null) {
+					m.setDepartmentId(String.valueOf(t.getDepartDicId().getDictionaryId()));
+				}
+				m.setText(t.getAnnotation());
+				m.setId(t.getAnnotation());
 				nl.add(m);
 			}
 		}
@@ -314,6 +345,30 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		
 		return getDictionarylistByHql(hql);
 	}
+	
+	@Override
+	public List<DictionaryInfo> getElectricList() {
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
+        Long departId = Long.valueOf(sessionInfo.getOrgnizationId());
+        RoleType memType = RoleType.getType(sessionInfo.getRoleNames());
+		String hql = "from Dictionary t where 1=1 and t.state = '1' ";
+		hql += " and (t.categoryNO = '0010' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0010' )) ";
+		switch(memType){
+			case MarketManger:
+			case DepartMember :	
+			case DepartManage :{
+				hql += " and (t.departDicId.dictionaryId ="+departId+ ") ";
+				break;
+			}
+			default:{
+				break;
+			}
+		}
+		
+		return getDictionarylistByHql(hql);
+	}
+	
 
 	@Override
 	public List<DictionaryInfo> getTopicList() {

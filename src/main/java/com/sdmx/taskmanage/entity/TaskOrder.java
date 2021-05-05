@@ -34,6 +34,7 @@ public class TaskOrder implements Serializable {
 	private Long orderId;
 	private Dictionary project;//项目id
 	//private Dictionary costTopicNo;//成本归集课题号
+	private Dictionary electric;//电路名称
 	private String internalModel;//所内型号
 	private Dictionary helpDept;//请求协作部门
 	private String applyDept;//申请部门
@@ -71,6 +72,8 @@ public class TaskOrder implements Serializable {
 	private Integer taskOrderType;
 	private Integer urgency;
 	private Dictionary orderType;
+	private Integer productStatus;
+	private Integer entrustNum;//委托数量
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_Order_ID")
@@ -91,7 +94,17 @@ public class TaskOrder implements Serializable {
 	public void setProject(Dictionary project) {
 		this.project = project;
 	}
-//	@JsonIgnore
+	
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+	@JoinColumn(name="electricId")
+	public Dictionary getElectric() {
+		return electric;
+	}
+	public void setElectric(Dictionary electric) {
+		this.electric = electric;
+	}
+	//	@JsonIgnore
 //	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
 //	@JoinColumn(name="costTopicNoId")
 //	public Dictionary getCostTopicNo() {
@@ -416,7 +429,16 @@ public class TaskOrder implements Serializable {
 	public void setOrderType(Dictionary orderType) {
 		this.orderType = orderType;
 	}
-
-	
-	
+	public Integer getProductStatus() {
+		return productStatus;
+	}
+	public void setProductStatus(Integer productStatus) {
+		this.productStatus = productStatus;
+	}
+	public Integer getEntrustNum() {
+		return entrustNum;
+	}
+	public void setEntrustNum(Integer entrustNum) {
+		this.entrustNum = entrustNum;
+	}
 }

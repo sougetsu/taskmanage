@@ -87,7 +87,7 @@
 					<td width=264 colspan=3><fmt:formatDate value="${taskOrder.wantedEndDate}" pattern="yyyy-MM-dd" /></td>
 				</tr>
 				<tr>
-					<th width=88 >是否有附件：</th>
+					<th width=88 >是否有附件</th>
 					<td width=194px colspan=2>
 						<c:choose>
 						   	<c:when test="${taskOrder.attachmentFlag==1}">
@@ -108,11 +108,11 @@
 						   	</c:otherwise>
 						</c:choose>
 					</td>
-					<th >监制单位：</th>
+					<th >监制单位</th>
 					<td colspan=2>${taskOrder.superviseUnit}</td>
 				</tr>
 				<tr>
-					<th width=88 >受控详规：</th>
+					<th width=88 >受控详规</th>
 					<td width=194px colspan=2>
 						<c:choose>
 						   	<c:when test="${taskOrder.controlledPlanFlag==1}">
@@ -133,13 +133,13 @@
 						   	</c:otherwise>
 						</c:choose>
 					</td>
-					<th >详规号：</th>
+					<th >详规号</th>
 					<td colspan=2>${taskOrder.detailPlanNo}</td>
 				</tr>
 				<c:choose>
 				   	<c:when test="${taskOrder.attachmentFlag==1}">
 				   		<tr id="attachSubmit">
-							<th width=88 >已上传附件：</th>
+							<th width=88 >已上传附件</th>
 							<td width=558 colspan=7>
 								<div id="xxwhAdd_alreadyAttachs">
 									<c:forEach items="${taskOrder.attachment}" var="item">
@@ -154,7 +154,7 @@
 				   	</c:when>
 				</c:choose>
 				<tr>
-					<th width=88 >业务申请内容:</th>
+					<th width=88 >业务申请内容</th>
 					<td width=558 colspan=7>
 						${taskOrder.applyContentNames}
 					</td>
@@ -359,10 +359,10 @@
 									    <td width=194 >
 									   		<c:choose>
 										   	<c:when test="${taskOrder.stockName==1}">
-										   		北微库
+										   		A库
 										   	</c:when>
 										   	<c:otherwise>
-										   		民芯库
+										   		B库
 										   	</c:otherwise>
 										</c:choose>
 									    </td>
@@ -378,7 +378,7 @@
 				   	</c:when>
 				   	<c:otherwise>
 				   		<tr>
-							<th width=88>具体要求：</th>
+							<th width=88>具体要求</th>
 							<td width=558 colspan=7>
 								${taskOrder.detailRequire}
 							</td>
@@ -643,19 +643,39 @@
 				   	</c:when>
 				</c:choose>
 				<tr>
-					<th width="150px" >任务类型：</th>
-					<td style="text-align:left" colspan=7>
+					<th width="150px" >任务类型</th>
+					<td style="text-align:left" colspan=2>
 						${taskOrder.orderTypeName}
+					</td>
+					<th width="150px" colspan=2>产品状态</th>
+					<td style="text-align:left" colspan=3>
+						<c:choose>
+						   	<c:when test="${taskOrder.productStatus==0}">
+						   		在研
+						   	</c:when>
+						   	<c:when test="${taskOrder.productStatus==1}">
+						   		老品
+						   	</c:when>
+						</c:choose>
 					</td>
 				</tr>
 				<tr>
-					<th width=88 >鉴定方式：</th>
+					<th width="150px" >委托数量</th>
+					<td width=174 colspan=2>
+						${taskOrder.entrustNum}
+					</td>
+					<th width=121 colspan=2></th>
+					<td width=264 colspan=3>
+					</td>
+				</tr>
+				<tr>
+					<th width=88 >鉴定方式</th>
 					<td width=558 colspan=7>
 						${taskOrder.checkTypeName}
 					</td>
 				</tr>
 				<tr>
-					<th width=88 >紧急程度：</th>
+					<th width=88 >紧急程度</th>
 					<td width=558 colspan=7>
 						<c:choose>
 						   	<c:when test="${taskOrder.urgency==1}">
@@ -671,19 +691,19 @@
 					</td>
 				</tr>
 				<tr>
-					<th width=88 >申请原因及说明：</th>
+					<th width=88 >申请原因及说明</th>
 					<td width=558 colspan=7>
 						${taskOrder.applyReason}
 					</td>
 				</tr>
 				<tr>
-					<th width=88 >备注：</th>
+					<th width=88 >备注</th>
 					<td width=558 colspan=7>
 						${taskOrder.remarks}
 					</td>
 				</tr>
 				<tr>
-					<th width=88 >生产部门负责人意见：</th>
+					<th width=88 >生产部门负责人意见</th>
 					<td width=558 colspan=7>
 						${taskOrder.productManagesuggest}
 					</td>

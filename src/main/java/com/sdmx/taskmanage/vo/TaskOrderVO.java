@@ -27,6 +27,8 @@ public class TaskOrderVO implements java.io.Serializable {
 	private String orderId;// 任务单ID
 	private String projectId;//项目Id
 	private String projectName;// 项目名称
+	private String electricId;//电路Id
+	private String electricName;// 电路名称
 	private String costTopicNoId;//成本归集课题号ID
 	private String costTopicNoName;//成本归集课题号
 	private String internalModel;// 所内型号
@@ -139,6 +141,8 @@ public class TaskOrderVO implements java.io.Serializable {
 	private String mcstockName; //使用库存
 	private String orderTypeId;
 	private String orderTypeName;
+	private Integer productStatus;
+	private Integer entrustNum;
 	
 	public int getPage() {
 		return page;
@@ -186,6 +190,22 @@ public class TaskOrderVO implements java.io.Serializable {
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
+	}
+	
+	public String getElectricId() {
+		return electricId;
+	}
+
+	public void setElectricId(String electricId) {
+		this.electricId = electricId;
+	}
+
+	public String getElectricName() {
+		return electricName;
+	}
+
+	public void setElectricName(String electricName) {
+		this.electricName = electricName;
 	}
 
 	public String getInternalModel() {
@@ -366,11 +386,12 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getProductManagesuggest() {
-		return productManagesuggest;
+		return  (productManagesuggest==null?productManagesuggest:productManagesuggest.replace("	"," "));
 	}
 
 	public void setProductManagesuggest(String productManagesuggest) {
 		this.productManagesuggest = productManagesuggest;
+		
 	}
 
 	public Date getCreatetime() {
@@ -440,7 +461,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getDetailRequire() {
-		return detailRequire;
+		return (detailRequire==null?detailRequire:detailRequire.replace("	"," "));
 	}
 
 	public void setDetailRequire(String detailRequire) {
@@ -1030,6 +1051,22 @@ public class TaskOrderVO implements java.io.Serializable {
 
 	public void setMcstockName(String mcstockName) {
 		this.mcstockName = mcstockName;
+	}
+
+	public Integer getProductStatus() {
+		return productStatus;
+	}
+
+	public void setProductStatus(Integer productStatus) {
+		this.productStatus = productStatus;
+	}
+
+	public Integer getEntrustNum() {
+		return entrustNum;
+	}
+
+	public void setEntrustNum(Integer entrustNum) {
+		this.entrustNum = entrustNum;
 	}
 	
 }

@@ -264,6 +264,24 @@
     		$("#Confirm_topicNoId").val(node.value);
     	}    
     });
+	$('input:radio[name="controlledPlanFlag"]').change(function(){
+        var a = $("input[name='controlledPlanFlag']:checked").val()
+        if ( a == "1") {
+        	$("input[name='countersignFlag'][value='0']").prop("checked", "checked");
+        }
+        if ( a == "0") {
+        	$("input[name='countersignFlag'][value='1']").prop("checked", "checked");
+        }
+    });
+	$('input:radio[name="countersignFlag"]').change(function(){
+        var a = $("input[name='countersignFlag']:checked").val()
+        if ( a == "1") {
+        	$("input[name='controlledPlanFlag'][value='0']").prop("checked", "checked");
+        }
+        if ( a == "0") {
+        	$("input[name='controlledPlanFlag'][value='1']").prop("checked", "checked");
+        }
+    });
 </script>
 <div class="easyui-layout" data-options="fit : true,border : false">
 <div data-options="region:'center',border:false">
@@ -274,19 +292,13 @@
 				<tr>
 					<th width="150px">项目名称</th>
 					<td width=174 colspan=2>
-						<input id="Confirm_projectId" name="projectId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/projectList',parentField : 'pid',required:'true'"
+						<input id="Confirm_projectId" name="projectId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/projectList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false" value="${taskOrder.projectId}"/>
 					</td>
 					<th width=101 colspan=2>任务单号</th>
 					<td width=264 colspan=3>
 						${taskOrder.lsh}
 					</td>
-					<%--<th width=121 colspan=2></th>
-					<td width=264 colspan=3>
-						<input name="costTopicNoId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/topicList',parentField : 'pid',required:'true'"
-						lines="true" cascadeCheck="false" value="${taskOrder.costTopicNoId}"/>
-					</td>
-				--%>
 				</tr>
 				<tr>
 					<th width="150px">所内型号</th>
@@ -296,7 +308,7 @@
 						style="width:330px" value="${taskOrder.internalModel}" /></td>
 					<th width=121 colspan=2>请求协作部门</th>
 					<td width=264 colspan=3>
-						<input name="helpDeptId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"
+						<input name="helpDeptId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"
 						lines="true" cascadeCheck="false" value="${taskOrder.helpDeptId}"/>
 					</td>
 				</tr>
@@ -343,7 +355,7 @@
 									onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" style="width:330px" value="<fmt:formatDate value="${taskOrder.wantedEndDate}" pattern="yyyy-MM-dd" />"/></td>
 				</tr>
 				<tr>
-					<th width="150px" >是否有附件：</th>
+					<th width="150px" >是否有附件</th>
 					<td width=174px style="text-align:left" colspan=2>
 					 	<span style="white-space:nowrap;">
 							<input type="radio" style="width:30px" id="attachmentYes" name="attachmentFlag" onclick="setAttachRow(this.value)" value="1" ${taskOrder.attachmentFlag == 1 ? 'checked' : ''}/>是
@@ -357,28 +369,28 @@
 						<input type="radio" style="width:30px" id="superviseNo" name="superviseFlag" value="0" ${taskOrder.superviseFlag == 0 ? 'checked' : ''}/>否
 						</span>
 					</td>
-					<th >监制单位：</th>
+					<th >监制单位</th>
 					<td colspan=2><input name="superviseUnit"
 						class="easyui-validatebox"
 						data-options="validType:'length[1,30]'"
 						style="width:98%" value="${taskOrder.superviseUnit}" /></td>
 				</tr>
 				<tr>
-					<th width="150px" >受控详规：</th>
+					<th width="150px" >受控详规</th>
 					<td width=174px style="text-align:left" colspan=2>
 						<span style="white-space:nowrap;">
-						<input type="radio" style="width:30px" id="controledPlanYes" name="controlledPlanFlag" value="1" ${taskOrder.controlledPlanFlag == 1 ? 'checked' : ''}/>是
-						<input type="radio" style="width:30px" id="controledPlanNo" name="controlledPlanFlag" value="0" ${taskOrder.controlledPlanFlag == 0 ? 'checked' : ''}/>否
+						<label><input type="radio" style="width:30px" id="controledPlanYes" name="controlledPlanFlag" value="1" ${taskOrder.controlledPlanFlag == 1 ? 'checked' : ''}/>是</label>
+						<label><input type="radio" style="width:30px" id="controledPlanNo" name="controlledPlanFlag" value="0" ${taskOrder.controlledPlanFlag == 0 ? 'checked' : ''}/>否</label>
 						</span>
 					</td>
 					<td width=121 colspan=2>
 						<span style="white-space:nowrap;">
 						<b>会签稿：</b>
-						<input type="radio" style="width:30px" id="countersignYes" name="countersignFlag" value="1" ${taskOrder.countersignFlag == 1 ? 'checked' : ''}/>是
-						<input type="radio" style="width:30px" id="countersignNo" name="countersignFlag" value="0" ${taskOrder.countersignFlag == 0 ? 'checked' : ''}/>否
+						<label><input type="radio" style="width:30px" id="countersignYes" name="countersignFlag" value="1" ${taskOrder.countersignFlag == 1 ? 'checked' : ''}/>是</label>
+						<label><input type="radio" style="width:30px" id="countersignNo" name="countersignFlag" value="0" ${taskOrder.countersignFlag == 0 ? 'checked' : ''}/>否</label>
 						</span>
 					</td>
-					<th >详规号：</th>
+					<th >详规号</th>
 					<td colspan=2><input name="detailPlanNo"
 						class="easyui-validatebox"
 						data-options="validType:'length[1,30]'"
@@ -387,7 +399,7 @@
 				<c:choose>
 				   	<c:when test="${taskOrder.attachmentFlag==1}">
 						<tr id="taskConfirm_attachSelect">
-							<th width="150px" >附件上传：</th>
+							<th width="150px" >附件上传</th>
 							<td style="text-align:left" colspan=7>
 								<div id="confirm_attachs"></div>
 								<input type="file" id="confirm_attach" name="attach"/>
@@ -395,7 +407,7 @@
 							</td>
 						</tr>
 						<tr id="taskConfirm_attachSubmit">
-							<th width="150px" >已上传附件：</th>
+							<th width="150px" >已上传附件</th>
 							<td style="text-align:left" colspan=7>
 								<div id="xxwhAdd_alreadyAttachs">
 									<c:forEach items="${taskOrder.attachment}" var="item">
@@ -411,7 +423,7 @@
 					</c:when>
 					<c:otherwise>
 						<tr id="taskConfirm_attachSelect" style="display:none;">
-							<th width="150px" >附件上传：</th>
+							<th width="150px" >附件上传</th>
 							<td style="text-align:left" colspan=7>
 								<div id="confirm_attachs"></div>
 								<input type="file" id="confirm_attach" name="attach"/>
@@ -419,7 +431,7 @@
 							</td>
 						</tr>
 						<tr id="taskConfirm_attachSubmit" style="display:none;">
-							<th width="150px" >已上传附件：</th>
+							<th width="150px" >已上传附件</th>
 							<td style="text-align:left" colspan=7>
 								<div id="xxwhAdd_alreadyAttachs"></div>
 							</td>
@@ -427,7 +439,7 @@
 					</c:otherwise>
 				</c:choose>
 				<tr>
-					<th width="150px" >业务申请内容:</th>
+					<th width="150px" >业务申请内容</th>
 					<td style="text-align:left" colspan=7>
 						<input type="checkbox" id="checkbox1" style="vertical-align:middle;width:30px" name="applyContentIds" onclick="setDetailRow(this.value,this.checked)" value="8" ${fn:contains(taskOrder.applyContentIds, '8')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox1">圆片减薄</label>
 						<input type="checkbox" id="checkbox2" style="vertical-align:middle;width:30px" name="applyContentIds" onclick="setDetailRow(this.value,this.checked)" value="9" ${fn:contains(taskOrder.applyContentIds, '9')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="checkbox2">圆片划片</label>
@@ -797,8 +809,8 @@
 							    >库存</span></b></p>
 							    </td>
 						    	<td width=194 >
-							   		<input type="radio" style="width:30px" name="stockName" value="1" ${taskOrder.stockName== 1 ? 'checked' : ''} />北微库
-									<input type="radio" style="width:30px" name="stockName" value="0" ${taskOrder.stockName== 0 ? 'checked' : ''} />民芯库
+							   		<input type="radio" style="width:30px" name="stockName" value="1" ${taskOrder.stockName== 1 ? 'checked' : ''} />A库
+									<input type="radio" style="width:30px" name="stockName" value="0" ${taskOrder.stockName== 0 ? 'checked' : ''} />B库
 							    </td>
 							    <td width=87 >
 							    <p ><b><span ></span></b></p>
@@ -939,8 +951,8 @@
 									    >库存</span></b></p>
 									    </td>
 									    <td width=194 >
-									   		<input type="radio" style="width:30px" name="stockName" value="1" /> 北微库
-											<input type="radio" style="width:30px" name="stockName" value="0" checked="checked" />民芯库
+									   		<input type="radio" style="width:30px" name="stockName" value="1" /> A库
+											<input type="radio" style="width:30px" name="stockName" value="0" checked="checked" />B库
 									    </td>
 									    <td width=87 >
 									    <p ><b><span ></span></b></p>
@@ -1606,26 +1618,41 @@
 				<c:choose>
 				   	<c:when test="${taskOrder.urgencyState==1}">
 						<tr>
-							<th width="150px" >任务类型：</th>
-							<td style="text-align:left" colspan=7>
-								<input  name="orderTypeId" class="easyui-combotree" style="width:330px" data-options="url:'${pageContext.request.contextPath}/dictionary/orderTypeList',parentField : 'pid'"
+							<th width="150px" >任务类型</th>
+							<td style="text-align:left" colspan=2>
+								<input  name="orderTypeId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/orderTypeList',parentField : 'pid'"
 								lines="true" cascadeCheck="false" value="${taskOrder.orderTypeId}"/>	
+							</td>
+							<th width="150px" colspan=2>产品状态</th>
+							<td style="text-align:left" colspan=3>
+								<label><input type="radio" style="width:30px" name="productStatus" value="0" ${taskOrder.productStatus == 0 ? 'checked' : ''} />在研</label>
+								<label><input type="radio" style="width:30px" name="productStatus" value="1" ${taskOrder.productStatus == 1 ? 'checked' : ''} />老品</label>
 							</td>
 						</tr>
 					</c:when>
 				</c:choose>
 				<tr>
-					<th width="150px" >鉴定方式：</th>
+					<th width="150px" >委托数量</th>
+					<td width=174 colspan=2>
+						<input name="entrustNum" class="easyui-validatebox" data-options="validType:'length[1,30]'" value="${taskOrder.entrustNum}" style="width:330px"/>	
+					</td>
+					<th width=121 colspan=2></th>
+					<td width=264 colspan=3>
+					</td>
+				</tr>
+				<tr>
+					<th width="150px" >鉴定方式</th>
 					<td style="text-align:left" colspan=7>
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check1" name="checkTypeId" value="23" ${taskOrder.checkTypeId == 23 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check1">自鉴</label>
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check2" name="checkTypeId" value="24" ${taskOrder.checkTypeId == 24 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check2">第三方监督</label>
 						<input type="checkbox" style="vertical-align:middle;width:30px" id="check3" name="checkTypeId" value="25" ${taskOrder.checkTypeId == 25 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check3">第三方直检</label>
+						<input type="checkbox" style="vertical-align:middle;width:30px" id="check4" name="checkTypeId" value="55" ${taskOrder.checkTypeId == 55 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check4">一致性</label>
 					</td>
 				</tr>
 				<c:choose>
 				   	<c:when test="${taskOrder.urgencyState==0}">
 						<tr>
-							<th width="150px" >紧急程度：</th>
+							<th width="150px" >紧急程度</th>
 							<td style="text-align:left" colspan=7>
 								<span style="white-space:nowrap;">
 									${taskOrder.urgencyName}
@@ -1636,37 +1663,37 @@
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<th width="150px" >紧急程度：</th>
+							<th width="150px" >紧急程度</th>
 							<td style="text-align:left" colspan=7>
 								<span style="white-space:nowrap;">
-								<input type="radio" style="width:30px" name="urgency" value="0" ${taskOrder.urgency == 0 ? 'checked' : ''} />一般
-								<input type="radio" style="width:30px" name="urgency" value="1" ${taskOrder.urgency == 1 ? 'checked' : ''} />紧急
-								<input type="radio" style="width:30px" name="urgency" value="2" ${taskOrder.urgency == 2 ? 'checked' : ''} />超紧急
+								<label><input type="radio" style="width:30px" name="urgency" value="0" ${taskOrder.urgency == 0 ? 'checked' : ''} />一般</label>
+								<label><input type="radio" style="width:30px" name="urgency" value="1" ${taskOrder.urgency == 1 ? 'checked' : ''} />紧急</label>
+								<label><input type="radio" style="width:30px" name="urgency" value="2" ${taskOrder.urgency == 2 ? 'checked' : ''} />超紧急</label>
 								</span>
 							</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>
 				<tr>
-					<th width="150px" >申请原因及说明：</th>
+					<th width="150px" >申请原因及说明</th>
 					<td colspan=7>
 						<textarea id="applyReason" name="applyReason" class="easyui-validatebox" data-options="validType:'length[1,1000]'"  style="height: 50px; width:98%">${taskOrder.applyReason}</textarea>
 					</td>
 				</tr>
 				<tr>
-					<th width="150px">具体要求：</th>
+					<th width="150px">具体要求</th>
 					<td colspan=7>
 						<textarea id="detailRequire" name="detailRequire" class="easyui-validatebox" data-options="validType:'length[1,1000]'"  style="height: 50px; width:98%">${taskOrder.detailRequire}</textarea>
 					</td>
 				</tr>
 				<tr>
-					<th width="150px" >备注：</th>
+					<th width="150px" >备注</th>
 					<td colspan=7>
 						<textarea id="remarks" name="remarks" class="easyui-validatebox" data-options="validType:'length[1,1000]'"  style="height: 50px; width:98%">${taskOrder.remarks}</textarea>
 					</td>
 				</tr>
 				<tr>
-					<th width="150px" >生产部门负责人意见：</th>
+					<th width="150px" >生产部门负责人意见</th>
 					<td colspan=7>
 						<textarea id="productManagesuggest" name="productManagesuggest" class="easyui-validatebox" data-options="validType:'length[1,1000]'"  style="height: 50px; width:98%">${taskOrder.productManagesuggest}</textarea>
 					</td>
