@@ -65,6 +65,13 @@ public class Dictionary implements Serializable{
 	 */
 	private String annotation;
 	
+	
+	/**
+	 * 扩展字段（目前用于显示电路名称）
+	 */
+	private String expvalue;
+	
+	
 	/**
 	 * 显示状态 
 	 */
@@ -147,8 +154,8 @@ public class Dictionary implements Serializable{
 		this.value = value;
 	}
 	
-	@Length(min = 0, max = 20, message = "注释长度不能超过20位")
-	@Column(length = 20,nullable=false)
+	@Length(min = 0, max = 100, message = "注释长度不能超过100位")
+	@Column(length = 100,nullable=false)
 	@FieldCN(fieldCn = "注释")
 	public String getAnnotation() {
 		return annotation;
@@ -156,6 +163,18 @@ public class Dictionary implements Serializable{
 
 	public void setAnnotation(String annotation) {
 		this.annotation = annotation;
+	}
+	
+	
+	@Length(min = 0, max = 50, message = "注释长度不能超过50位")
+	@Column(length = 50,nullable=true)
+	@FieldCN(fieldCn = "扩展字段")
+	public String getExpvalue() {
+		return expvalue;
+	}
+
+	public void setExpvalue(String expvalue) {
+		this.expvalue = expvalue;
 	}
 
 	@Length(min = 1, max = 1, message = "显示状态")

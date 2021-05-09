@@ -34,7 +34,6 @@ public class TaskOrder implements Serializable {
 	private Long orderId;
 	private Dictionary project;//项目id
 	//private Dictionary costTopicNo;//成本归集课题号
-	private Dictionary electric;//电路名称
 	private String internalModel;//所内型号
 	private Dictionary helpDept;//请求协作部门
 	private String applyDept;//申请部门
@@ -95,15 +94,6 @@ public class TaskOrder implements Serializable {
 		this.project = project;
 	}
 	
-	@JsonIgnore
-	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
-	@JoinColumn(name="electricId")
-	public Dictionary getElectric() {
-		return electric;
-	}
-	public void setElectric(Dictionary electric) {
-		this.electric = electric;
-	}
 	//	@JsonIgnore
 //	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
 //	@JoinColumn(name="costTopicNoId")

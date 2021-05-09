@@ -259,9 +259,10 @@
 			taskConfirm_attachSubmit.style.display = (document.all ? "block" : "table-row");
 		}
 	}
-	$("#Confirm_projectId").combotree({
+	$("#Confirm_electricId").combotree({
     	onSelect:function(node){
-    		$("#Confirm_topicNoId").val(node.value);
+    		$("#Confirm_projectName").val(node.annotation);
+    		$("#Confirm_topicNo").val(node.value);
     	}    
     });
 	$('input:radio[name="controlledPlanFlag"]').change(function(){
@@ -290,14 +291,24 @@
 			<input type="hidden" name="orderId" value="${taskOrder.orderId}"/>
 			<table class="tasktableForm" width="95%">
 				<tr>
-					<th width="150px">项目名称</th>
+					<th width="150px">任务单号</th>
 					<td width=174 colspan=2>
-						<input id="Confirm_projectId" name="projectId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/projectList',parentField : 'pid',required:'true'"
-						lines="true" cascadeCheck="false" value="${taskOrder.projectId}"/>
-					</td>
-					<th width=101 colspan=2>任务单号</th>
-					<td width=264 colspan=3>
 						${taskOrder.lsh}
+					</td>
+					<th width=101 colspan=2></th>
+					<td width=264 colspan=3>
+						
+					</td>
+				</tr>
+				<tr>
+					<th style="width: 150px">电路名称</th>
+					<td width=174 colspan=2>
+						<input id="Confirm_electricId" name="electricId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/electricList',parentField : 'pid'"
+						lines="true" cascadeCheck="false" value="${taskOrder.electricId}"/>
+					</td>
+					<th width=121 colspan=2>项目名称</th>
+					<td width=264 colspan=3>
+						<input id="Confirm_projectName" name="projectName" readonly="true"  value="${taskOrder.projectName}" style="width:330px;font-size: 12px"/>
 					</td>
 				</tr>
 				<tr>
@@ -331,7 +342,7 @@
 				<tr>
 					<th width="150px">课题号</th>
 					<td width=174 colspan=2>
-						<input id="Confirm_topicNoId" name="topicNoId" readonly="true" style="width:330px;font-size: 12px" value="${taskOrder.topicNo}"/>
+						<input id="Confirm_topicNo" name="topicNo" readonly="true" style="width:330px;font-size: 12px" value="${taskOrder.topicNo}"/>
 					</td>
 					<th width=121 colspan=2>项目负责人</th>
 					<td width=106><input name="projectManager"

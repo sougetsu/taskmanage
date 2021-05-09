@@ -45,10 +45,10 @@
 	});
 	function formatZxcxOperation(value, row, index){
 		var str = '';
-			str += formatString('<span onclick="taskorder_list_detail(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>详情</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+			str += formatString('<span onclick="taskorder_list_detail(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>详情</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/information.png');
 			if(row.confirmState==1){ 
 				str += '&nbsp;';
-				str += formatString('<span onclick="taskorder_list_confirm(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>审核</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+				str += formatString('<span onclick="taskorder_list_confirm(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>审核</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/comment_edit.png');
 			}
 			if(row.editState==1){ 
 				str += '&nbsp;';
@@ -64,11 +64,11 @@
 			}
 			if(row.fixState==1){
 				str += '&nbsp;';
-				str += formatString('<span onclick="taskorder_list_fix(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>确认</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+				str += formatString('<span onclick="taskorder_list_fix(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>确认</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/disk.png');
 			}
 			if(row.deleteState==1){
 				str += '&nbsp;';
-				str += formatString('<span onclick="taskorder_list_delete(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>删除</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+				str += formatString('<span onclick="taskorder_list_delete(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>删除</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/delete.png');
 			}
 		return str;
 	}

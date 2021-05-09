@@ -213,15 +213,11 @@
             });
     	}
 	}
-	$("#Add_projectId").combotree({
-    	onSelect:function(node){
-    		$("#Add_topicNoId").val(node.value);
-    	}    
-    });
 	$("#Add_electricId").combotree({
     	onSelect:function(node){
-    		$("#Add_topicNoId").val(node.value);
-    	}    
+    		$("#Add_projectName").val(node.annotation);
+    		$("#Add_topicNo").val(node.value);
+    	}
     });
 	$('input:radio[name="controlledPlanFlag"]').change(function(){
         var a = $("input[name='controlledPlanFlag']:checked").val()
@@ -253,12 +249,10 @@
 					<td width=174 colspan=2>
 						<input id="Add_electricId" name="electricId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/electricList',parentField : 'pid'"
 						lines="true" cascadeCheck="false" />
-						
 					</td>
 					<th width=121 colspan=2>项目名称</th>
 					<td width=264 colspan=3>
-						<input id="Add_projectId" name="projectId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/projectList',parentField : 'pid'"
-						lines="true" cascadeCheck="false" />
+						<input id="Add_projectName" name="projectName" readonly="true"  style="width:330px;font-size: 12px"/>
 					</td>
 				</tr>
 				<tr>
@@ -292,7 +286,7 @@
 				<tr>
 					<th width="150px">课题号</th>
 					<td width=174 colspan=2>
-						<input id="Add_topicNoId" name="topicNoId" readonly="true" style="width:330px;font-size: 12px"/>
+						<input id="Add_topicNo" name="topicNo" readonly="true" style="width:330px;font-size: 12px"/>
 					</td>
 					<th width=121 colspan=2>项目负责人</th>
 					<td width=106><input name="projectManager"

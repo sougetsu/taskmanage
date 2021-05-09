@@ -282,11 +282,12 @@ $.extend($.fn.tree.methods, {
  */
 $.fn.tree.defaults.loadFilter = function(data, parent) {
 	var opt = $(this).data().tree.options;
-	var idFiled, textFiled, parentField,valueField;
+	var idFiled, textFiled, parentField,valueField,annotationField;
 	if (opt.parentField) {
 		idFiled = opt.idFiled || 'id';
 		textFiled = opt.textFiled || 'text';
 		valueFiled = opt.valueField ||'value';
+		annotationField = opt.annotationField ||'annotation';
 		parentField = opt.parentField;
 		var i, l, treeData = [], tmpMap = [];
 		for (i = 0, l = data.length; i < l; i++) {
@@ -298,15 +299,18 @@ $.fn.tree.defaults.loadFilter = function(data, parent) {
 					tmpMap[data[i][parentField]]['children'] = [];
 				data[i]['text'] = data[i][textFiled];
 				data[i]['value'] = data[i][valueFiled];
+				data[i]['annotation'] = data[i][annotationField];
 				tmpMap[data[i][parentField]]['children'].push(data[i]);
 			} else {
 				data[i]['text'] = data[i][textFiled];
 				data[i]['value'] = data[i][valueFiled];
+				data[i]['annotation'] = data[i][annotationField];
 				treeData.push(data[i]);
 			}
 		}
 		return treeData;
 	}
+	alert(data);
 	return data;
 };
 

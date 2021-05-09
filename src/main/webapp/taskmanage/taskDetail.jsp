@@ -35,13 +35,22 @@
 		<form id="taskOrder_detailForm"method="post">
 			<table id="PrintA" class="tasktableForm" width=100%>
 				<tr>
-					<th width=88>项目名称</th>
-					<td width=194 colspan=2>
-						${taskOrder.projectName}
-					</td>
-					<th width=101 colspan=2>任务单号</th>
-					<td width=264 colspan=3>
+					<th width="150px">任务单号</th>
+					<td width=174 colspan=2>
 						${taskOrder.lsh}
+					</td>
+					<th width=101 colspan=2></th>
+					<td width=264 colspan=3>
+					</td>
+				</tr>
+				<tr>
+					<th style="width: 150px">电路名称</th>
+					<td width=174 colspan=2>
+						${taskOrder.electricName}
+					</td>
+					<th width=121 colspan=2>项目名称</th>
+					<td width=264 colspan=3>
+						${taskOrder.projectName}
 					</td>
 				</tr>
 				<tr>

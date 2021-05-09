@@ -228,9 +228,17 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 		BeanUtilsEx.copyProperties(taskOrder, taskOrdervo);
 		taskOrder.setTaskOrderType(1);
 		//项目名称、课题号
-		Dictionary project = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getProjectId()));
-		taskOrder.setProject(project);
-		taskOrder.setTopic(project);
+		if(UtilValidate.isNotEmpty(taskOrdervo.getProjectId())) {
+			Dictionary project = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getProjectId()));
+			taskOrder.setProject(project);
+			taskOrder.setTopic(project);
+		}
+		//电路名称
+		if(UtilValidate.isNotEmpty(taskOrdervo.getElectricId())) {
+			Dictionary electric = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getElectricId()));
+			taskOrder.setProject(electric);
+			taskOrder.setTopic(electric);
+		}
 		//成本归集课题号
 //		Dictionary costTopicNo = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getCostTopicNoId()));
 //		taskOrder.setCostTopicNo(costTopicNo);
@@ -285,6 +293,7 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 				taskPackage.setShellType(taskOrdervo.getShellType());
 				taskPackage.setDiscNum(taskOrdervo.getDiscNum());
 				taskPackage.setWaferFlag(taskOrdervo.getWaferFlag());
+				taskPackage.setStockName(taskOrdervo.getStockName());
 				taskPackageDao.save(taskPackage);
 				taskOrder.setTaskPackage(taskPackage);
 			}
@@ -362,12 +371,18 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 	private TaskOrderVO getDtoData(TaskOrder taskOrder){
 		TaskOrderVO taskOrderVO = new TaskOrderVO();
 		BeanUtilsEx.copyProperties(taskOrderVO,taskOrder);
-		taskOrderVO.setProjectId(String.valueOf(taskOrder.getProject().getDictionaryId()));
-		taskOrderVO.setProjectName(taskOrder.getProject().getAnnotation());
-		taskOrderVO.setTopicNoId(String.valueOf(taskOrder.getProject().getDictionaryId()));
-		taskOrderVO.setTopicNo(taskOrder.getProject().getValue());
-//		taskOrderVO.setCostTopicNoId(String.valueOf(taskOrder.getCostTopicNo().getDictionaryId()));
-//		taskOrderVO.setCostTopicNoName(taskOrder.getCostTopicNo().getAnnotation());
+		
+		if(taskOrder.getProject()!=null) {
+			//项目名称
+			taskOrderVO.setProjectId(String.valueOf(taskOrder.getProject().getDictionaryId()));
+			taskOrderVO.setProjectName(taskOrder.getProject().getAnnotation());
+			//课题号
+			taskOrderVO.setTopicNoId(String.valueOf(taskOrder.getProject().getDictionaryId()));
+			taskOrderVO.setTopicNo(taskOrder.getProject().getValue());
+			//电路名称
+			taskOrderVO.setElectricId(String.valueOf(taskOrder.getProject().getDictionaryId()));
+			taskOrderVO.setElectricName(taskOrder.getProject().getExpvalue());
+		}
 		//业务申请内容
 		List<Dictionary> applyContent = taskOrder.getApplyContent();
 		String applyContentIds = "";
@@ -405,29 +420,32 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 			if(StringUtils.isHave(contentIds, "11")){
 				taskOrderVO.setPackageFlag(1);
 				TaskPackage taskPackage = taskOrder.getTaskPackage();
-				List<Dictionary> packageStatus = taskPackage.getPackageStatus();
-				String packageStatusIds = "";
-				String packageStatusNames = "";
-				for(Dictionary dic: packageStatus){
-					if (packageStatusIds.length() > 0) {
-						packageStatusIds += ",";
-						packageStatusNames +=",";
+				if(UtilValidate.isNotEmpty(taskPackage)) {
+					List<Dictionary> packageStatus = taskPackage.getPackageStatus();
+					String packageStatusIds = "";
+					String packageStatusNames = "";
+					for(Dictionary dic: packageStatus){
+						if (packageStatusIds.length() > 0) {
+							packageStatusIds += ",";
+							packageStatusNames +=",";
+						}
+						packageStatusIds += dic.getDictionaryId();
+						packageStatusNames += dic.getValue();
 					}
-					packageStatusIds += dic.getDictionaryId();
-					packageStatusNames += dic.getValue();
+					taskOrderVO.setPackageStatusIds(packageStatusIds);
+					taskOrderVO.setPackageStatusNames(packageStatusNames);
+					taskOrderVO.setBondNum(taskPackage.getBondNum());
+					taskOrderVO.setChipLabel(taskPackage.getChipLabel());
+					taskOrderVO.setDiscBatch(taskPackage.getDiscBatch());
+					taskOrderVO.setMarkDemand(taskPackage.getMarkDemand());
+					taskOrderVO.setPackageNum(taskPackage.getPackageNum());
+					taskOrderVO.setPackageShape(taskPackage.getPackageShape());
+					taskOrderVO.setQualityLevel(taskPackage.getQualityLevel());
+					taskOrderVO.setShellType(taskPackage.getShellType());
+					taskOrderVO.setDiscNum(taskPackage.getDiscNum());
+					taskOrderVO.setWaferFlag(taskPackage.getWaferFlag());
+					taskOrderVO.setStockName(taskPackage.getStockName());
 				}
-				taskOrderVO.setPackageStatusIds(packageStatusIds);
-				taskOrderVO.setPackageStatusNames(packageStatusNames);
-				taskOrderVO.setBondNum(taskPackage.getBondNum());
-				taskOrderVO.setChipLabel(taskPackage.getChipLabel());
-				taskOrderVO.setDiscBatch(taskPackage.getDiscBatch());
-				taskOrderVO.setMarkDemand(taskPackage.getMarkDemand());
-				taskOrderVO.setPackageNum(taskPackage.getPackageNum());
-				taskOrderVO.setPackageShape(taskPackage.getPackageShape());
-				taskOrderVO.setQualityLevel(taskPackage.getQualityLevel());
-				taskOrderVO.setShellType(taskPackage.getShellType());
-				taskOrderVO.setDiscNum(taskPackage.getDiscNum());
-				taskOrderVO.setWaferFlag(taskPackage.getWaferFlag());
 			}
 		}
 		//鉴定方式
@@ -524,6 +542,19 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
     			taskOrderVO.setAttachment(attachvo);// 设置附件信息
     		}
         }
+        //紧急程度
+        if(taskOrder.getUrgency()!=null)
+		{
+			if(taskOrder.getUrgency()==1){
+				taskOrderVO.setUrgencyName("紧急");
+			}else if(taskOrder.getUrgency()==2){
+				taskOrderVO.setUrgencyName("超紧急");
+			}else{
+				taskOrderVO.setUrgencyName("一般");
+			}
+		}else{
+			taskOrderVO.setUrgencyName("一般");
+		}
 		return taskOrderVO;
 	}
 
@@ -544,10 +575,20 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
         SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
         RoleType memType = RoleType.getType(sessionInfo.getRoleNames());
 		TaskOrder taskOrder = taskOrderDao.get(TaskOrder.class, Long.parseLong(taskOrdervo.getOrderId()));
-		//项目名称、课题号
-		Dictionary project = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getProjectId()));
-		taskOrder.setProject(project);
-		taskOrder.setTopic(project);
+		//电路名称 项目名称 课题号
+		if(UtilValidate.isNotEmpty(taskOrdervo.getProjectId())) {
+			Dictionary project = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getProjectId()));
+			taskOrder.setProject(project);
+			taskOrder.setTopic(project);
+		}
+		
+		//电路名称 项目名称 课题号
+		if(UtilValidate.isNotEmpty(taskOrdervo.getElectricId())) {
+			Dictionary electric = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getElectricId()));
+			taskOrder.setProject(electric);
+			taskOrder.setTopic(electric);
+		}
+		
 		//成本归集课题号
 //		Dictionary costTopicNo = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getCostTopicNoId()));
 //		taskOrder.setCostTopicNo(costTopicNo);
@@ -618,11 +659,11 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 				taskPackage.setShellType(taskOrdervo.getShellType());
 				taskPackage.setDiscNum(taskOrdervo.getDiscNum());
 				taskPackage.setWaferFlag(taskOrdervo.getWaferFlag());
+				taskPackage.setStockName(taskOrdervo.getStockName());
 				taskPackageDao.save(taskPackage);
 				taskOrder.setTaskPackage(taskPackage);
 			}
 		}
-		taskOrder.setApplyContent(applyContent);
 		taskOrder.setApplyContent(applyContent);
 		//鉴定方式
 		List<Dictionary> checkType = new  ArrayList<Dictionary>();
@@ -634,6 +675,7 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 		}
 		taskOrder.setCheckType(checkType);
 		taskOrder.setApplyReason(taskOrdervo.getApplyReason());
+		taskOrder.setUrgency(taskOrdervo.getUrgency());
 		taskOrder.setDetailRequire(taskOrdervo.getDetailRequire());
 		taskOrder.setRemarks(taskOrdervo.getRemarks());
 		taskOrder.setProductManagesuggest(taskOrdervo.getProductManagesuggest());
@@ -758,6 +800,7 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 	private List<String> columnTitle(){
 		List<String> columnTitle = new ArrayList<String>();
 		columnTitle.add("任务单号");
+		columnTitle.add("电路名称");
 		columnTitle.add("项目名称");
 		columnTitle.add("所内型号");
 		columnTitle.add("申请部门 ");
@@ -789,7 +832,8 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 			TaskOrder task = (TaskOrder) iterator.next();
 			columns = new ArrayList<String>();
 			columns.add(task.getLsh());
-			columns.add(task.getProject().getValue());
+			columns.add(task.getProject().getExpvalue());
+			columns.add(task.getProject().getAnnotation());
 			columns.add(task.getInternalModel());
 			columns.add(task.getApplyDept());
 			columns.add(task.getApplyMember());

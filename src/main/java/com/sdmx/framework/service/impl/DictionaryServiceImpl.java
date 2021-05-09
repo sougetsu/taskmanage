@@ -239,6 +239,28 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		}
 		return nl;
 	}
+	
+	private List<DictionaryInfo> getElectricListByHql(String hql) {
+		List<DictionaryInfo> nl = new ArrayList<DictionaryInfo>();
+		List<Dictionary> l = baseDao.find(hql);
+		if (l != null && l.size() > 0) {
+			for (Dictionary t : l) {
+				DictionaryInfo m = new DictionaryInfo();
+				BeanUtils.copyProperties(t, m);
+				if (t.getDictionary() != null) {
+					m.setPid(String.valueOf(t.getDictionary().getDictionaryId()));
+				}
+				if (t.getDepartDicId() != null) {
+					m.setDepartmentId(String.valueOf(t.getDepartDicId().getDictionaryId()));
+				}
+				m.setText(t.getExpvalue());
+				m.setId(String.valueOf(t.getDictionaryId()));
+				nl.add(m);
+			}
+		}
+		return nl;
+	}
+	
 
 	@Override
 	public List<DictionaryInfo> typeList() {
@@ -263,58 +285,6 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		return nl;
 	}
 	
-//	public List<DictionaryInfo> getOrganizationObjectByRoleAndMember(String memberType , String memberId){
-//		List<Object> params = null;
-//		String hql = "from Dictionary t "; //+
-////				"left join fetch t.dictionarys a " +
-////				"left outer join Dictionary.dictionarys.dictionarys b on a.codeNO = b.categoryNO " +
-////				"where t.codeNO = '0005' ";
-//		hql += addWhere(memberType,memberId);
-//		hql += " order by t.seq";
-//		return getDictionarylistByHql(hql,params);
-//	}
-//	
-//	private String addWhere(String memberType , String memberId){
-//		String hql = "where 1=1 ";
-//		List<Object> params = new ArrayList<Object>();
-//		
-//		if("超管角色".equals(memberType)){
-//		}else if("系统管理员".equals(memberType)){
-//		}else if("班长席".equals(memberType)){
-//		}else if("坐席".equals(memberType)){
-//			hql += " and (t.codeNO = '0005' or (t.dictionarys.categoryNO = t.codeNO ) or (t.dictionarys.dictionarys.categoryNO = t.dictionarys.codeNO )) ";
-//			params.add(Long.parseLong(memberId));
-//		}else if("直属单位".equals(memberType)){
-//			hql += " and( t.complaintObject.categoryNO in " +
-//					"(select y.organization.codeNO from Member y  " +
-//					"where y.memberId = :getMemberId ) " +
-//					" or t.complaintObject.codeNO = (select z.organization.codeNO from Member z " +
-//					"where z.memberId = :getMemberId ))";
-//			params.add(Long.parseLong(memberId));
-//		}else if("直属单位下属部门".equals(memberType)){
-//			hql += " and t.complaintObject.codeNO in (select y.organization.codeNO from Member y " +
-//					"where y.memberId = :getMemberId )";
-//			params.add(Long.parseLong(memberId));
-//		}
-//		return hql;
-//	}
-//	private List<DictionaryInfo> getDictionarylistByHql(String hql,List<Object> params) {
-//		List<DictionaryInfo> nl = new ArrayList<DictionaryInfo>();
-//		List<Dictionary> l = baseDao.find(hql,params);
-//		if (l != null && l.size() > 0) {
-//			for (Dictionary t : l) {
-//				DictionaryInfo m = new DictionaryInfo();
-//				BeanUtils.copyProperties(t, m);
-//				if (t.getpId() != null) {
-//					m.setPid(String.valueOf(t.getpId()));
-//				}
-//				m.setText(t.getValue());
-//				m.setId(String.valueOf(t.getDictionaryId()));
-//				nl.add(m);
-//			}
-//		}
-//		return nl;
-//	}
 	public Dictionary getLimitedDays(int limitedType){
 		Dictionary limitedDay = null;
 		String hql = "from Dictionary t where t.state = '1' and t.categoryNO = '0010' and t.codeNO="+limitedType;
@@ -348,25 +318,9 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	
 	@Override
 	public List<DictionaryInfo> getElectricList() {
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-        SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
-        Long departId = Long.valueOf(sessionInfo.getOrgnizationId());
-        RoleType memType = RoleType.getType(sessionInfo.getRoleNames());
-		String hql = "from Dictionary t where 1=1 and t.state = '1' ";
-		hql += " and (t.categoryNO = '0010' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0010' )) ";
-		switch(memType){
-			case MarketManger:
-			case DepartMember :	
-			case DepartManage :{
-				hql += " and (t.departDicId.dictionaryId ="+departId+ ") ";
-				break;
-			}
-			default:{
-				break;
-			}
-		}
-		
-		return getDictionarylistByHql(hql);
+		String hql = "from Dictionary t where 1=1 and t.state = '1' and t.expvalue is not null";
+		hql += " and (t.categoryNO = '0004' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0004' )) ";
+		return getElectricListByHql(hql);
 	}
 	
 

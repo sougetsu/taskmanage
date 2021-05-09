@@ -8,6 +8,7 @@ public class DictionaryInfo {
 	private String codeNO;
 	private String value;
 	private String annotation;
+	private String expvalue;
 	private String display;
 	private Integer seq;
 	private String state;
@@ -53,6 +54,13 @@ public class DictionaryInfo {
 	}
 	public void setAnnotation(String annotation) {
 		this.annotation = annotation;
+	}
+	
+	public String getExpvalue() {
+		return (expvalue==null?expvalue:expvalue.replace("	"," "));
+	}
+	public void setExpvalue(String expvalue) {
+		this.expvalue = expvalue;
 	}
 	public String getDisplay() {
 		return display;
