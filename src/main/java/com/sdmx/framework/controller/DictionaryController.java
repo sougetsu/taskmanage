@@ -96,7 +96,7 @@ public class DictionaryController {
 	}
 	
 	/**
-	 * 获得项目名称
+	 * 获得电路名称
 	 * @param request
 	 * @return List<DictionaryInfo> 对象列表
 	 */
@@ -104,6 +104,17 @@ public class DictionaryController {
 	@ResponseBody
 	public List<DictionaryInfo> getElectricList(HttpServletRequest request) {
 		return dictionaryService.getElectricList();
+	}
+	
+	/**
+	 * 获得电路名称
+	 * @param request
+	 * @return List<DictionaryInfo> 对象列表
+	 */
+	@RequestMapping("/electricListText")
+	@ResponseBody
+	public List<DictionaryInfo> getElectricListText(HttpServletRequest request) {
+		return dictionaryService.getElectricListText();
 	}
 	
 	

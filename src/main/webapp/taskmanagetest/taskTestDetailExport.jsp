@@ -1,8 +1,11 @@
 <%@ page contentType="application/msword;charset=GBK" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%     
-response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");   
+
+<c:set var="lsh" value="${taskOrder.lsh}" scope="request"></c:set>
+<% 
+String filename=(String)request.getAttribute("lsh")+"(公开).doc";
+response.setHeader("Content-disposition","attachment;filename="+ new String(filename.getBytes("gb2312"), "ISO8859-1" ));
 %> 
 <script type="text/javascript">
 	$(function() {
@@ -14,22 +17,13 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 					<th colspan=8 style="text-align:center">任务通知单</th>
 				</tr>
 				<tr>
-					<th width="150px">任务单号</th>
-					<td width=174 colspan=2>
-						${taskOrder.lsh}
-					</td>
-					<th width=101 colspan=2></th>
-					<td width=264 colspan=3>
-					</td>
-				</tr>
-				<tr>
-					<th style="width: 150px">电路名称</th>
-					<td width=174 colspan=2>
-						${taskOrder.electricName}
-					</td>
-					<th width=121 colspan=2>项目名称</th>
-					<td width=264 colspan=3>
+					<th width=88>项目名称</th>
+					<td whidth=194 colspan=2>
 						${taskOrder.projectName}
+					</td>
+					<th width=101 colspan=2>任务单号</th>
+					<td width=264 colspan=3>
+						${taskOrder.lsh}
 					</td>
 				</tr>
 				<tr>

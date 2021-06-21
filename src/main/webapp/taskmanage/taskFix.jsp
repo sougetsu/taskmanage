@@ -51,8 +51,9 @@
 					<td width=174 colspan=2>
 						${taskOrder.lsh}
 					</td>
-					<th width=101 colspan=2></th>
+					<th width=101 colspan=2>所内型号</th>
 					<td width=264 colspan=3>
+						${taskOrder.internalModel}	
 					</td>
 				</tr>
 				<tr>
@@ -66,8 +67,8 @@
 					</td>
 				</tr>
 				<tr>
-					<th width=88>所内型号</th>
-					<td width=194 colspan=2>${taskOrder.internalModel}</td>
+					<th width=88>归属部门</th>
+					<td width=194 colspan=2>${taskOrder.belongDeptName}</td>
 					<th width=101 colspan=2>请求协作部门</th>
 					<td width=264 colspan=3>
 						${taskOrder.helpDeptName}
@@ -720,46 +721,53 @@
 			</table>
 		</form>
 	</div>
-	<%-- <c:choose>
+	<c:choose>
 		<c:when test="${taskOrder.status==43 || taskOrder.status==13 || taskOrder.status==51}">
 			<div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
-			<div id="priceItem" title="价格信息" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
-				<table width=100%>
-					<thead>
-						<tr>
-							<th field="itemName" width="100">项目内容</th>
-							<th field="basePrice" width="90" align="right">起步收费</th>
-							<th field="price" width="90" align="right">收费标准（元）</th>
-							<th field="chargeUnit" width="80" align="right">计价单位</th>
-							<th field="amount" width="80" align="right">数量</th>
-							<th field="unitcost" width="80" align="right">总计（元）</th>
-							<th field="remarks" width="150">备注</th>
-						</tr>
-						<c:forEach var="item" items="${taskPrice}">
-			       			<tr>
-								<td align="center">${item.itemName}</td>
-								<td align="right">${item.basePrice}</td>
-								<td align="right">${item.price}</td>
-								<td align="right">${item.chargeUnit}</td>
-								<td align="right">${item.amount}</td>
-								<td align="right">${item.unitcost}</td>
-								<td >${item.remarks}</td>
+				<div id="priceItem" title="价格信息" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
+					<table width=100%>
+						<thead>
+							<tr>
+								<th field="dlmc" width="100" align="left">电路名称</th>
+								<th field="orderType" width="100" align="right">任务类型</th>
+								<th field="fzPrice" width="90" align="right">封装单价(元/只)</th>
+								<th field="jdghpcsPrice" width="80" align="right">鉴定供货批测试费(元/只)</th>
+								<th field="sxPrice" width="80" align="right">筛选费用(元/只)</th>
+								<th field="jdyzxjcPrice" width="80" align="right">鉴定/一致性检测费(元/批)</th>
+								<th field="swhgpcsPrice" width="80" align="right">三温合格品测试费(元/只)</th>
+								<th field="itemNum" width="50" align="center">数量</th>
+								<th field="totalPrice" width="150" align="center">总计（元）</th>
 							</tr>
-						</c:forEach>
-						<tr>
-							<td ></td>
-							<td align="right"></td>
-							<td align="right"></td>
-							<td align="right"></td>
-							<td align="right" style=" font-weight:bold">合计（元）</td>
-							<td align="right">${taskOrder.sumPrice}</td>
-							<td ></td>
-						</tr>
-					</thead>
-				</table>
+							<c:forEach var="item" items="${taskPrice}">
+				       			<tr>
+									<td align="left">${item.dlmc}</td>
+									<td align="right">${item.orderType}</td>
+									<td align="right">${item.fzPrice}</td>
+									<td align="right">${item.jdghpcsPrice}</td>
+									<td align="right">${item.sxPrice}</td>
+									<td align="right">${item.jdyzxjcPrice}</td>
+									<td align="right">${item.swhgpcsPrice}</td>
+									<td align="center">${item.itemNum}</td>
+									<td align="center">${item.totalPrice}</td>
+								</tr>
+							</c:forEach>
+							<tr>
+								<td ></td>
+								<td align="right"></td>
+								<td align="right"></td>
+								<td align="right"></td>
+								<td align="right"></td>
+								<td align="right"></td>
+								<td align="right"></td>
+								<td align="center" style=" font-weight:bold">合计（元）</td>
+								<td align="center">${taskOrder.sumPrice}</td>
+								<td ></td>
+							</tr>
+						</thead>
+					</table>
+				</div>
 			</div>
-			</div>
-			<div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
+			<%-- <div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
 			<div id="scheduleDetail" title="工作进度信息" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
 				<table cellSpacing=0 cellPadding=5>
 			    	<tr>
@@ -869,9 +877,9 @@
 				    </tr>
 			    </table>
 			</div>
-			</div>
+			</div> --%>
 		</c:when>
-	</c:choose> --%>
+	</c:choose>
 	<div  style="width:780px;margin-left: auto;margin-right: auto;margin-bottom: 20px;" ">
 		<table>
 		<tr>

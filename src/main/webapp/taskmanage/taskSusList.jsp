@@ -20,7 +20,6 @@
 			selectOnCheck : false,
 			singleSelect:true,
 			columns : [ [ 
-				{field : 'action',title : '操作',width : 180,formatter : formatZxcxOperation},
 			    {field : 'orderId',title : '序号',hidden:true,width : 80}, 
 			    {field : 'lsh',title : '任务单号',width : 130}, 
 			    {field : 'projectName',title : '项目名称',width : 100,sortable : true},
@@ -32,8 +31,11 @@
 			    {field : 'createtime',title : '登记日期',width : 150,sortable : true}, 
 			    {field : 'wantedEndDate',title : '希望完成时间',width : 120,sortable : true},
 			    {field : 'statusName',title : '任务单状态',width : 100,sortable : true},
-			    {field : 'sumPrice',title : '价格',width : 100,sortable : true},
-			    {field : 'urgencyName',title : '紧急程度',width : 100,sortable : true}
+			    {field : 'orderTypeName',title : '任务类型',width : 100,sortable : true},
+			    {field : 'urgencyName',title : '紧急程度',width : 100,sortable : true},
+			    {field : 'belongDeptName',title : '归属部门',width : 100},
+			    {field : 'sumPrice',title : '费用合计',width : 100},
+			    {field : 'action',title : '操作',width : 180,formatter : formatZxcxOperation}
 			    ] ],
 		    onLoadSuccess : function() {
 				parent.$.messager.progress('close');
@@ -58,13 +60,13 @@
 				str += '&nbsp;';
 				str += formatString('<span onclick="taskorder_list_price(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>核价</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 			}
-			if(row.priceEditState==1){
-				str += '&nbsp;';
-				str += formatString('<span onclick="taskorder_list_priceEdit(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>修改</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
-			}
+			//if(row.priceEditState==1){
+			//	str += '&nbsp;';
+			//	str += formatString('<span onclick="taskorder_list_priceEdit(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>修改</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+			//}
 			if(row.fixState==1){
 				str += '&nbsp;';
-				str += formatString('<span onclick="taskorder_list_fix(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>确认</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/disk.png');
+				str += formatString('<span onclick="taskorder_list_fix(\'{0}\');" style="cursor:pointer " ><img src="{1}"/>确认完成</span>', row.orderId, '${pageContext.request.contextPath}/style/images/extjs_icons/disk.png');
 			}
 			if(row.deleteState==1){
 				str += '&nbsp;';

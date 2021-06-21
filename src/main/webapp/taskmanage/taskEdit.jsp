@@ -230,6 +230,7 @@
     	onSelect:function(node){
     		$("#edit_projectName").val(node.annotation);
     		$("#edit_topicNo").val(node.value);
+    		$("input[name='internalModel']").val(node.text);
     	}    
     });
 	$('input:radio[name="controlledPlanFlag"]').change(function(){
@@ -262,9 +263,12 @@
 					<td width=174 colspan=2>
 						${taskOrder.lsh}
 					</td>
-					<th width=101 colspan=2></th>
+					<th width=101 colspan=2>所内型号</th>
 					<td width=264 colspan=3>
-						
+						<input name="internalModel"
+						class="easyui-validatebox"
+						data-options="required:true,validType:'length[1,100]'"
+						style="width:330px" value="${taskOrder.internalModel}" />
 					</td>
 				</tr>
 				<tr>
@@ -279,11 +283,11 @@
 					</td>
 				</tr>
 				<tr>
-					<th width="150px">所内型号</th>
-					<td width=174 colspan=2><input name="internalModel"
-						class="easyui-validatebox"
-						data-options="required:true,validType:'length[1,100]'"
-						style="width:330px" value="${taskOrder.internalModel}" /></td>
+					<th width="150px">归属部门</th>
+					<td width=174 colspan=2>
+						<input name="belongDeptId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"
+						lines="true" cascadeCheck="false" value="${taskOrder.belongDeptId}"/>
+					</td>
 					<th width=121 colspan=2>请求协作部门</th>
 					<td width=264 colspan=3>
 						<input name="helpDeptId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"

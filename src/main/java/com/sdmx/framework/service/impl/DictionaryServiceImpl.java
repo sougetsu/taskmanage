@@ -171,19 +171,6 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		}else if(seleT==1){
 			hql += " and (t.categoryNO = '0005' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0005' )) ";
 		}
-//		if("超管角色".equals(memberType)){
-//			hql += " and t.categoryNO = '0005' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0005' ";
-//		}else if("系统管理员".equals(memberType)){
-//			hql += " and t.categoryNO = '0005' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0005' )";
-//		}else if("班长席".equals(memberType)){
-//			hql += " and t.categoryNO = '0005' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0005' )";
-//		}else if("坐席".equals(memberType)){
-//			hql += " and (t.categoryNO = '0005' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0005' ))";
-//		}else if("直属单位".equals(memberType)){
-//			hql += " and t.categoryNO = (select m.organization.codeNO from Member m where m.memberId = "+memberId+") ";
-//		}else if("直属单位下属部门".equals(memberType)){
-//			
-//		}
 		return getDictionarylistByHql(hql);
 	}
 	public List<DictionaryInfo> getOrganizationObjectTextByRoleAndMember(RoleType roleType , String memberId,int seleT){
@@ -261,6 +248,27 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		return nl;
 	}
 	
+	private List<DictionaryInfo> getElectricTextListByHql(String hql) {
+		List<DictionaryInfo> nl = new ArrayList<DictionaryInfo>();
+		List<Dictionary> l = baseDao.find(hql);
+		if (l != null && l.size() > 0) {
+			for (Dictionary t : l) {
+				DictionaryInfo m = new DictionaryInfo();
+				BeanUtils.copyProperties(t, m);
+				if (t.getDictionary() != null) {
+					m.setPid(String.valueOf(t.getDictionary().getDictionaryId()));
+				}
+				if (t.getDepartDicId() != null) {
+					m.setDepartmentId(String.valueOf(t.getDepartDicId().getDictionaryId()));
+				}
+				m.setText(t.getExpvalue());
+				m.setId(t.getExpvalue());
+				nl.add(m);
+			}
+		}
+		return nl;
+	}
+	
 
 	@Override
 	public List<DictionaryInfo> typeList() {
@@ -322,6 +330,14 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		hql += " and (t.categoryNO = '0004' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0004' )) ";
 		return getElectricListByHql(hql);
 	}
+	
+	@Override
+	public List<DictionaryInfo> getElectricListText() {
+		String hql = "from Dictionary t where 1=1 and t.state = '1' and t.expvalue is not null";
+		hql += " and (t.categoryNO = '0004' or t.categoryNO in (select a.codeNO from Dictionary a where a.categoryNO = '0004' )) ";
+		return getElectricTextListByHql(hql);
+	}
+	
 	
 
 	@Override

@@ -12,6 +12,8 @@
 	</script>
 </c:if>
 <script type="text/javascript">
+var allData = new Array();
+var bFound = true; 
 	$(function() {
 		$('#admin_zdgl_treegrid').treegrid({
 			url : '${pageContext.request.contextPath}/dictionary/list',
@@ -19,8 +21,15 @@
 			treeField : 'text',
 			parentField : 'pid',
 			fit : true,
-			fitColumns : true,
+			fitColumns : false,
 			border : false,
+			loadFilter:function(data){ 
+				if (bFound) {
+					allData = data;
+					bFound = false;
+				}
+				return data;
+			},
 			frozenColumns : [ [ {
 				title : '编号',
 				field : 'id',
@@ -29,7 +38,7 @@
 			}, {
 				field : 'text',
 				title : '字典名称',
-				width : 150
+				width : 250
 			} ] ],
 			columns : [ [ {
 				field : 'categoryNO',
@@ -42,6 +51,10 @@
 			},{
 				field : 'value',
 				title : '意义',
+				width : 150
+			},{
+				field : 'expvalue',
+				title : '电路名称',
 				width : 150
 			}, {
 				field : 'seq',
@@ -103,6 +116,13 @@
 				iconCls : 'icon-reload',
 				handler : function() {
 					$('#admin_zdgl_treegrid').treegrid('reload');
+				}
+			},'-',{
+				text: '<input id="filter" type="text" />',
+			},{
+				iconCls:'icon-search',
+				handler:function () {
+				   doFilter();
 				}
 			} ],
 			onLoadSuccess : function() {
@@ -227,6 +247,38 @@
 			}
 		});
 	}
+	function doFilter() {
+        var filter = $("#filter").val();
+        if (filter == "") {
+        	alert(allData.length);
+            $('#admin_zdgl_treegrid').treegrid('loadData', allData);
+        } else {
+            var newData = new Array();
+            for (var i = 0; i < allData.length; i++) {
+                var item = allData[i];
+                if (item.text.indexOf(filter) != -1) {
+                    // 定义一个数组  
+                    newData.push(item);
+                } else if (item.children != null && item.children.length > 0) {
+                    doChildFilter(item, newData, filter);
+                }
+            }
+            $('#admin_zdgl_treegrid').treegrid('loadData', newData);
+        }
+    }
+    function doChildFilter(parentItem, newData, filter) {
+        var list = parentItem.children;
+        for (var i = 0; i < list.length; i++) {
+            var item = list[i];
+            if (item.Name.indexOf(filter) != -1) {
+                // 定义一个数组  
+                newData.push(item);
+                return;
+            } else if (item.children != null && item.children.length > 0) {
+                doChildFilter(item, newData, filter);
+            }
+        }
+    }
 </script>
 <table id="admin_zdgl_treegrid"></table>
 <div id="admin_zdgl_menu" class="easyui-menu" style="width:120px;display: none;">

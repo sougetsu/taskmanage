@@ -36,6 +36,7 @@ public class TaskOrder implements Serializable {
 	//private Dictionary costTopicNo;//成本归集课题号
 	private String internalModel;//所内型号
 	private Dictionary helpDept;//请求协作部门
+	private Dictionary belongDept;//归属部门
 	private String applyDept;//申请部门
 	private String applyMember;//申请人
 	private String applyMemberPhone;//申请人电话
@@ -65,6 +66,7 @@ public class TaskOrder implements Serializable {
 	private TaskMixPackage taskMixPackage;//混合封装
 	private TaskMultiChipPackage taskMultiChipPackage;//多芯片封装
 	private Set<TaskPrice> taskPriceList = new  HashSet<TaskPrice>();//工单核价内容
+	private Set<TaskPriceDetail> taskPriceDetailList = new  HashSet<TaskPriceDetail>();//工单核价内容
 	private TaskSchedule taskSchedule;//工单日程
 	private Double sumPrice;
 	private String lsh;
@@ -93,16 +95,6 @@ public class TaskOrder implements Serializable {
 	public void setProject(Dictionary project) {
 		this.project = project;
 	}
-	
-	//	@JsonIgnore
-//	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
-//	@JoinColumn(name="costTopicNoId")
-//	public Dictionary getCostTopicNo() {
-//		return costTopicNo;
-//	}
-//	public void setCostTopicNo(Dictionary costTopicNo) {
-//		this.costTopicNo = costTopicNo;
-//	}
 	@Column(length = 100)
 	public String getInternalModel() {
 		return internalModel;
@@ -119,6 +111,17 @@ public class TaskOrder implements Serializable {
 	public void setHelpDept(Dictionary helpDept) {
 		this.helpDept = helpDept;
 	}
+	
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+	@JoinColumn(name="belongDept")
+	public Dictionary getBelongDept() {
+		return belongDept;
+	}
+	public void setBelongDept(Dictionary belongDept) {
+		this.belongDept = belongDept;
+	}
+	
 	public String getApplyDept() {
 		return applyDept;
 	}
@@ -311,6 +314,7 @@ public class TaskOrder implements Serializable {
 	public void setTaskMultiChipPackage(TaskMultiChipPackage taskMultiChipPackage) {
 		this.taskMultiChipPackage = taskMultiChipPackage;
 	}
+	
 	@OneToMany(mappedBy="taskOrder",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	public Set<TaskPrice> getTaskPriceList() {
 		return taskPriceList;
@@ -318,6 +322,15 @@ public class TaskOrder implements Serializable {
 	public void setTaskPriceList(Set<TaskPrice> taskPriceList) {
 		this.taskPriceList = taskPriceList;
 	}
+	
+	@OneToMany(mappedBy="taskOrder",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	public Set<TaskPriceDetail> getTaskPriceDetailList() {
+		return taskPriceDetailList;
+	}
+	public void setTaskPriceDetailList(Set<TaskPriceDetail> taskPriceDetailList) {
+		this.taskPriceDetailList = taskPriceDetailList;
+	}
+	
 	@OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
     @JoinColumn(name="scheduleId")
 	public TaskSchedule getTaskSchedule() {

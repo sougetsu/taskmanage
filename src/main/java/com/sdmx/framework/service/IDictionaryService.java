@@ -39,6 +39,7 @@ public interface IDictionaryService extends IService {
 	public Dictionary getLimitedDays(int limitedType);
 	public List<DictionaryInfo> getProjectList();
 	public List<DictionaryInfo> getElectricList();
+	public List<DictionaryInfo> getElectricListText();
 	public List<DictionaryInfo> getTopicList();
 	public List<DictionaryInfo> getErsaiTopicList();
 	public List<DictionaryInfo> getYansTopicList();

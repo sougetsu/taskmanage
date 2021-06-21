@@ -1,8 +1,10 @@
 <%@ page contentType="application/msword;charset=GBK" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%     
-response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");   
+<c:set var="lsh" value="${taskOrder.lsh}" scope="request"></c:set>
+<% 
+String filename=(String)request.getAttribute("lsh")+"(公开).doc";
+response.setHeader("Content-disposition","attachment;filename="+ new String(filename.getBytes("gb2312"), "ISO8859-1" ));   
 %> 
 <script type="text/javascript">
 	$(function() {
@@ -18,8 +20,9 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 					<td width=174 colspan=2>
 						${taskOrder.lsh}
 					</td>
-					<th width=101 colspan=2></th>
+					<th width=101 colspan=2>所内型号</th>
 					<td width=264 colspan=3>
+						${taskOrder.internalModel}
 					</td>
 				</tr>
 				<tr>
@@ -33,8 +36,10 @@ response.setHeader("Content-disposition","attachment;filename=taskOrder.doc");
 					</td>
 				</tr>
 				<tr>
-					<th width=88>所内型号</th>
-					<td width=194 colspan=2>${taskOrder.internalModel}</td>
+					<th width=88>归属部门</th>
+					<td width=194 colspan=2>
+						${taskOrder.belongDeptName}
+					</td>
 					<th width=101 colspan=2>请求协作部门</th>
 					<td width=264 colspan=3>
 						${taskOrder.helpDeptName}

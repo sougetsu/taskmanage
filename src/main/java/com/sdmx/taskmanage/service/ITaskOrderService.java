@@ -10,6 +10,7 @@ import com.sdmx.taskmanage.entity.TaskOrder;
 import com.sdmx.taskmanage.vo.LogVO;
 import com.sdmx.taskmanage.vo.PriceCheckVO;
 import com.sdmx.taskmanage.vo.TaskOrderVO;
+import com.sdmx.taskmanage.vo.TaskPriceDetailVO;
 import com.sdmx.taskmanage.vo.TaskPriceVO;
 import com.sdmx.taskmanage.vo.TaskScheduleVO;
 
@@ -19,6 +20,7 @@ public interface ITaskOrderService extends IService {
 	public TaskOrder create(TaskOrderVO taskOrdervo);
 	public TaskOrderVO getTaskOrderById(String taskId);
 	public List<TaskPriceVO> getTaskPriceListById(String taskId);
+	public List<TaskPriceDetailVO> getTaskPriceDetailById(String taskId);
 	public TaskScheduleVO getTaskScheduleById(String taskId);
 	public TaskOrder confirmOK(TaskOrderVO taskOrdervo);
 	public TaskOrder confirmNG(TaskOrderVO taskOrdervo);

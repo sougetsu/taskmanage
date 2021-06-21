@@ -38,6 +38,7 @@ import com.sdmx.framework.vo.SessionInfo;
 import com.sdmx.taskmanage.dao.IAttachmentDao;
 import com.sdmx.taskmanage.dao.ILshDao;
 import com.sdmx.taskmanage.dao.IOperateLogDao;
+import com.sdmx.taskmanage.dao.IPriceDetailDao;
 import com.sdmx.taskmanage.dao.IPriceItemDao;
 import com.sdmx.taskmanage.dao.ITaskDicingDao;
 import com.sdmx.taskmanage.dao.ITaskMixPackageDao;
@@ -45,9 +46,11 @@ import com.sdmx.taskmanage.dao.ITaskMultiChipPackageDao;
 import com.sdmx.taskmanage.dao.ITaskOrderDao;
 import com.sdmx.taskmanage.dao.ITaskPackageDao;
 import com.sdmx.taskmanage.dao.ITaskPriceDao;
+import com.sdmx.taskmanage.dao.ITaskPriceDetailDao;
 import com.sdmx.taskmanage.dao.ITaskReductionDao;
 import com.sdmx.taskmanage.entity.Attachment;
 import com.sdmx.taskmanage.entity.OperateLog;
+import com.sdmx.taskmanage.entity.PriceDetail;
 import com.sdmx.taskmanage.entity.PriceItem;
 import com.sdmx.taskmanage.entity.TaskDicing;
 import com.sdmx.taskmanage.entity.TaskMixPackage;
@@ -55,6 +58,7 @@ import com.sdmx.taskmanage.entity.TaskMultiChipPackage;
 import com.sdmx.taskmanage.entity.TaskOrder;
 import com.sdmx.taskmanage.entity.TaskPackage;
 import com.sdmx.taskmanage.entity.TaskPrice;
+import com.sdmx.taskmanage.entity.TaskPriceDetail;
 import com.sdmx.taskmanage.entity.TaskReduction;
 import com.sdmx.taskmanage.entity.TaskSchedule;
 import com.sdmx.taskmanage.service.IAttachmentService;
@@ -66,6 +70,7 @@ import com.sdmx.taskmanage.vo.OperatorQueryType;
 import com.sdmx.taskmanage.vo.PriceCheckVO;
 import com.sdmx.taskmanage.vo.TaskOrderStatus;
 import com.sdmx.taskmanage.vo.TaskOrderVO;
+import com.sdmx.taskmanage.vo.TaskPriceDetailVO;
 import com.sdmx.taskmanage.vo.TaskPriceVO;
 import com.sdmx.taskmanage.vo.TaskScheduleVO;
 
@@ -103,6 +108,11 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 	private IOperateLogDao operatelogDao;
 	@Autowired
 	private ILshDao lshDao;
+	@Autowired
+	private IPriceDetailDao priceDetailDao;
+	@Autowired
+	private ITaskPriceDetailDao taskPriceDetailDao;
+	
 	@Override
 	public DataGrid listTaskOrder(TaskOrderVO taskOrdervo) {
 		DataGrid dg = new DataGrid();
@@ -258,6 +268,11 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		//成本归集课题号
 		//Dictionary costTopicNo = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getCostTopicNoId()));
 		//taskOrder.setCostTopicNo(costTopicNo);
+		
+		//归属部门
+		Dictionary belongDept = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getBelongDeptId()));
+		taskOrder.setBelongDept(belongDept);
+				
 		//协助部门
 		Dictionary helpDept = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getHelpDeptId()));
 		taskOrder.setHelpDept(helpDept);
@@ -267,7 +282,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			Dictionary orderType = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getOrderTypeId()));
 			taskOrder.setOrderType(orderType);
 		}
-		taskOrder.setProductStatus(taskOrdervo.getProductStatus());		
+		taskOrder.setProductStatus(taskOrdervo.getProductStatus());	
 		//业务申请内容
 		List<Dictionary> applyContent = new  ArrayList<Dictionary>();
 		if (UtilValidate.isNotEmpty(taskOrdervo.getApplyContentIds())) {
@@ -622,6 +637,10 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		taskOrderVO.setOrderId(String.valueOf(taskOrder.getOrderId()));
 		taskOrderVO.setHelpDeptId(String.valueOf(taskOrder.getHelpDept().getDictionaryId()));
 		taskOrderVO.setHelpDeptName(taskOrder.getHelpDept().getValue());
+		if(UtilValidate.isNotEmpty(taskOrder.getBelongDept())) {
+			taskOrderVO.setBelongDeptId(String.valueOf(taskOrder.getBelongDept().getDictionaryId()));
+			taskOrderVO.setBelongDeptName(taskOrder.getBelongDept().getValue());
+		}
 		//状态名称
 		for (TaskOrderStatus type : TaskOrderStatus.values()) {
 			if(taskOrder.getStatus()== type.getValue()){
@@ -738,7 +757,6 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			taskOrder.setProject(project);
 			taskOrder.setTopic(project);
 		}
-		
 		//电路名称 项目名称 课题号
 		if(UtilValidate.isNotEmpty(taskOrdervo.getElectricId())) {
 			Dictionary electric = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getElectricId()));
@@ -750,9 +768,17 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		//taskOrder.setCostTopicNo(costTopicNo);
 		//所内型号
 		taskOrder.setInternalModel(taskOrdervo.getInternalModel());
+		
+		//归属部门
+		if(UtilValidate.isNotEmpty(taskOrdervo.getBelongDeptId())) {
+			Dictionary belongDept = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getBelongDeptId()));
+			taskOrder.setBelongDept(belongDept);
+		}
+		
 		//协助部门
 		Dictionary helpDept = dictionaryDao.get(Dictionary.class, Long.parseLong(taskOrdervo.getHelpDeptId()));
 		taskOrder.setHelpDept(helpDept);
+		
 		taskOrder.setApplyDept(taskOrdervo.getApplyDept());
 		taskOrder.setApplyMember(taskOrdervo.getApplyMember());
 		taskOrder.setApplyMemberPhone(taskOrdervo.getApplyMemberPhone());
@@ -917,8 +943,9 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			}
 			case TestCenterManage:{
 				//2020.01.27取消封测核价操作
-				//taskOrder.setStatus(TaskOrderStatus.WAITTOCHARGE_TESTCENTERMANAGE.getValue());
-				taskOrder.setStatus(TaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue());
+				taskOrder.setStatus(TaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue());
+				//taskOrder.setStatus(TaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue());
+				
 				break;
 			}
 			default:{
@@ -937,6 +964,9 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			}
 		}
 		taskOrderDao.saveOrUpdate(taskOrder);
+		if(taskOrder.getStatus() == TaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue()) {
+			calcOrderPrice(taskOrder);
+		}
 		//操作日志
 		OperateLog opLog = new OperateLog();
 		opLog.setLshId(taskOrder.getLsh());
@@ -946,6 +976,96 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		operatelogDao.save(opLog);
 		return taskOrder;
 	}
+	
+	private void calcOrderPrice(TaskOrder taskOrder) {
+		//1,根据order的电路型号招到对应的核价表;
+		String dlmc = taskOrder.getProject().getExpvalue();
+		String hql = "from PriceDetail t where t.cpxh = :cpxh";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("cpxh",dlmc);
+		PriceDetail priceDetail= priceDetailDao.get(hql, params);
+		//2,根据order的任务类型确认单价
+		if(UtilValidate.isNotEmpty(priceDetail)) {
+			TaskPriceDetail tpd = new TaskPriceDetail();
+			if(("供货生产").equals(taskOrder.getOrderType().getValue()) || ("鉴定生产").equals(taskOrder.getOrderType().getValue())) {
+				tpd.setOrderType(taskOrder.getOrderType());
+				tpd.setPriceDetail(priceDetail);
+				//数量
+				int num = 0;
+				//封装
+				if(UtilValidate.isNotEmpty(taskOrder.getTaskPackage())) {
+					num = taskOrder.getTaskPackage().getPackageNum();
+				}
+				//混合封装
+				if(UtilValidate.isNotEmpty(taskOrder.getTaskMixPackage())) {
+					num = taskOrder.getTaskMixPackage().getMpackageNum();
+				}
+				//多芯片封装
+				if(UtilValidate.isNotEmpty(taskOrder.getTaskMultiChipPackage())) {
+					num = taskOrder.getTaskMultiChipPackage().getMcpackageNum();
+				}
+				tpd.setItemNum(num);
+				//鉴定生产=（封装单价+鉴定供货测试费+筛选单价）*数量+鉴定/一致性检测费
+				Double totalPrice = (priceDetail.getFzPrice()+priceDetail.getJdghpcsPrice()+priceDetail.getSxPrice())*num + priceDetail.getJdyzxjcPrice();
+				tpd.setTotalPrice(totalPrice);
+				taskOrder.setSumPrice(totalPrice);
+				tpd.setTaskOrder(taskOrder);
+				taskPriceDetailDao.save(tpd);
+			}
+			if(("初样生产").equals(taskOrder.getOrderType().getValue())) {
+				tpd.setOrderType(taskOrder.getOrderType());
+				tpd.setTaskOrder(taskOrder);
+				tpd.setPriceDetail(priceDetail);
+				//数量
+				int num = 0;
+				//封装
+				if(UtilValidate.isNotEmpty(taskOrder.getTaskPackage())) {
+					num = taskOrder.getTaskPackage().getPackageNum();
+				}
+				//混合封装
+				if(UtilValidate.isNotEmpty(taskOrder.getTaskMixPackage())) {
+					num = taskOrder.getTaskMixPackage().getMpackageNum();
+				}
+				//多芯片封装
+				if(UtilValidate.isNotEmpty(taskOrder.getTaskMultiChipPackage())) {
+					num = taskOrder.getTaskMultiChipPackage().getMcpackageNum();
+				}
+				tpd.setItemNum(num);
+				//初样生产=（封装单价+三温测试单价）*数量
+				double totalPrice = (priceDetail.getFzPrice()+priceDetail.getSwhgpcsPrice())*num ;
+				tpd.setTotalPrice(totalPrice);
+				taskOrder.setSumPrice(totalPrice);
+				tpd.setTaskOrder(taskOrder);
+				taskPriceDetailDao.save(tpd);
+			}
+			;
+		}
+	}
+	public List<TaskPriceDetailVO> getTaskPriceDetailById(String taskId){
+		TaskOrder taskOrder = taskOrderDao.get(TaskOrder.class, Long.parseLong(taskId));
+		Set<TaskPriceDetail> tpList = taskOrder.getTaskPriceDetailList();
+		List<TaskPriceDetailVO> taskPriceDetailList = new ArrayList<TaskPriceDetailVO>();
+		for (TaskPriceDetail tp : tpList) {
+			TaskPriceDetailVO tpvo = new TaskPriceDetailVO();
+			tpvo.setBcsxPrice(tp.getPriceDetail().getBcsxPrice());
+			tpvo.setCwcpPrice(tp.getPriceDetail().getCwcpPrice());
+			tpvo.setDlmc(tp.getPriceDetail().getCpxh());
+			tpvo.setFzPrice(tp.getPriceDetail().getFzPrice());
+			tpvo.setItemNum(tp.getItemNum());
+			tpvo.setJdghpcsPrice(tp.getPriceDetail().getJdghpcsPrice());
+			tpvo.setJdyzxjcPrice(tp.getPriceDetail().getJdyzxjcPrice());
+			tpvo.setOrderType(tp.getOrderType().getValue());
+			tpvo.setQtscfPrice(tp.getPriceDetail().getQtscfPrice());
+			tpvo.setSwhgpcsPrice(tp.getPriceDetail().getSwhgpcsPrice());
+			tpvo.setSxPrice(tp.getPriceDetail().getSxPrice());
+			tpvo.setTotalPrice(tp.getTotalPrice());
+			tpvo.setYsPrice(tp.getPriceDetail().getYsPrice());
+			taskPriceDetailList.add(tpvo);
+		}
+		return taskPriceDetailList;
+		
+	}
+	
 	
 	/**
 	 * 审核不通过
@@ -1037,6 +1157,8 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		columnTitle.add("任务类型");
 		columnTitle.add("紧急程度");
 		columnTitle.add("产品状态");
+		columnTitle.add("归属部门");
+		columnTitle.add("价格合计");
 
 		return columnTitle;
 	}
@@ -1111,7 +1233,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 				columns.add("一般");
 			}
 			//在研
-			if(task.getProductStatus()!=null)
+			if(UtilValidate.isNotEmpty(task.getProductStatus()))
 			{
 				if(task.getProductStatus() == 0) {
 					columns.add("在研");	
@@ -1119,8 +1241,14 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 					columns.add("老品");
 				}
 			}else {
+				columns.add("在研");
+			}
+			if(UtilValidate.isNotEmpty(task.getBelongDept())) {
+				columns.add(task.getBelongDept().getValue());
+			}else {
 				columns.add("");
 			}
+			columns.add(String.valueOf(task.getSumPrice()));
 			rows.add(columns);
 		}
 		

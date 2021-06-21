@@ -39,8 +39,9 @@
 					<td width=174 colspan=2>
 						${taskOrder.lsh}
 					</td>
-					<th width=101 colspan=2></th>
+					<th width=101 colspan=2>所内型号</th>
 					<td width=264 colspan=3>
+						${taskOrder.internalModel}
 					</td>
 				</tr>
 				<tr>
@@ -54,8 +55,10 @@
 					</td>
 				</tr>
 				<tr>
-					<th width=88>所内型号</th>
-					<td width=194 colspan=2>${taskOrder.internalModel}</td>
+					<th width=88>归属部门</th>
+					<td width=194 colspan=2>
+						${taskOrder.belongDeptName}
+					</td>
 					<th width=101 colspan=2>请求协作部门</th>
 					<td width=264 colspan=3>
 						${taskOrder.helpDeptName}

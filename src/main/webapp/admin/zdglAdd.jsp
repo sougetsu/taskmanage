@@ -10,7 +10,7 @@
 				<th>编号</th>
 				<td><input name="id" readonly="readonly" />
 				</td>
-				<th>字典描述</th>
+				<th>字典描述（项目名称）</th>
 				<td><input name="text" class="easyui-validatebox" data-options="required:true" />
 				</td>
 			</tr>
@@ -19,7 +19,7 @@
 				<td><input name="categoryNO" />
 				</td>
 				<th>业务编号</th>
-				<td><input name="codeNO" style="width:155px;" />
+				<td><input name="codeNO" class="easyui-numberspinner" data-options="min:0,max:999,editable:false,required:true,missingMessage:'请选择业务编号'" value="10" style="width:155px;" />
 				</td>
 			</tr>
 			<tr>
@@ -42,7 +42,14 @@
 					lines="true" cascadeCheck="false"/>	
 				</td>
 			</tr>
-			
+			<tr>
+				<th>扩展字段（电路名称）</th>
+				<td><input name="expvalue" />
+				</td>
+				<th></th>
+				<td>
+				</td>
+			</tr>
 		</table>
 	</form>
 </div>

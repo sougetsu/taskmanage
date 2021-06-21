@@ -800,7 +800,6 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 	private List<String> columnTitle(){
 		List<String> columnTitle = new ArrayList<String>();
 		columnTitle.add("任务单号");
-		columnTitle.add("电路名称");
 		columnTitle.add("项目名称");
 		columnTitle.add("所内型号");
 		columnTitle.add("申请部门 ");
@@ -832,7 +831,6 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 			TaskOrder task = (TaskOrder) iterator.next();
 			columns = new ArrayList<String>();
 			columns.add(task.getLsh());
-			columns.add(task.getProject().getExpvalue());
 			columns.add(task.getProject().getAnnotation());
 			columns.add(task.getInternalModel());
 			columns.add(task.getApplyDept());

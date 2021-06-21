@@ -51,15 +51,6 @@
 					<td width=174 colspan=2>
 						${taskOrder.lsh}
 					</td>
-					<th width=101 colspan=2></th>
-					<td width=264 colspan=3>
-					</td>
-				</tr>
-				<tr>
-					<th style="width: 150px">电路名称</th>
-					<td width=174 colspan=2>
-						${taskOrder.electricName}
-					</td>
 					<th width=121 colspan=2>项目名称</th>
 					<td width=264 colspan=3>
 						${taskOrder.projectName}

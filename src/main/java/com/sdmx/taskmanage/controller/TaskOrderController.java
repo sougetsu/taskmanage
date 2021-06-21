@@ -29,8 +29,6 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,8 +38,6 @@ import com.sdmx.framework.util.ExceptionUtil;
 import com.sdmx.framework.util.ResourceUtil;
 import com.sdmx.framework.vo.DataGrid;
 import com.sdmx.framework.vo.JsonResult;
-import com.sdmx.framework.vo.RoleType;
-import com.sdmx.framework.vo.SessionInfo;
 import com.sdmx.taskmanage.entity.Attachment;
 import com.sdmx.taskmanage.service.IAttachmentService;
 import com.sdmx.taskmanage.service.IPriceItemService;
@@ -53,7 +49,7 @@ import com.sdmx.taskmanage.vo.PriceCheckVO;
 import com.sdmx.taskmanage.vo.PriceItemVO;
 import com.sdmx.taskmanage.vo.TaskOrderStatus;
 import com.sdmx.taskmanage.vo.TaskOrderVO;
-import com.sdmx.taskmanage.vo.TaskPriceVO;
+import com.sdmx.taskmanage.vo.TaskPriceDetailVO;
 import com.sdmx.taskmanage.vo.TaskScheduleVO;
 
 @Controller
@@ -266,14 +262,20 @@ public class TaskOrderController {
 	@RequestMapping("/fixPage")
 	public ModelAndView fixPage(String id, HttpServletRequest request) {
 		TaskOrderVO tInfo = taskOrderService.getTaskOrderById(id);
-//		if(tInfo.getStatus() == TaskOrderStatus.COMPLETED.getValue() ||
-//			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
-//			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
-//			List<TaskPriceVO> taskPriceList = taskOrderService.getTaskPriceListById(id);
-//			TaskScheduleVO taskSchedule = taskOrderService.getTaskScheduleById(id);
-//			request.setAttribute("taskPrice", taskPriceList);
-//			request.setAttribute("taskSchedule", taskSchedule);
-//		}
+		if(tInfo.getStatus() == TaskOrderStatus.COMPLETED.getValue() ||
+			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_TESTCENTERMANAGE.getValue() ||
+			tInfo.getStatus() == TaskOrderStatus.WAITTOFIX_DEPARTMANAGE.getValue()){
+			
+			//List<TaskPriceVO> taskPriceList = taskOrderService.getTaskPriceListById(id);
+			//TaskScheduleVO taskSchedule = taskOrderService.getTaskScheduleById(id);
+			//request.setAttribute("taskPrice", taskPriceList);
+			//request.setAttribute("taskSchedule", taskSchedule);
+			
+			//加载详细核价信息
+			List<TaskPriceDetailVO> taskPriceList = taskOrderService.getTaskPriceDetailById(id);
+			request.setAttribute("taskPrice", taskPriceList);
+			
+		}
 		request.setAttribute("taskOrder", tInfo);
 		return new ModelAndView("/taskmanage/taskFix");
 	}

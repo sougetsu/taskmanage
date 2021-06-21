@@ -43,6 +43,14 @@
 					lines="true" cascadeCheck="false"/>	
 				</td>
 			</tr>
+			<tr>
+				<th>扩展字段（电路名称）</th>
+				<td><input name="expvalue" />
+				</td>
+				<th></th>
+				<td>
+				</td>
+			</tr>
 		</table>
 	</form>
 </div>

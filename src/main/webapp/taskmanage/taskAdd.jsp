@@ -256,11 +256,11 @@
 					</td>
 				</tr>
 				<tr>
-					<th width="150px">所内型号</th>
-					<td width=174 colspan=2><input name="internalModel"
-						class="easyui-validatebox"
-						data-options="required:true,validType:'length[1,100]'"
-						style="width:330px" /></td>
+					<th width="150px">归属部门</th>
+					<td width=174 colspan=2>
+						<input name="belongDeptId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"
+						lines="true" cascadeCheck="false"/>
+					</td>
 					<th width=121 colspan=2>请求协作部门</th>
 					<td width=264 colspan=3>
 						<input name="helpDeptId" class="easyui-combotree" style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/organizationList',parentField : 'pid',required:'true'"
@@ -966,16 +966,17 @@
 							<label><input type="radio" style="width:30px" name="productStatus" value="1" />老品</label>
 						</td>
 					</tr>
+					
 				</c:if>
 				<tr>
-					<th width="150px" >委托数量</th>
-					<td width=174 colspan=2>
-						<input name="entrustNum" class="easyui-validatebox" data-options="validType:'length[1,30]'"  style="width:330px"/>	
-					</td>
-					<th width=121 colspan=2></th>
-					<td width=264 colspan=3>
-					</td>
-				</tr>
+						<th width="150px" >委托数量</th>
+						<td width=174 colspan=2>
+							<input name="entrustNum" class="easyui-validatebox" data-options="validType:'length[1,30]'"  style="width:330px"/>	
+						</td>
+						<th width=121 colspan=2></th>
+						<td width=264 colspan=3>
+						</td>
+					</tr>
 				<tr>
 					<th width="150px" >鉴定方式</th>
 					<td style="text-align:left" colspan=7>
