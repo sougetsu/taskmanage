@@ -226,7 +226,7 @@
 					<td>
 						<input name="electricName" />
 					</td>
-					<td>所内型号</td>
+					<td>原所内型号</td>
 					<td>
 						<input name="internalModel" />
 					</td>

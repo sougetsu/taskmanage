@@ -24,6 +24,7 @@
 			    {field : 'lsh',title : '任务单号',width : 130}, 
 			    {field : 'projectName',title : '项目名称',width : 100,sortable : true},
 			    {field : 'electricName',title : '电路名称',width : 120},
+			    {field : 'internalModel',title : '原所内型号',width : 120},
 			    {field : 'applyDept',title : '申请部门',width : 100,sortable : true}, 
 			    {field : 'applyMember',title : '申请人',width : 80,sortable : true},
 			    {field : 'topicNo',title : '课题号',width : 100,sortable : true}, 
@@ -176,6 +177,10 @@
 					<td><input name="applyMember" /></td>
 					<td>电路名称</td>
 					<td><input name="electricName" /></td>
+					<td>原所内型号</td>
+					<td>
+						<input name="internalModel" />
+					</td>
 				</tr>
 				<tr>
 					<td style="width: 60px;">科&nbsp;&nbsp;题&nbsp;&nbsp;号</td>
@@ -184,6 +189,9 @@
 					<td><input id="taskSus_registTimeStart" name="registTimeStart" onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" /></td>
 					<td style="width: 60px; text-align: right;">创建时间止</td>
 					<td><input id="taskSus_registTimeEnd" name="registTimeEnd" onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" /></td>
+					<td>任务类型</td>
+					<td><input name="orderTypeId" class="easyui-combotree" data-options="url:'${pageContext.request.contextPath}/dictionary/orderTypeList',parentField : 'pid',required:'true'"
+						lines="true" cascadeCheck="false"/></td>
 				</tr>
 				<tr>
 					<td colspan="6" style="text-align: center;">
