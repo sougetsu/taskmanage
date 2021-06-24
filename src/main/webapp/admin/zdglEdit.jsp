@@ -5,7 +5,7 @@
 	});
 </script>
 <div align="center">
-	<form id="admin_zdglEdit_editForm" method="post">
+	<form id="admin_zdglEdit_editForm" action="${pageContext.request.contextPath}/dictionary/modify"  method="post">
 		<table class="tableForm">
 			<tr>
 				<th>编号</th>

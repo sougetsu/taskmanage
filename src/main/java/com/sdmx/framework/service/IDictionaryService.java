@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.sdmx.framework.entity.Dictionary;
+import com.sdmx.framework.vo.DataGrid;
 import com.sdmx.framework.vo.DictionaryInfo;
 import com.sdmx.framework.vo.RoleType;
 
 public interface IDictionaryService extends IService {
+	
+	public DataGrid getDictionary(DictionaryInfo dictionaryInfo);
 	
 	public DictionaryInfo create(DictionaryInfo dic);
 

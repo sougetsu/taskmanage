@@ -2,7 +2,9 @@ package com.sdmx.framework.service.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,10 +16,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.sdmx.framework.dao.IBaseDao;
+import com.sdmx.framework.dao.IDictionaryDao;
 import com.sdmx.framework.entity.Dictionary;
 import com.sdmx.framework.service.IDictionaryService;
 import com.sdmx.framework.util.ResourceUtil;
 import com.sdmx.framework.util.UtilValidate;
+import com.sdmx.framework.vo.DataGrid;
 import com.sdmx.framework.vo.DictionaryInfo;
 import com.sdmx.framework.vo.RoleType;
 import com.sdmx.framework.vo.SessionInfo;
@@ -36,6 +40,8 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	public void setBaseDao(IBaseDao<Dictionary> baseDao) {
 		this.baseDao = baseDao;
 	}
+	@Autowired
+	private IDictionaryDao dictionaryDao;
 
 	@Override
 	@Transactional
@@ -52,6 +58,76 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		baseDao.save(dic);
 		dicInfo.setId(String.valueOf(dic.getDictionaryId()));
 		return dicInfo;
+	}
+	
+	@Override
+	public DataGrid getDictionary(DictionaryInfo dictionaryInfo) {
+		DataGrid dg = new DataGrid();
+		Map<String, Object> params = new HashMap<String, Object>();
+		List<DictionaryInfo> nl = new ArrayList<DictionaryInfo>();
+
+		String hql = "from Dictionary t  where t.state = '1'";
+		hql = addWhere(dictionaryInfo, hql, params);
+		hql = addOrder(dictionaryInfo, hql);
+		String totalHql = "select count(*) " + hql;
+		List<Dictionary> l = dictionaryDao.find(hql, params, dictionaryInfo.getPage(),
+				dictionaryInfo.getRows());
+		dg.setTotal(dictionaryDao.count(totalHql, params));
+		changeModel(l, nl);
+		dg.setRows(nl);
+		return dg;
+	}
+	private String addWhere(DictionaryInfo dictionaryInfo, String hql,
+			Map<String, Object> params) {
+		// 名称
+		if (dictionaryInfo.getText() != null && !dictionaryInfo.getText().trim().equals("")) {
+			hql += " and t.annotation like :textval ";
+			params.put("textval", "%%" + dictionaryInfo.getText().trim() + "%%");
+		}
+		// 课题号
+		if (dictionaryInfo.getValue() != null && !dictionaryInfo.getValue().trim().equals("")) {
+			hql += " and t.value like :valuestr ";
+			params.put("valuestr", "%%" + dictionaryInfo.getValue().trim() + "%%");
+		}
+		// 电路名称
+		if (dictionaryInfo.getExpvalue() != null && !dictionaryInfo.getExpvalue().trim().equals("")) {
+			hql += " and t.expvalue like :expvalue ";
+			params.put("expvalue", "%%" + dictionaryInfo.getExpvalue().trim() + "%%");
+		}
+		// 字典类型
+		if (dictionaryInfo.getCategoryNO() != null && !dictionaryInfo.getCategoryNO().trim().equals("")) {
+			hql += " and t.categoryNO = :categoryNO ";
+			params.put("categoryNO", dictionaryInfo.getCategoryNO());
+		}
+		return hql;
+	}
+	private String addOrder(DictionaryInfo dictionaryInfo, String hql) {
+		hql += " order by t.categoryNO";
+		return hql;
+	}
+	private void changeModel(List<Dictionary> l, List<DictionaryInfo> nl) {
+		if (l != null && l.size() > 0) {
+			for (Dictionary dictionary : l) {
+				nl.add(getDtoByEntity(dictionary));
+			}
+		}
+	}
+	
+	private DictionaryInfo getDtoByEntity(Dictionary t){
+		if(t == null){
+			return null;
+		}
+		DictionaryInfo r = new DictionaryInfo();
+		BeanUtils.copyProperties(t, r);
+		if (t.getDictionary() != null) {
+			r.setPid(String.valueOf(t.getDictionary().getDictionaryId()));
+		}
+		if (t.getDepartDicId() != null) {
+			r.setDepartmentId(String.valueOf(t.getDepartDicId().getDictionaryId()));
+		}
+		r.setText(t.getAnnotation());
+		r.setId(String.valueOf(t.getDictionaryId()));
+		return r;
 	}
 	
 	@Override

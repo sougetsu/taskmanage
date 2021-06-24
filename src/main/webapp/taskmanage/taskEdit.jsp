@@ -230,7 +230,7 @@
     	onSelect:function(node){
     		$("#edit_projectName").val(node.annotation);
     		$("#edit_topicNo").val(node.value);
-    		$("input[name='internalModel']").val(node.text);
+    		$("#edit_internalModel").val(node.text);
     	}    
     });
 	$('input:radio[name="controlledPlanFlag"]').change(function(){
@@ -265,9 +265,9 @@
 					</td>
 					<th width=101 colspan=2>所内型号</th>
 					<td width=264 colspan=3>
-						<input name="internalModel"
+						<input id="edit_internalModel" name="internalModel"
 						class="easyui-validatebox"
-						data-options="required:true,validType:'length[1,100]'"
+						data-options="validType:'length[1,100]'"
 						style="width:330px" value="${taskOrder.internalModel}" />
 					</td>
 				</tr>

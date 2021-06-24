@@ -6,30 +6,32 @@
 		$.canAdd = true;
 	</script>
 </c:if>
+<c:if test="${fn:contains(sessionInfo.functionUrls, '/dictionary/remove')}">
+	<script type="text/javascript">
+		$.canDelete = true;
+	</script>
+</c:if>
 <c:if test="${fn:contains(sessionInfo.functionUrls, '/dictionary/modify')}">
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
 </c:if>
 <script type="text/javascript">
-var allData = new Array();
-var bFound = true; 
 	$(function() {
-		$('#admin_zdgl_treegrid').treegrid({
-			url : '${pageContext.request.contextPath}/dictionary/list',
-			idField : 'id',
-			treeField : 'text',
-			parentField : 'pid',
+		$('#admin_zdgl_datagrid').datagrid({
+			url : '${pageContext.request.contextPath}/dictionary/datalist',
 			fit : true,
-			fitColumns : false,
+			fitColumns : true,
 			border : false,
-			loadFilter:function(data){ 
-				if (bFound) {
-					allData = data;
-					bFound = false;
-				}
-				return data;
-			},
+			pagination : true,
+			idField : 'id',
+			pageSize : 10,
+			pageList : [ 10, 20, 30, 40, 50 ],
+			sortName : 'CATEGORYNO',
+			sortOrder : 'asc',
+			checkOnSelect : false,
+			selectOnCheck : false,
+			singleSelect:true,
 			frozenColumns : [ [ {
 				title : '编号',
 				field : 'id',
@@ -65,20 +67,9 @@ var bFound = true;
 				title : '上级编号',
 				width : 150,
 				hidden : true
-			}, {
-				field : 'action',
-				title : '动作',
-				width : 50,
-				formatter : function(value, row, index) {
-					var str = '';
-					if ($.canEdit) {
-						str += formatString('<img onclick="admin_zdgl_editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
-						str += '&nbsp;';
-						str += formatString('<img onclick="admin_zdgl_removeFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
-					}
-					return str;
-				}
-			} ] ],
+			},
+			    {field : 'action',title : '动作',width : 100,formatter : formatZdglOperation}
+			    ] ],
 			toolbar : [ {
 				text : '增加',
 				iconCls : 'icon-add',
@@ -86,59 +77,69 @@ var bFound = true;
 					if ($.canAdd) {
 						admin_zdgl_appendFun();
 					}else{
-						$.messager.alert('提示', "您没有添加字典的权限！");
+						$.messager.alert('提示', "您没有添加用户权限！");
 					}
 				}
-			}, '-', {
-				text : '展开',
-				iconCls : 'icon-redo',
-				handler : function() {
-					var node = $('#admin_zdgl_treegrid').treegrid('getSelected');
-					if (node) {
-						$('#admin_zdgl_treegrid').treegrid('expandAll', node.cid);
-					} else {
-						$('#admin_zdgl_treegrid').treegrid('expandAll');
-					}
-				}
-			}, '-', {
-				text : '折叠',
-				iconCls : 'icon-undo',
-				handler : function() {
-					var node = $('#admin_zdgl_treegrid').treegrid('getSelected');
-					if (node) {
-						$('#admin_zdgl_treegrid').treegrid('collapseAll', node.cid);
-					} else {
-						$('#admin_zdgl_treegrid').treegrid('collapseAll');
-					}
-				}
-			}, '-', {
-				text : '刷新',
-				iconCls : 'icon-reload',
-				handler : function() {
-					$('#admin_zdgl_treegrid').treegrid('reload');
-				}
-			},'-',{
-				text: '<input id="filter" type="text" />',
-			},{
-				iconCls:'icon-search',
-				handler:function () {
-				   doFilter();
-				}
-			} ],
+			}],
 			onLoadSuccess : function() {
+				$('#admin_zdgl_searchForm table').show();
 				parent.$.messager.progress('close');
+
+				$(this).datagrid('tooltip');
 			},
-			onContextMenu : function(e, row) {
+			onRowContextMenu : function(e, rowIndex, rowData) {
 				e.preventDefault();
-				$(this).treegrid('unselectAll');
-				$(this).treegrid('select', row.id);
-				$('#admin_zdgl_menu').menu('show', {
+				$(this).datagrid('unselectAll').datagrid('uncheckAll');
+				$(this).datagrid('selectRow', rowIndex);
+				$('#menu').menu('show', {
 					left : e.pageX,
 					top : e.pageY
 				});
 			}
 		});
 	});
+	function formatZdglOperation(value, row, index){
+		var str = '';
+			str += $.formatString('<img onclick="admin_zdgl_editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+		str += '&nbsp;';
+			str += $.formatString('<img onclick="admin_zdgl_removeFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
+		return str;
+	}
+	function admin_zdgl_searchFun() {
+		$('#admin_zdgl_datagrid').datagrid('load', serializeObject($('#admin_zdgl_searchForm')));
+	}
+	function admin_zdgl_cleanFun() {
+		$('#admin_zdgl_searchForm input').val('');
+		$('#admin_zdgl_datagrid').datagrid('load', {});
+	}
+	function admin_zdgl_editFun(id) {
+		$('#admin_zdgl_datagrid').datagrid('uncheckAll').datagrid('unselectAll').datagrid('clearSelections');
+		$("#zdgl_dialog").editDialog({
+			id :id,
+			width : 620,
+			height : 300,
+            url : '${pageContext.request.contextPath}/admin/zdglEdit.jsp',
+            title :"编辑用户",
+            originContain : '#admin_zdgl_datagrid',
+            onLoad : function() {
+				var index = $('#admin_zdgl_datagrid').datagrid('getRowIndex', id);
+				var rows = $('#admin_zdgl_datagrid').datagrid('getRows');
+				var o = rows[index];
+				o.roleIds = stringToList(rows[index].roleIds);
+				$('#admin_zdglEdit_editForm').form('load', o);
+			}
+        });
+	}
+	function admin_zdgl_appendFun() {
+		$('#admin_zdgl_datagrid').datagrid('uncheckAll').datagrid('unselectAll').datagrid('clearSelections');
+		$("#zdgl_dialog").editDialog({
+			width : 620,
+			height : 300,
+            url : '${pageContext.request.contextPath}/admin/zdglAdd.jsp',
+            title :"增加字典",
+            originContain : '#admin_zdgl_datagrid'
+        });
+	}
 	function admin_zdgl_removeFun(id) {
 		$.messager.confirm('确认', '您是否要删除该字典？', function(r) {
 			if (r) {
@@ -147,7 +148,8 @@ var bFound = true;
 					dataType : 'json',
 					success : function(result) {
 						if (result.success) {
-							$('#admin_zdgl_treegrid').treegrid('reload');
+							$('#admin_zdgl_datagrid').datagrid('load');
+							$('#admin_zdgl_datagrid').datagrid('uncheckAll').datagrid('unselectAll').datagrid('clearSelections');
 						}
 						$.messager.show({
 							title : '提示',
@@ -158,131 +160,42 @@ var bFound = true;
 			}
 		});
 	}
-	function admin_zdgl_appendFun() {
-		$('<div/>').dialog({
-			href : '${pageContext.request.contextPath}/admin/zdglAdd.jsp',
-			width : 600,
-			height : 300,
-			modal : true,
-			title : '字典项添加',
-			buttons : [ {
-				text : '增加',
-				iconCls : 'icon-add',
-				handler : function() {
-					var d = $(this).closest('.window-body');
-					$('#admin_zdglAdd_addForm').form('submit', {
-						url : '${pageContext.request.contextPath}/dictionary/create',
-						success : function(result) {
-							try {
-								var r = $.parseJSON(result);
-								if (r.success) {
-									$('#admin_zdgl_treegrid').treegrid('append', {
-										parent : r.obj.pid,
-										data : [ r.obj ]
-									});
-
-									d.dialog('destroy');
-
-									$('#layout_west_tree').tree('reload');
-								}
-								$.messager.show({
-									title : '提示',
-									msg : r.msg
-								});
-							} catch (e) {
-								$.messager.alert('提示', result);
-							}
-						}
-					});
-				}
-			} ],
-			onClose : function() {
-				$(this).dialog('destroy');
-			}
-		});
-	}
-	function admin_zdgl_editFun(id) {
-		if (id != undefined) {
-			$('#admin_zdgl_treegrid').treegrid('select', id);
-		}
-		var node = $('#admin_zdgl_treegrid').treegrid('getSelected');
-		$('<div/>').dialog({
-			href : '${pageContext.request.contextPath}/admin/zdglEdit.jsp',
-			width : 600,
-			height : 300,
-			modal : true,
-			title : '字典项编辑',
-			buttons : [ {
-				text : '编辑',
-				iconCls : 'icon-edit',
-				handler : function() {
-					var d = $(this).closest('.window-body');
-					$('#admin_zdglEdit_editForm').form('submit', {
-						url : '${pageContext.request.contextPath}/dictionary/modify',
-						success : function(result) {
-							try {
-								var r = $.parseJSON(result);
-								if (r.success) {
-									$('#admin_zdgl_treegrid').treegrid('reload');
-									d.dialog('destroy');
-
-									$('#layout_west_tree').tree('reload');
-								}
-								$.messager.show({
-									title : '提示',
-									msg : r.msg
-								});
-							} catch (e) {
-								$.messager.alert('提示', result);
-							}
-						}
-					});
-				}
-			} ],
-			onClose : function() {
-				$(this).dialog('destroy');
-			},
-			onLoad : function() {
-				$('#admin_zdglEdit_editForm').form('load', node);
-			}
-		});
-	}
-	function doFilter() {
-        var filter = $("#filter").val();
-        if (filter == "") {
-        	alert(allData.length);
-            $('#admin_zdgl_treegrid').treegrid('loadData', allData);
-        } else {
-            var newData = new Array();
-            for (var i = 0; i < allData.length; i++) {
-                var item = allData[i];
-                if (item.text.indexOf(filter) != -1) {
-                    // 定义一个数组  
-                    newData.push(item);
-                } else if (item.children != null && item.children.length > 0) {
-                    doChildFilter(item, newData, filter);
-                }
-            }
-            $('#admin_zdgl_treegrid').treegrid('loadData', newData);
-        }
-    }
-    function doChildFilter(parentItem, newData, filter) {
-        var list = parentItem.children;
-        for (var i = 0; i < list.length; i++) {
-            var item = list[i];
-            if (item.Name.indexOf(filter) != -1) {
-                // 定义一个数组  
-                newData.push(item);
-                return;
-            } else if (item.children != null && item.children.length > 0) {
-                doChildFilter(item, newData, filter);
-            }
-        }
-    }
 </script>
-<table id="admin_zdgl_treegrid"></table>
-<div id="admin_zdgl_menu" class="easyui-menu" style="width:120px;display: none;">
-	<div onclick="admin_zdgl_appendFun();" data-options="iconCls:'icon-add'">增加</div>
-	<div onclick="admin_zdgl_deleteFun();" data-options="iconCls:'icon-remove'">删除</div>
-	<div onclick="admin_zdgl_editFun();" data-options="iconCls:'icon-edit'">编辑</div>
+<div class="easyui-layout" data-options="fit : true,border : false">
+	<div data-options="region:'north',title:'查询条件',border:false" style="height: 95px;top-padding:20px;overflow: hidden;" align="center">
+		<form id="admin_zdgl_searchForm">
+			<table class="tableForm">
+				<tr>
+					<th style="width: 50px;">字典类型</th>
+					<td>
+						<select name=categoryNO style="width: 150px;height:26px">
+							<option value="">请选择</option>
+							<option value="0001">业务申请内容</option>
+							<option value="0002">鉴定方式</option>
+  							<option value="0003">封装状态</option>	
+  							<option value="0004">电路名称</option>	
+  							<option value="0005">部门名称</option>	
+  							<option value="0006">成本归集课题号</option>	
+  							<option value="0009">任务单分类</option>	
+  							<option value="0012">库存单位</option>	
+  							<option value="0016">二筛课题号</option>
+  							<option value="0026">验收课题号</option>
+						</select>
+					</td>
+					<th style="width: 50px;">字典名称</th>
+					<td><input name="text" style="width: 150px;" /></td>
+					<th style="width: 50px;">课题号</th>
+					<td><input name="value" style="width: 150px;" /></td>
+					<th style="width: 50px;">电路名称</th>
+					<td><input name="expvalue" style="width: 150px;" /></td>
+					
+				</tr>
+			</table>
+			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="admin_zdgl_searchFun();">查询</a> <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true" onclick="admin_zdgl_cleanFun();">清空条件</a>
+		</form>
+	</div>
+	<div data-options="region:'center',border:false">
+		<table id="admin_zdgl_datagrid"></table>
+	</div>
 </div>
+<div id="zdgl_dialog"></div>

@@ -4,7 +4,7 @@
 	});
 </script>
 <div align="center">
-	<form id="admin_zdglAdd_addForm" method="post">
+	<form id="admin_zdglAdd_addForm" action="${pageContext.request.contextPath}/dictionary/create" method="post">
 		<table class="tableForm">
 			<tr>
 				<th>编号</th>

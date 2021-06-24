@@ -143,9 +143,14 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			hql += " and t.applyMember like :applyMember";
 			params.put("applyMember", "%%" +taskOrdervo.getApplyMember().trim() + "%%");
 		}
+		//电路名称
+		if (UtilValidate.isNotEmpty(taskOrdervo.getElectricName())) {
+			hql += " and t.project.expvalue like :expvalue";
+			params.put("expvalue", "%%" +taskOrdervo.getElectricName().trim() + "%%");
+		}
 		//所内型号
 		if (UtilValidate.isNotEmpty(taskOrdervo.getInternalModel())) {
-			hql += " and t.internalModel like :internalModel";
+			hql += " and t.internalModel like :internalModel)";
 			params.put("internalModel", "%%" +taskOrdervo.getInternalModel().trim() + "%%");
 		}
 		//任务类型
@@ -1158,6 +1163,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		columnTitle.add("紧急程度");
 		columnTitle.add("产品状态");
 		columnTitle.add("归属部门");
+		columnTitle.add("数量");
 		columnTitle.add("价格合计");
 
 		return columnTitle;
@@ -1179,7 +1185,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			columns.add(task.getLsh());
 			columns.add(task.getProject().getExpvalue());
 			columns.add(task.getProject().getAnnotation());
-			columns.add(task.getInternalModel());
+			columns.add(UtilValidate.isEmpty(task.getInternalModel())?"":task.getInternalModel());
 			columns.add(task.getApplyDept());
 			columns.add(task.getApplyMember());
 			columns.add(task.getTopic().getValue());
@@ -1248,6 +1254,24 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 			}else {
 				columns.add("");
 			}
+			//数量
+			int num = 0;
+			//封装
+			if(UtilValidate.isNotEmpty(task.getTaskPackage())) {
+				num = task.getTaskPackage().getPackageNum();
+			}
+			//混合封装
+			if(UtilValidate.isNotEmpty(task.getTaskMixPackage())) {
+				num = task.getTaskMixPackage().getMpackageNum();
+			}
+			//多芯片封装
+			if(UtilValidate.isNotEmpty(task.getTaskMultiChipPackage())) {
+				num = task.getTaskMultiChipPackage().getMcpackageNum();
+			}
+			if(num == 0 && UtilValidate.isNotEmpty(task.getEntrustNum())) {
+				num = task.getEntrustNum();
+			}
+			columns.add(String.valueOf(num));
 			columns.add(String.valueOf(task.getSumPrice()));
 			rows.add(columns);
 		}

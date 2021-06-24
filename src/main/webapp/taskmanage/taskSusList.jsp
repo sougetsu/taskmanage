@@ -23,7 +23,7 @@
 			    {field : 'orderId',title : '序号',hidden:true,width : 80}, 
 			    {field : 'lsh',title : '任务单号',width : 130}, 
 			    {field : 'projectName',title : '项目名称',width : 100,sortable : true},
-			    {field : 'internalModel',title : '所内型号',width : 120},
+			    {field : 'electricName',title : '电路名称',width : 120},
 			    {field : 'applyDept',title : '申请部门',width : 100,sortable : true}, 
 			    {field : 'applyMember',title : '申请人',width : 80,sortable : true},
 			    {field : 'topicNo',title : '课题号',width : 100,sortable : true}, 
@@ -174,8 +174,8 @@
 					<td><input name="projectName" /></td>
 					<td style="width: 60px;">申&nbsp;&nbsp;请&nbsp;&nbsp;人</td>
 					<td><input name="applyMember" /></td>
-					<td>所内型号</td>
-					<td><input name="internalModel" /></td>
+					<td>电路名称</td>
+					<td><input name="electricName" /></td>
 				</tr>
 				<tr>
 					<td style="width: 60px;">科&nbsp;&nbsp;题&nbsp;&nbsp;号</td>

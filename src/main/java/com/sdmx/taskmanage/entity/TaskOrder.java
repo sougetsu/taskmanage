@@ -395,7 +395,7 @@ public class TaskOrder implements Serializable {
     				" 是否中测/修调:"+this.getTaskPackage().getWaferFlag();
     				
     	}
-    	String info = ",工单号："+this.getLsh() + ",申请部门："+this.getApplyDept()+",申请员工号："+this.applyMember+",申请人号码："+this.applyMemberPhone+
+    	String info = ",工单号："+this.getLsh()  + ",产品状态："+this.getProductStatus()+ ",申请部门："+this.getApplyDept()+",申请员工号："+this.applyMember+",申请人号码："+this.applyMemberPhone+
     			",申请原因："+this.applyReason+",加急状态："+this.urgency+",交付物："+this.deliverable+",详规号："+this.getDetailPlanNo()+",具体要求："+this.getDetailRequire()+
     			",所内型号："+this.getInternalModel()+",生产调度意见："+this.getProductManagesuggest()+",项目负责人："+this.getProjectManager()+
     			",负责人电话："+this.getProjectManagerPhone()+",备注："+this.getRemarks()+",状态："+this.getStatus()+",监制单位："+this.getSuperviseUnit()+

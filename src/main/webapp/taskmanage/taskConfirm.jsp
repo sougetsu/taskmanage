@@ -263,7 +263,7 @@
     	onSelect:function(node){
     		$("#Confirm_projectName").val(node.annotation);
     		$("#Confirm_topicNo").val(node.value);
-    		$("input[name='internalModel']").val(node.text);
+    		$("#Confirm_internalModel").val(node.text);
     	}    
     });
 	$('input:radio[name="controlledPlanFlag"]').change(function(){
@@ -298,9 +298,9 @@
 					</td>
 					<th width=101 colspan=2>所内型号</th>
 					<td width=264 colspan=3>
-						<input name="internalModel"
+						<input id="Confirm_internalModel" name="internalModel"
 						class="easyui-validatebox"
-						data-options="required:true,validType:'length[1,100]'"
+						data-options="validType:'length[1,100]'"
 						style="width:330px" value="${taskOrder.internalModel}" />
 					</td>
 				</tr>
@@ -1645,6 +1645,21 @@
 							</td>
 						</tr>
 					</c:when>
+					<c:otherwise>
+						<tr>
+							<th width="150px" >任务类型</th>
+							<td style="text-align:left" colspan=2>
+								<input  name="orderTypeId" class="easyui-combotree" readonly = true style="width:330px;height:26px" data-options="url:'${pageContext.request.contextPath}/dictionary/orderTypeList',parentField : 'pid'"
+								lines="true" cascadeCheck="false" value="${taskOrder.orderTypeId}"/>	
+							</td>
+							<th width="150px" colspan=2>产品状态</th>
+							<td style="text-align:left" colspan=3>
+								<input type="hidden" name="productStatus" value = ${taskOrder.productStatus}>
+								<label><input type="radio" disabled style="width:30px" name="productStatus" value="0" ${taskOrder.productStatus == 0 ? 'checked' : ''} />在研</label>
+								<label><input type="radio" disabled style="width:30px" name="productStatus" value="1" ${taskOrder.productStatus == 1 ? 'checked' : ''} />老品</label>
+							</td>
+						</tr>
+					</c:otherwise>
 				</c:choose>
 				<tr>
 					<th width="150px" >委托数量</th>

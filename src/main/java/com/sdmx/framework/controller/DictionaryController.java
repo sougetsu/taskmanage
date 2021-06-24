@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sdmx.framework.service.IDictionaryService;
 import com.sdmx.framework.util.ResourceUtil;
+import com.sdmx.framework.vo.DataGrid;
 import com.sdmx.framework.vo.DictionaryInfo;
 import com.sdmx.framework.vo.JsonResult;
 import com.sdmx.framework.vo.RoleType;
@@ -28,6 +29,13 @@ public class DictionaryController {
     public List<DictionaryInfo> list() {
     	return dictionaryService.list();
     }
+	
+	@RequestMapping(value = "/datalist")
+    @ResponseBody
+    public DataGrid list(DictionaryInfo dic) {
+    	return dictionaryService.getDictionary(dic);
+    }
+	
 	
 	@RequestMapping(value = "/create")
     @ResponseBody
