@@ -150,7 +150,7 @@ public class TaskOrderServiceImpl implements ITaskOrderService{
 		}
 		//所内型号
 		if (UtilValidate.isNotEmpty(taskOrdervo.getInternalModel())) {
-			hql += " and t.internalModel like :internalModel)";
+			hql += " and t.internalModel like :internalModel";
 			params.put("internalModel", "%%" +taskOrdervo.getInternalModel().trim() + "%%");
 		}
 		//任务类型
