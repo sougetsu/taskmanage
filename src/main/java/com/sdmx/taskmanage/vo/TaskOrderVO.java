@@ -187,7 +187,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getProjectName() {
-		return projectName;
+		return replaceString(projectName);
 	}
 
 	public void setProjectName(String projectName) {
@@ -203,7 +203,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getElectricName() {
-		return electricName;
+		return replaceString(electricName);
 	}
 
 	public void setElectricName(String electricName) {
@@ -211,7 +211,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getInternalModel() {
-		return (internalModel==null?internalModel:internalModel.replace("	"," "));
+		return replaceString(internalModel);
 	}
 
 	public void setInternalModel(String internalModel) {
@@ -227,7 +227,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getApplyDept() {
-		return (applyDept==null?applyDept:applyDept.replace("	"," "));
+		return replaceString(applyDept);
 	}
 
 	public void setApplyDept(String applyDept) {
@@ -235,7 +235,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getApplyMember() {
-		return applyMember;
+		return replaceString(applyMember); 
 	}
 
 	public void setApplyMember(String applyMember) {
@@ -243,7 +243,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getApplyMemberPhone() {
-		return applyMemberPhone;
+		return replaceString(applyMemberPhone); 
 	}
 
 	public void setApplyMemberPhone(String applyMemberPhone) {
@@ -251,7 +251,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getTopicNo() {
-		return topicNo;
+		return replaceString(topicNo);
 	}
 
 	public void setTopicNo(String topicNo) {
@@ -259,7 +259,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getProjectManager() {
-		return projectManager;
+		return replaceString(projectManager); 
 	}
 
 	public void setProjectManager(String projectManager) {
@@ -267,7 +267,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getProjectManagerPhone() {
-		return projectManagerPhone;
+		return replaceString(projectManagerPhone);
 	}
 
 	public void setProjectManagerPhone(String projectManagerPhone) {
@@ -275,7 +275,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getDeliverable() {
-		return deliverable;
+		return replaceString(deliverable);
 	}
 
 	public void setDeliverable(String deliverable) {
@@ -324,7 +324,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getSuperviseUnit() {
-		return (superviseUnit==null?superviseUnit:superviseUnit.replace("	"," "));
+		return replaceString(superviseUnit);
 	}
 
 	public void setSuperviseUnit(String superviseUnit) {
@@ -348,7 +348,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getDetailPlanNo() {
-		return (detailPlanNo==null?detailPlanNo:detailPlanNo.replace("	"," "));
+		return replaceString(detailPlanNo);
 	}
 
 	public void setDetailPlanNo(String detailPlanNo) {
@@ -372,7 +372,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getApplyReason() {
-		return (applyReason==null?applyReason:applyReason.replace("	"," "));
+		return replaceString(applyReason);
 	}
 
 	public void setApplyReason(String applyReason) {
@@ -380,7 +380,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getRemarks() {
-		return  (remarks==null?remarks:remarks.replace("	"," "));
+		return  replaceString(remarks);
 	}
 
 	public void setRemarks(String remarks) {
@@ -388,7 +388,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getProductManagesuggest() {
-		return  (productManagesuggest==null?productManagesuggest:productManagesuggest.replace("	"," "));
+		return  replaceString(productManagesuggest);
 	}
 
 	public void setProductManagesuggest(String productManagesuggest) {
@@ -439,7 +439,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getCheckTypeName() {
-		return checkTypeName;
+		return replaceString(checkTypeName);
 	}
 
 	public void setCheckTypeName(String checkTypeName) {
@@ -447,7 +447,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getHelpDeptName() {
-		return helpDeptName;
+		return replaceString(helpDeptName);
 	}
 
 	public void setHelpDeptName(String helpDeptName) {
@@ -463,7 +463,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getBelongDeptName() {
-		return belongDeptName;
+		return replaceString(belongDeptName);
 	}
 
 	public void setBelongDeptName(String belongDeptName) {
@@ -479,7 +479,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getDetailRequire() {
-		return (detailRequire==null?detailRequire:detailRequire.replace("	"," "));
+		return replaceString(detailRequire);
 	}
 
 	public void setDetailRequire(String detailRequire) {
@@ -495,7 +495,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getPackageStatusNames() {
-		return packageStatusNames;
+		return replaceString(packageStatusNames);
 	}
 
 	public void setPackageStatusNames(String packageStatusNames) {
@@ -503,7 +503,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getQualityLevel() {
-		return (qualityLevel==null?qualityLevel:qualityLevel.replace("	"," "));
+		return replaceString(qualityLevel);
 	}
 
 	public void setQualityLevel(String qualityLevel) {
@@ -511,7 +511,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getDiscBatch() {
-		return (discBatch==null?discBatch:discBatch.replace("	"," "));
+		return replaceString(discBatch);
 	}
 
 	public void setDiscBatch(String discBatch) {
@@ -527,7 +527,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getChipLabel() {
-		return (chipLabel==null?chipLabel:chipLabel.replace("	"," "));
+		return replaceString(chipLabel);
 	}
 
 	public void setChipLabel(String chipLabel) {
@@ -535,7 +535,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getShellType() {
-		return (shellType==null?shellType:shellType.replace("	"," "));
+		return replaceString(shellType);
 	}
 
 	public void setShellType(String shellType) {
@@ -543,7 +543,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getBondNum() {
-		return (bondNum==null?bondNum:bondNum.replace("	"," "));
+		return replaceString(bondNum);
 	}
 
 	public void setBondNum(String bondNum) {
@@ -551,7 +551,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getPackageShape() {
-		return (packageShape==null?packageShape:packageShape.replace("	"," "));
+		return replaceString(packageShape);
 	}
 
 	public void setPackageShape(String packageShape) {
@@ -559,7 +559,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMarkDemand() {
-		return (markDemand==null?markDemand:markDemand.replace("	"," "));
+		return replaceString(markDemand);
 	}
 
 	public void setMarkDemand(String markDemand) {
@@ -567,7 +567,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getStatusName() {
-		return statusName;
+		return replaceString(statusName);
 	}
 
 	public void setStatusName(String statusName) {
@@ -607,7 +607,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getCostTopicNoName() {
-		return (costTopicNoName==null?costTopicNoName:costTopicNoName.replace("	"," "));
+		return replaceString(costTopicNoName);
 	}
 
 	public void setCostTopicNoName(String costTopicNoName) {
@@ -623,7 +623,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getReductionNo() {
-		return (reductionNo==null?reductionNo:reductionNo.replace("	"," "));
+		return replaceString(reductionNo);
 	}
 
 	public void setReductionNo(String reductionNo) {
@@ -631,7 +631,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getReductionTabletsNo() {
-		return (reductionTabletsNo==null?reductionTabletsNo:reductionTabletsNo.replace("	"," "));
+		return replaceString(reductionTabletsNo);
 	}
 
 	public void setReductionTabletsNo(String reductionTabletsNo) {
@@ -639,7 +639,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getReductionThickness() {
-		return (reductionThickness==null?reductionThickness:reductionThickness.replace("	"," "));
+		return replaceString(reductionThickness);
 	}
 
 	public void setReductionThickness(String reductionThickness) {
@@ -647,7 +647,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getDicingNo() {
-		return (dicingNo==null?dicingNo:dicingNo.replace("	"," "));
+		return replaceString(dicingNo);
 	}
 
 	public void setDicingNo(String dicingNo) {
@@ -655,7 +655,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getDicingTabletsNo() {
-		return (dicingTabletsNo==null?dicingTabletsNo:dicingTabletsNo.replace("	"," "));
+		return replaceString(dicingTabletsNo);
 	}
 
 	public void setDicingTabletsNo(String dicingTabletsNo) {
@@ -663,7 +663,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getDicingTubeNum() {
-		return (dicingTubeNum==null?dicingTubeNum:dicingTubeNum.replace("	"," "));
+		return replaceString(dicingTubeNum);
 	}
 
 	public void setDicingTubeNum(String dicingTubeNum) {
@@ -671,7 +671,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getDicingPlan() {
-		return (dicingPlan==null?dicingPlan:dicingPlan.replace("	"," "));
+		return replaceString(dicingPlan);
 	}
 
 	public void setDicingPlan(String dicingPlan) {
@@ -751,7 +751,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getDiscNum() {
-		return discNum;
+		return replaceString(discNum);
 	}
 
 	public void setDiscNum(String discNum) {
@@ -800,7 +800,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getOrderTypeName() {
-		return orderTypeName;
+		return replaceString(orderTypeName);
 	}
 
 	public void setOrderTypeName(String orderTypeName) {
@@ -824,7 +824,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMpackageStatusNames() {
-		return mpackageStatusNames;
+		return replaceString(mpackageStatusNames);
 	}
 
 	public void setMpackageStatusNames(String mpackageStatusNames) {
@@ -832,7 +832,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMqualityLevel() {
-		return (mqualityLevel==null?mqualityLevel:mqualityLevel.replace("	"," "));
+		return replaceString(mqualityLevel);
 	}
 
 	public void setMqualityLevel(String mqualityLevel) {
@@ -840,7 +840,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMdiscBatch() {
-		return (mdiscBatch==null?mdiscBatch:mdiscBatch.replace("	"," "));
+		return replaceString(mdiscBatch);
 	}
 
 	public void setMdiscBatch(String mdiscBatch) {
@@ -856,7 +856,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMchipLabel() {
-		return (mchipLabel==null?mchipLabel:mchipLabel.replace("	"," "));
+		return replaceString(mchipLabel);
 	}
 
 	public void setMchipLabel(String mchipLabel) {
@@ -864,7 +864,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMshellType() {
-		return (mshellType==null?mshellType:mshellType.replace("	"," "));
+		return replaceString(mshellType);
 	}
 
 	public void setMshellType(String mshellType) {
@@ -872,7 +872,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMbondNum() {
-		return (mbondNum==null?mbondNum:mbondNum.replace("	"," "));
+		return replaceString(mbondNum);
 	}
 
 	public void setMbondNum(String mbondNum) {
@@ -880,7 +880,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMpackageShape() {
-		return (mpackageShape==null?mpackageShape:mpackageShape.replace("	"," "));
+		return replaceString(mpackageShape);
 	}
 
 	public void setMpackageShape(String mpackageShape) {
@@ -888,7 +888,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMmarkDemand() {
-		return (mmarkDemand==null?mmarkDemand:mmarkDemand.replace("	"," "));
+		return replaceString(mmarkDemand);
 	}
 
 	public void setMmarkDemand(String mmarkDemand) {
@@ -896,7 +896,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMdiscNum() {
-		return (mdiscNum==null?mdiscNum:mdiscNum.replace("	"," "));
+		return replaceString(mdiscNum);
 	}
 
 	public void setMdiscNum(String mdiscNum) {
@@ -944,7 +944,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMcpackageStatusNames() {
-		return mcpackageStatusNames;
+		return replaceString(mcpackageStatusNames);
 	}
 
 	public void setMcpackageStatusNames(String mcpackageStatusNames) {
@@ -952,7 +952,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMcqualityLevel() {
-		return (mcqualityLevel==null?mcqualityLevel:mcqualityLevel.replace("	"," "));
+		return replaceString(mcqualityLevel);
 	}
 
 	public void setMcqualityLevel(String mcqualityLevel) {
@@ -960,7 +960,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMcdiscBatch() {
-		return (mcdiscBatch==null?mcdiscBatch:mcdiscBatch.replace("	"," "));
+		return replaceString(mcdiscBatch);
 	}
 
 	public void setMcdiscBatch(String mcdiscBatch) {
@@ -976,7 +976,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMcchipLabel() {
-		return (mcchipLabel==null?mcchipLabel:mcchipLabel.replace("	"," "));
+		return replaceString(mcchipLabel);
 	}
 
 	public void setMcchipLabel(String mcchipLabel) {
@@ -984,7 +984,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMcshellType() {
-		return (mcshellType==null?mcshellType:mcshellType.replace("	"," "));
+		return replaceString(mcshellType);
 	}
 
 	public void setMcshellType(String mcshellType) {
@@ -992,7 +992,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMcbondNum() {
-		return (mcbondNum==null?mcbondNum:mcbondNum.replace("	"," "));
+		return replaceString(mcbondNum);
 	}
 
 	public void setMcbondNum(String mcbondNum) {
@@ -1000,7 +1000,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMcpackageShape() {
-		return (mcpackageShape==null?mcpackageShape:mcpackageShape.replace("	"," "));
+		return replaceString(mcpackageShape);
 	}
 
 	public void setMcpackageShape(String mcpackageShape) {
@@ -1008,7 +1008,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMcmarkDemand() {
-		return (mcmarkDemand==null?mcmarkDemand:mcmarkDemand.replace("	"," "));
+		return replaceString(mcmarkDemand);
 	}
 
 	public void setMcmarkDemand(String mcmarkDemand) {
@@ -1016,7 +1016,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMcdiscNum() {
-		return (mcdiscNum==null?mcdiscNum:mcdiscNum.replace("	"," "));
+		return replaceString(mcdiscNum);
 	}
 
 	public void setMcdiscNum(String mcdiscNum) {
@@ -1048,7 +1048,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getStockName() {
-		return stockName;
+		return replaceString(stockName);
 	}
 
 	public void setStockName(String stockName) {
@@ -1056,7 +1056,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMstockName() {
-		return mstockName;
+		return replaceString(mstockName);
 	}
 
 	public void setMstockName(String mstockName) {
@@ -1064,7 +1064,7 @@ public class TaskOrderVO implements java.io.Serializable {
 	}
 
 	public String getMcstockName() {
-		return mcstockName;
+		return replaceString(mcstockName);
 	}
 
 	public void setMcstockName(String mcstockName) {
@@ -1087,4 +1087,22 @@ public class TaskOrderVO implements java.io.Serializable {
 		this.entrustNum = entrustNum;
 	}
 	
+	private String replaceString(String sContent) {
+		if (sContent == null) { 
+			return sContent; 
+		}
+		if (sContent.contains("	")){
+            sContent = sContent.replace("	"," ");
+        }
+		if (sContent.contains("\u0009")){
+			sContent = sContent.replace("\u0009", "");
+		}
+		if (sContent.contains("\u00A0")){
+			sContent = sContent.replace("\u00A0", "");
+		}
+        sContent = sContent.trim();
+        
+        return sContent;
+	}
+
 }

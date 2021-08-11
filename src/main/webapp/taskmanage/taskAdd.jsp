@@ -217,6 +217,7 @@
     	onSelect:function(node){
     		$("#Add_projectName").val(node.annotation);
     		$("#Add_topicNo").val(node.value);
+    		$("#Add_internalModel").val(node.text);
     	}
     });
 	$('input:radio[name="controlledPlanFlag"]').change(function(){
@@ -243,6 +244,7 @@
 	<div align="center" style="margin-top:20px;">
 		<form id="taskOrder_createForm"method="post" enctype="multipart/form-data">
 		<input type="hidden" id="status" name="status">
+		<input type="hidden" id="Add_internalModel" name="internalModel">
 			<table class="tasktableForm" width="95%" border="1"  bordercolor="#B5C0C4" rules="none" style="border-collapse:collapse;">
 				<tr>
 					<th style="width: 150px">电路名称</th>
