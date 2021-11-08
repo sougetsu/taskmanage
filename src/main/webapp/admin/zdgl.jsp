@@ -119,7 +119,7 @@
 			width : 620,
 			height : 300,
             url : '${pageContext.request.contextPath}/admin/zdglEdit.jsp',
-            title :"编辑用户",
+            title :"编辑字典",
             originContain : '#admin_zdgl_datagrid',
             onLoad : function() {
 				var index = $('#admin_zdgl_datagrid').datagrid('getRowIndex', id);

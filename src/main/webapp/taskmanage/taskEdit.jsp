@@ -1547,10 +1547,10 @@
 				<tr>
 					<th width="150px" >鉴定方式</th>
 					<td style="text-align:left" colspan=7>
-						<input type="checkbox" style="vertical-align:middle;width:30px" id="check1" name="checkTypeId" value="23" ${taskOrder.checkTypeId == 23 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check1">自鉴</label>
-						<input type="checkbox" style="vertical-align:middle;width:30px" id="check2" name="checkTypeId" value="24" ${taskOrder.checkTypeId == 24 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check2">第三方监督</label>
-						<input type="checkbox" style="vertical-align:middle;width:30px" id="check3" name="checkTypeId" value="25" ${taskOrder.checkTypeId == 25 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check3">第三方直检</label>
-						<input type="checkbox" style="vertical-align:middle;width:30px" id="check4" name="checkTypeId" value="55" ${taskOrder.checkTypeId == 55 ? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check4">一致性</label>
+						<input type="checkbox" style="vertical-align:middle;width:30px" id="check1" name="checkTypeId" value="23" ${fn:contains(taskOrder.checkTypeId, '23')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check1">自鉴</label>
+						<input type="checkbox" style="vertical-align:middle;width:30px" id="check2" name="checkTypeId" value="24" ${fn:contains(taskOrder.checkTypeId, '24')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check2">第三方监督</label>
+						<input type="checkbox" style="vertical-align:middle;width:30px" id="check3" name="checkTypeId" value="25" ${fn:contains(taskOrder.checkTypeId, '25')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check3">第三方直检</label>
+						<input type="checkbox" style="vertical-align:middle;width:30px" id="check4" name="checkTypeId" value="55" ${fn:contains(taskOrder.checkTypeId, '55')? 'checked' : ''}><label style="vertical-align:middle;display:inline-block;" for="check4">一致性</label>
 					</td>
 				</tr>
 				

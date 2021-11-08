@@ -63,8 +63,8 @@ public class TaskOrderVO implements java.io.Serializable {
 	private String remarks;// 备注
 	private String productManagesuggest;// 生产部门负责人意见
 	private Date createtime;// 任务单创建时间
-	private Date registTimeStart;// 登记开始日期
-	private Date registTimeEnd;// 登记结束日期
+	private String registTimeStart;// 登记开始日期
+	private String registTimeEnd;// 登记结束日期
 	private int status;// 任务单状态
 	private String statusName;// 任务单状态名
 	private String detailRequire;// 具体要求 无封装时
@@ -404,21 +404,19 @@ public class TaskOrderVO implements java.io.Serializable {
 		this.createtime = createtime;
 	}
 
-	@JsonSerialize(using = JsonDateSerializer.class)
-	public Date getRegistTimeStart() {
+	public String getRegistTimeStart() {
 		return registTimeStart;
 	}
 
-	public void setRegistTimeStart(Date registTimeStart) {
+	public void setRegistTimeStart(String registTimeStart) {
 		this.registTimeStart = registTimeStart;
 	}
 
-	@JsonSerialize(using = JsonDateSerializer.class)
-	public Date getRegistTimeEnd() {
+	public String getRegistTimeEnd() {
 		return registTimeEnd;
 	}
 
-	public void setRegistTimeEnd(Date registTimeEnd) {
+	public void setRegistTimeEnd(String registTimeEnd) {
 		this.registTimeEnd = registTimeEnd;
 	}
 

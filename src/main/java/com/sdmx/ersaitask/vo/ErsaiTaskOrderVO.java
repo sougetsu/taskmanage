@@ -75,7 +75,7 @@ public class ErsaiTaskOrderVO {
 		this.reportNo = reportNo;
 	}
 	public String getInternalModel() {
-		return (internalModel==null?internalModel:internalModel.replace("	"," "));
+		return replaceString(internalModel);
 	}
 	public void setInternalModel(String internalModel) {
 		this.internalModel = internalModel;
@@ -87,25 +87,25 @@ public class ErsaiTaskOrderVO {
 		this.applyDept = applyDept;
 	}
 	public String getApplyMember() {
-		return applyMember;
+		return replaceString(applyMember);
 	}
 	public void setApplyMember(String applyMember) {
 		this.applyMember = applyMember;
 	}
 	public String getApplyMemberPhone() {
-		return applyMemberPhone;
+		return replaceString(applyMemberPhone);
 	}
 	public void setApplyMemberPhone(String applyMemberPhone) {
 		this.applyMemberPhone = applyMemberPhone;
 	}
 	public String getProjectManager() {
-		return projectManager;
+		return replaceString(projectManager);
 	}
 	public void setProjectManager(String projectManager) {
 		this.projectManager = projectManager;
 	}
 	public String getProjectManagerPhone() {
-		return projectManagerPhone;
+		return replaceString(projectManagerPhone);
 	}
 	public void setProjectManagerPhone(String projectManagerPhone) {
 		this.projectManagerPhone = projectManagerPhone;
@@ -117,25 +117,25 @@ public class ErsaiTaskOrderVO {
 		this.wantedEndDate = wantedEndDate;
 	}
 	public String getApplyReason() {
-		return (applyReason==null?applyReason:applyReason.replace("	"," ")); 
+		return replaceString(applyReason);
 	}
 	public void setApplyReason(String applyReason) {
 		this.applyReason = applyReason;
 	}
 	public String getDetailRequire() {
-		return  (detailRequire==null?detailRequire:detailRequire.replace("	"," "));
+		return  replaceString(detailRequire);
 	}
 	public void setDetailRequire(String detailRequire) {
 		this.detailRequire = detailRequire;
 	}
 	public String getRemarks() {
-		return (remarks==null?remarks:remarks.replace("	"," "));
+		return replaceString(remarks);
 	}
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
 	public String getProductManagesuggest() {
-		return productManagesuggest;
+		return replaceString(productManagesuggest);
 	}
 	public void setProductManagesuggest(String productManagesuggest) {
 		this.productManagesuggest = productManagesuggest;
@@ -171,7 +171,7 @@ public class ErsaiTaskOrderVO {
 		this.topicName = topicName;
 	}
 	public String getHelpDeptName() {
-		return helpDeptName;
+		return replaceString(helpDeptName);
 	}
 	public void setHelpDeptName(String helpDeptName) {
 		this.helpDeptName = helpDeptName;
@@ -339,6 +339,22 @@ public class ErsaiTaskOrderVO {
 		this.goldcutNo = goldcutNo;
 	}
 	
-	
+	private String replaceString(String sContent) {
+		if (sContent == null) { 
+			return sContent; 
+		}
+		if (sContent.contains("	")){
+            sContent = sContent.replace("	"," ");
+        }
+		if (sContent.contains("\u0009")){
+			sContent = sContent.replace("\u0009", "");
+		}
+		if (sContent.contains("\u00A0")){
+			sContent = sContent.replace("\u00A0", "");
+		}
+        sContent = sContent.trim();
+        
+        return sContent;
+	}
 	
 }

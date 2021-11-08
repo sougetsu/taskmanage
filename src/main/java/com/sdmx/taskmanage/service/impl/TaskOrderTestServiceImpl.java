@@ -1,5 +1,6 @@
 package com.sdmx.taskmanage.service.impl;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -140,15 +141,26 @@ public class TaskOrderTestServiceImpl implements ITaskOrderTestService{
 			hql += " and t.lsh= :lshNo";
 			params.put("lshNo", taskOrdervo.getLsh().trim());
 		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		//开始登记时间
-		if (taskOrdervo.getRegistTimeStart() != null) {
-			hql += " and t.createtime >= :regStartDate";
-			params.put("regStartDate", taskOrdervo.getRegistTimeStart());
+		if (UtilValidate.isNotEmpty(taskOrdervo.getRegistTimeStart())) {
+			try {
+				hql += " and t.createtime >= :regStartDate";
+				params.put("regStartDate",sdf.parse(taskOrdervo.getRegistTimeStart()));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		//结束登记时间
-		if (taskOrdervo.getRegistTimeEnd() != null) {
-			hql += " and t.createtime <= :regEndDate";
-			params.put("regEndDate", taskOrdervo.getRegistTimeEnd());
+		if (UtilValidate.isNotEmpty(taskOrdervo.getRegistTimeEnd())) {
+			try {
+				hql += " and t.createtime <= :regEndDate";
+				params.put("regStartDate",sdf.parse(taskOrdervo.getRegistTimeEnd()));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		//根据角色确定内容
 		RoleType memType = RoleType.getType(sessionInfo.getRoleNames());

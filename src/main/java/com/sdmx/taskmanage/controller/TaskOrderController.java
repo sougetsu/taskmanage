@@ -203,6 +203,9 @@ public class TaskOrderController {
 //			request.setAttribute("taskPrice", taskPriceList);
 //			request.setAttribute("taskSchedule", taskSchedule);
 //		}
+		//加载详细核价信息
+		List<TaskPriceDetailVO> taskPriceList = taskOrderService.getTaskPriceDetailById(id);
+		request.setAttribute("taskPrice", taskPriceList);
 		request.setAttribute("taskOrder", tInfo);
 		return new ModelAndView("/taskmanage/taskDetail");
 	}

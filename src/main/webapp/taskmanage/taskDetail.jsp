@@ -1598,5 +1598,164 @@
 				</tr>
 			</table>
 	</div>
+	<c:choose>
+		<c:when test="${taskOrder.status==43 || taskOrder.status==13 || taskOrder.status==51}">
+			<div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
+				<div id="priceItem" title="价格信息" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
+					<table width=100%>
+						<thead>
+							<tr>
+								<th field="dlmc" width="100" align="left">电路名称</th>
+								<th field="orderType" width="100" align="right">任务类型</th>
+								<th field="fzPrice" width="90" align="right">封装单价(元/只)</th>
+								<th field="jdghpcsPrice" width="80" align="right">鉴定供货批测试费(元/只)</th>
+								<th field="sxPrice" width="80" align="right">筛选费用(元/只)</th>
+								<th field="jdyzxjcPrice" width="80" align="right">鉴定/一致性检测费(元/批)</th>
+								<th field="swhgpcsPrice" width="80" align="right">三温合格品测试费(元/只)</th>
+								<th field="itemNum" width="50" align="center">数量</th>
+								<th field="totalPrice" width="150" align="center">总计（元）</th>
+							</tr>
+							<c:forEach var="item" items="${taskPrice}">
+				       			<tr>
+									<td align="left">${item.dlmc}</td>
+									<td align="right">${item.orderType}</td>
+									<td align="right">${item.fzPrice}</td>
+									<td align="right">${item.jdghpcsPrice}</td>
+									<td align="right">${item.sxPrice}</td>
+									<td align="right">${item.jdyzxjcPrice}</td>
+									<td align="right">${item.swhgpcsPrice}</td>
+									<td align="center">${item.itemNum}</td>
+									<td align="center">${item.totalPrice}</td>
+								</tr>
+							</c:forEach>
+							<tr>
+								<td ></td>
+								<td align="right"></td>
+								<td align="right"></td>
+								<td align="right"></td>
+								<td align="right"></td>
+								<td align="right"></td>
+								<td align="right"></td>
+								<td align="center" style=" font-weight:bold">合计（元）</td>
+								<td align="center">${taskOrder.sumPrice}</td>
+								<td ></td>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<%-- <div  style="width:780px;margin-left: auto;margin-right: auto;margin-top: 20px;margin-bottom: 20px;">
+			<div id="scheduleDetail" title="工作进度信息" class="easyui-panel" style="width:780px;margin-left: auto;margin-right: auto;">  
+				<table cellSpacing=0 cellPadding=5>
+			    	<tr>
+			    		<th  width="10%" align="right">封装:</th>
+			    		<td width="10%" align="right">
+	                       	开始时间
+	                   	</td>
+	                   	<td width="20%" align="left">
+							<fmt:formatDate value="${taskSchedule.pakstartDate}" pattern="yyyy-MM-dd" />
+	                   	</td>
+	                    <td  width="10%" align="right" >
+	                       	结束时间
+	                   	</td>
+	                   	<td width="20%" align="left">
+							<fmt:formatDate value="${taskSchedule.pakendDate}" pattern="yyyy-MM-dd" />
+	                   	</td>
+	                   	<td  width="10%" align="right" >
+	                       	工期
+	                   	</td>
+	                   	<td width="20%" id="day1" align="left">
+	                   		${taskSchedule.pakTime}天
+	                   	</td>
+				    </tr>
+				    <tr>
+			    		<th  width="10%" align="right">监制:</th>
+			    		<td width="10%" align="right">
+	                       	开始时间
+	                   	</td>
+	                   	<td width="20%" align="left">
+							<fmt:formatDate value="${taskSchedule.svstartDate}" pattern="yyyy-MM-dd" />
+	                   	</td>
+	                    <td  width="10%" align="right" >
+	                       	结束时间
+	                   	</td>
+	                   	<td width="20%" align="left">
+							<fmt:formatDate value="${taskSchedule.svendDate}" pattern="yyyy-MM-dd" />
+	                   	</td>
+	                   	<td  width="10%" align="right" >
+	                       	工期
+	                   	</td>
+	                   	<td width="20%" id="day2" align="left">
+	                   	${taskSchedule.svTime}天
+	                   	</td>
+				    </tr>
+				    <tr>
+			    		<th  width="10%" align="right">成测:</th>
+			    		<td width="10%" align="right">
+	                       	开始时间
+	                   	</td>
+	                   	<td width="20%" align="left">
+							<fmt:formatDate value="${taskSchedule.teststartDate}" pattern="yyyy-MM-dd" />
+	                   	</td>
+	                    <td  width="10%" align="right" >
+	                       	结束时间
+	                   	</td>
+	                   	<td width="20%" align="left">
+							<fmt:formatDate value="${taskSchedule.testendDate}" pattern="yyyy-MM-dd" />
+	                   	</td>
+	                   	<td  width="10%" align="right" >
+	                       	工期
+	                   	</td>
+	                   	<td width="20%" id="day3"align="left">
+	                   	${taskSchedule.testTime}天
+	                   	</td>
+				    </tr>
+				    <tr>
+			    		<th  width="10%" align="right">筛选:</th>
+			    		<td width="10%" align="right">
+	                       	开始时间
+	                   	</td>
+	                   	<td width="20%" align="left">
+							<fmt:formatDate value="${taskSchedule.sxstartDate}" pattern="yyyy-MM-dd" />
+	                   	</td>
+	                    <td  width="10%" align="right" >
+	                       	结束时间
+	                   	</td>
+	                   	<td width="20%" align="left">
+							<fmt:formatDate value="${taskSchedule.sxendDate}" pattern="yyyy-MM-dd" />
+	                   	</td>
+	                   	<td  width="10%" align="right" >
+	                       	工期
+	                   	</td>
+	                   	<td width="20%" id="day4" align="left">
+	                   	${taskSchedule.sxTime}天
+	                   	</td>
+				    </tr>
+				    <tr>
+			    		<th  width="10%" align="right">鉴定:</th>
+			    		<td width="10%" align="right">
+	                       	开始时间
+	                   	</td>
+	                   	<td width="20%" align="left">
+							<fmt:formatDate value="${taskSchedule.jdstartDate}" pattern="yyyy-MM-dd" />
+	                   	</td>
+	                    <td  width="10%" align="right" >
+	                       	结束时间
+	                   	</td>
+	                   	<td width="20%" align="left">
+							<fmt:formatDate value="${taskSchedule.jdendDate}" pattern="yyyy-MM-dd" />
+	                   	</td>
+	                   	<td  width="10%" align="right" >
+	                       	工期
+	                   	</td>
+	                   	<td width="20%" id="day5" align="left">
+	                   		${taskSchedule.jdTime}天
+	                   	</td>
+				    </tr>
+			    </table>
+			</div>
+			</div> --%>
+		</c:when>
+	</c:choose>
 </div>
 </div>
